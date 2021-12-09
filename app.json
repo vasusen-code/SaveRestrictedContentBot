@@ -1,0 +1,33 @@
+{
+    "name": "",
+    "description": "Simple basic code for a telegram bot in Telethon.",
+    "logo": "",
+    "keywords": [
+        "telegram",
+        "telethon",
+        "telegram-bot",
+        "DroneBots"
+    ],
+    "repository": "https://github.com/vasusen-code/telethontemplate",
+    "website": "",
+    "success_url": "https://t.me/DroneBots",
+    "env": {
+        "API_HASH": {
+            "description": "You API HASH from my.telegram.org",
+            "value": ""
+        },
+        "APP_ID": {
+            "description": "You API ID from my.telegram.org",
+            "value": ""
+        },
+        "BOT_TOKEN": {
+            "description": "Bot token, get it from @BotFather.",
+            "value": ""
+        }
+    },
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ]
+}
