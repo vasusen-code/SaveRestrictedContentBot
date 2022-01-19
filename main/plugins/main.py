@@ -1,7 +1,9 @@
 import re
 from telethon import events
 
-from .. import Drone, client
+from .. import client
+from .. import bot as Drone
+
 from main.plugins.get_msg import get_msg
 
 def get_link(string):
