@@ -20,12 +20,14 @@ def get_link(string):
     
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def m(event):
+    q = []
     link = get_link(event.text)
     if not link:
         return
     if 't.me' in link:
         try:
             msg = await get_msg(client, link)
+            q.append(msg)
         except Exception as e:
             await event.reply(f'Error: `{str(e)}`')
-        await event.client.send_message(event.chat_id, msg) 
+        await event.client.send_message(event.chat_id, q[0]) 
