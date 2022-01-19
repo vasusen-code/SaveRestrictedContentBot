@@ -1,6 +1,6 @@
 #ChauhanMahesh/Vasusen/DroneBots/COL
 
-import time, logging
+import sys, time, logging
 from decouple import config
 from telethon import TelegramClient
 from telethon.sessions import StringSession
