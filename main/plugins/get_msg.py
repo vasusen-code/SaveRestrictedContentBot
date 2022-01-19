@@ -9,7 +9,7 @@ async def join(client, invite_link)
         await client(ImportChatInviteRequest(invite_link))
         return "Successfully joined the Channel"
     except errors.UserAlreadyParticipantError:
-        return "You have already joined the Channel"
+        return "Already joined the Channel"
     except errors.InviteHashExpiredError:
         return "Wrong URL"
       
