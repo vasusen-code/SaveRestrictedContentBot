@@ -16,7 +16,7 @@ async def join(client, invite_link)
 async def get_msg(client, msg_link):
     chat = int(str(-100) + str(msg_link.split("/")[-2]))
     msg_id = int(msg_link.split("/")[-1])
-    msg = await client.get_messages(chat, offset_id=msg_id)
+    msg = await client.get_messages(chat, ids=msg_id)
     return msg
     
     
