@@ -22,10 +22,8 @@ async def m(event):
     if not link:
         return
     if 't.me' in link:
-        msg_id = int(link.split("/")[-1])
-        chat_id = int(str(-100) + str(link.split("/")[-2]))
         try:
-            msg = await get_msg(chat_id, msg_id)
+            msg = await get_msg(client, link)
         except Exception as e:
             await event.reply(f'Error: `{str(e)}`')
         await event.client.send_message(event.chat_id, msg) 
