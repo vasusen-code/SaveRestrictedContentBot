@@ -14,7 +14,7 @@ API_HASH = config("API_HASH", default=None)
 BOT_TOKEN = config("BOT_TOKEN", default=None)
 SESSION = config("SESSION", default=None)
 
-client = TelegramClient(StringSession(SESSION) , APP_ID, API_HASH)
+client = TelegramClient(StringSession(SESSION) , API_ID, API_HASH)
 try:
     client.start()
 except BaseException:
