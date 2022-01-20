@@ -4,7 +4,7 @@ from telethon import events
 from .. import API_ID, API_HASH, BOT_TOKEN
 from .. import bot as Drone
 
-from pyrogram import client, filters
+from pyrogram import Client, filters
 from main.plugins.get_msg import get_msg
 
 robot = Client('robot', api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
