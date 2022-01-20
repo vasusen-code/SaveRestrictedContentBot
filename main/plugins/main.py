@@ -1,6 +1,6 @@
 # Github.com/Vasusen-code
 
-from main.plugins.helpers import start, get_link, forcesub, forcesub_text, join
+from main.plugins.helpers import start_userbot, get_link, forcesub, forcesub_text, join
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION
 
 from pyrogram import Client, filters
@@ -24,10 +24,7 @@ async def get_msg(userbot, client, sender, msg_link):
     chat = msg_link.split("/")[-2]
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c' in msg_link:
-        
-        await userbot.start()
-        await idle()
-    
+        await start_userbot(userbot)
         msg = await userbot.copy_message("me", chat, msg_id)
         await client.send_message(int(sender), msg) 
     else:
