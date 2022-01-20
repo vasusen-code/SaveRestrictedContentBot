@@ -9,8 +9,7 @@ forcesub_text = 'You have to join @Dronebots to use this bot.'
 
 #Multi client-------------------------------------------------------------------------------------------------------------
 
-async def start(Bot, userbot):
-    await Bot.start()
+async def start_userbot(userbot):
     await userbot.start()
     await idle()
     
