@@ -42,7 +42,6 @@ async def clone(bot, event):
         return
     await start_userbot(userbot)
     if 't.me/+' in link:
-        xy = await join(userbot, link) 
         await event.reply_text(text=xy)
         return 
     if 't.me' in link:
@@ -55,3 +54,4 @@ async def clone(bot, event):
                 return await event.reply_text(text=f'Error: `{str(e)}`')
 
 Bot.run()
+userbot.start()
