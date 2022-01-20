@@ -16,7 +16,7 @@ async def start_userbot(userbot):
 
 async def join(client, invite_link):
     try:
-        hash = invite_link.split("+")[1]
+        hash = 't.me/joinchat/' + invite_link.split("+")[1]
         await client.join_chat(hash)
         return "Successfully joined the Channel"
     except Exception as e:
@@ -35,7 +35,6 @@ async def forcesub(bot, sender):
     if FORCESUB is not None:
         if not str(FORCESUB).startswith("-100"):
             FORCESUB = int("-100" + str(FORCESUB))
-    if FORCESUB is not None:
         try:
             user = await bot.get_chat_member(FORCESUB, sender)
             if user.status == "kicked":
