@@ -3,10 +3,10 @@
 
 from pyrogram.types import Message
 
-async def get_msg(client, msg_link):
+async def get_msg(client, sender, msg_link):
     chat = msg_link.split("/")[-2]
     msg_id = int(msg_link.split("/")[-1])
     msg = await client.get_messages(chat, msg_id)
-    return msg
+    await client.send_message(sender, msg.copy)
     
     
