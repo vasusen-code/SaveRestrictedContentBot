@@ -16,8 +16,9 @@ async def join(client, invite_link):
     
 async def forcesub(id):
     FORCESUB = config("FORCESUB", default=None)
-    if not str(FORCESUB).startswith("-100"):
-        FORCESUB = int("-100" + str(FORCESUB))
+    if FORCESUB is not None:
+        if not str(FORCESUB).startswith("-100"):
+            FORCESUB = int("-100" + str(FORCESUB))
     ok = False
     try:
         x = await Drone(GetParticipantRequest(channel=int(FORCESUB), participant=int(id)))
