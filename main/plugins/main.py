@@ -21,14 +21,16 @@ userbot = Client(
     api_id=API_ID)
     
 async def get_msg(userbot, client, sender, msg_link):
-    chat = msg_link.split("/")[-2]
+    chat = ""
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c' in msg_link:
+        chat = int('-100' + str(msg_link.split("/")[-2]))
         msg = await userbot.copy_message("me", chat, msg_id)
         await client.send_message(int(sender), msg) 
     else:
+        chat =  msg_link.split("/")[-2]
         await client.copy_message(int(sender), chat, msg_id)
-
+    
 @Bot.on_message(filters.private)
 async def clone(bot, event):
     if event.text == '/start':
