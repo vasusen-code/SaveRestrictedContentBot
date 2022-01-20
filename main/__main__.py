@@ -19,3 +19,4 @@ print("Successfully deployed!")
 
 if __name__ == "__main__":
     bot.run_until_disconnected()
+    robot.run_until_disconnected()
