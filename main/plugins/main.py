@@ -40,7 +40,13 @@ async def clone(bot, event):
     if xx is True:
         await event.reply_text(text=forcesub_text)
         return
-    await start_userbot(userbot)
+    try:
+        await start_userbot(userbot)
+    except Exception as e:
+        if 'ConnectionError' in str(e):
+            pass
+        else:
+            return
     if 't.me/+' in link:
         await event.reply_text(text=xy)
         return 
@@ -54,4 +60,3 @@ async def clone(bot, event):
                 return await event.reply_text(text=f'Error: `{str(e)}`')
 
 Bot.run()
-userbot.start()
