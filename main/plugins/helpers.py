@@ -1,6 +1,10 @@
 from telethon import errors
 from telethon.tl.functions.messages import ImportChatInviteRequest
 
+from decouple import config
+
+forcesub_text = 'You have to join @Dronebots to use this bot.'
+
 async def join(client, invite_link):
     try:
         await client(ImportChatInviteRequest(invite_link))
