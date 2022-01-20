@@ -30,3 +30,4 @@ async def m(event):
         except Exception as e:
             await event.reply(f'Error: `{str(e)}`')
         
+robot.run_until_disconnected()
