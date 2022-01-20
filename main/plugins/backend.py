@@ -7,6 +7,7 @@ from pyrogram import Client, filters
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
 import re
+from decouple import config
 
 Bot = Client(
     "Simple-Pyrogram-Bot",
@@ -22,6 +23,10 @@ userbot = Client(
 )
 
 async def forcesub(bot, sender):
+    FORCESUB = config("FORCESUB", default=None)
+    if FORCESUB is not None:
+        if not str(FORCESUB).startswith("-100"):
+            FORCESUB = int("-100" + str(FORCESUB))
     if FORCESUB is not None:
         try:
             user = await bot.get_chat_member(FORCESUB, sender)
