@@ -24,6 +24,10 @@ async def get_msg(userbot, client, sender, msg_link):
     chat = msg_link.split("/")[-2]
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c' in msg_link:
+        
+        await userbot.start()
+        await idle()
+    
         msg = await userbot.copy_message("me", chat, msg_id)
         await client.send_message(int(sender), msg) 
     else:
@@ -50,4 +54,4 @@ async def clone(bot, event):
         except Exception as e:
             return await event.reply_text(text=f'Error: `{str(e)}`')
 
-asyncio.run(start(Bot, userbot))
+bot.run()
