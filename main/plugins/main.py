@@ -4,10 +4,8 @@ from main.plugins.helpers import get_link, forcesub, forcesub_text, join
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION
 
 from pyrogram import Client, filters
-from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
 import re
-from decouple import config
 
 Bot = Client(
     "Simple-Pyrogram-Bot",
