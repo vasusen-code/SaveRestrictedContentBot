@@ -1,8 +1,6 @@
 import re
-from telethon import events
 
 from .. import API_ID, API_HASH, BOT_TOKEN
-from .. import bot as Drone
 
 from pyrogram import Client, filters
 from main.plugins.get_msg import get_msg
@@ -21,10 +19,6 @@ def get_link(string):
     except Exception:
         return False
     
-@Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
-async def m(event):
-    pass
-  
 @robot.on_message(filters.private)
 async def run(client, message):
     link = get_link(message.text)
