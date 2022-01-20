@@ -1,22 +1,12 @@
 # ChauhanMahesh/Vasusen/COL/DroneBots
 # Github.com/Vasusen-code
 
-from telethon import errors
-from telethon.tl.functions.messages import ImportChatInviteRequest
+from pyrogram.types import Message
 
-async def join(client, invite_link):
-    try:
-        await client(ImportChatInviteRequest(invite_link))
-        return "Successfully joined the Channel"
-    except errors.UserAlreadyParticipantError:
-        return "Already joined the Channel"
-    except errors.InviteHashExpiredError:
-        return "Wrong URL"
-      
 async def get_msg(client, msg_link):
     chat = msg_link.split("/")[-2]
     msg_id = int(msg_link.split("/")[-1])
-    msg = await client.get_messages(chat, ids=msg_id)
+    msg = await client.get_messages(chat, msg_id)
     return msg
     
     
