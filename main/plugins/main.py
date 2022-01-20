@@ -54,4 +54,4 @@ async def clone(bot, event):
         except Exception as e:
             return await event.reply_text(text=f'Error: `{str(e)}`')
 
-bot.run()
+Bot.run()
