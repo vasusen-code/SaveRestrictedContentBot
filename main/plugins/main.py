@@ -31,3 +31,5 @@ async def m(event):
         except Exception as e:
             await event.reply(f'Error: `{str(e)}`')
         await event.client.send_message(event.chat_id, q[0]) 
+
+robot.run()
