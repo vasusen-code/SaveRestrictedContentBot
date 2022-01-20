@@ -1,12 +1,19 @@
+#Github.com/Vasusen-code
+from .. import API_ID, BOT_TOKEN, API_HASH
+from pyrogram import Client, filters
 import re
-from .. import bot as Drone
-from telethon import events
+
+Bot = Client(
+    "Simple-Pyrogram-Bot",
+    bot_token=BOT_TOKEN,
+    api_id=int(API_ID),
+    api_hash=API_HASH
+)
 
 async def get_msg(client, sender, msg_link):
     chat = msg_link.split("/")[-2]
     msg_id = int(msg_link.split("/")[-1])
-    msg = await client.get_messages(chat, ids=msg_id)
-    await client.send_message(sender, msg)
+    await client.copy_message(sender, chat, msg_id)
     
     
 def get_link(string):
@@ -21,13 +28,15 @@ def get_link(string):
     except Exception:
         return False
     
-@Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
-async def x(event):
+@Bot.on_message(filters.private)
+async def start(bot, event):
     link = get_link(event.text)
     if not link:
         return
     if 't.me' in link:
         try:
-            await get_msg(Drone, event.sender_id, link)
+            await get_msg(bot, event.chat.id, link)
         except Exception as e:
             return await event.reply(f'Error: `{str(e)}`')
+
+Bot.run()
