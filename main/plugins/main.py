@@ -1,7 +1,7 @@
 import re
 from telethon import events
 
-from .. import client
+from .. import client, robot
 from .. import bot as Drone
 
 from main.plugins.get_msg import get_msg
@@ -26,7 +26,7 @@ async def m(event):
         return
     if 't.me' in link:
         try:
-            msg = await get_msg(client, link)
+            msg = await get_msg(robot, link)
             q.append(msg)
         except Exception as e:
             await event.reply(f'Error: `{str(e)}`')
