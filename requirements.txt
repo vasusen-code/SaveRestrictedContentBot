@@ -1,4 +1,4 @@
 python-decouple
 
-telethon==1.2.0
-cryptg
+pyrogram==1.3.5
+
