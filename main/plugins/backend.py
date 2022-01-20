@@ -1,6 +1,6 @@
 # Github.com/Vasusen-code
 
-from main.plugins.helpers import get_link, forcesub_text
+from main.plugins.helpers import get_link, forcesub_text, join
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION
 
 from pyrogram import Client, filters
@@ -51,15 +51,16 @@ async def clone(bot, event):
         return
     xx = await forcesub(bot, event.chat.id)
     if xx is True:
-        await event.reply_text(forcesub_text)
+        await event.reply_text(text=forcesub_text)
         return
     if 't.me/+' in link:
-        return
+        xy = await join(userbot, link) 
+        await event.reply_text(text=xy)
     if 't.me' in link:
         try:
             await get_msg(userbot, bot, event.chat.id, link)
         except Exception as e:
-            return await event.reply_text(f'Error: `{str(e)}`')
+            return await event.reply_text(text=f'Error: `{str(e)}`')
 
 Bot.run()
 userbot.run()
