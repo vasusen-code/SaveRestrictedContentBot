@@ -48,6 +48,7 @@ async def clone(bot, event):
         else:
             return
     if 't.me/+' in link:
+        xy = await join(link)
         await event.reply_text(text=xy)
         return 
     if 't.me' in link:
