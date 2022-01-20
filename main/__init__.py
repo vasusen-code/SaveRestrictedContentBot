@@ -4,7 +4,6 @@ import sys, time, logging
 from decouple import config
 
 from telethon import TelegramClient
-from telethon.sessions import StringSession
 
 from pyrogram import Client
 
