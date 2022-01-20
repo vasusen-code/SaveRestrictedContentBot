@@ -1,4 +1,4 @@
-from pyrogram import Client, filters
+from pyrogram import Client, filters, idle
 from pyrogram.raw.functions.messages import ImportChatInvite
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
@@ -7,6 +7,13 @@ from decouple import config
 
 forcesub_text = 'You have to join @Dronebots to use this bot.'
 
+#Multi client-------------------------------------------------------------------------------------------------------------
+
+async def start(Bot, userbot):
+    await Bot.start()
+    await userbot.start()
+    await idle()
+    
 #Join private chat-------------------------------------------------------------------------------------------------------------
 
 async def join(client, invite_link):
