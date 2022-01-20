@@ -1,5 +1,4 @@
 from pyrogram import Client, filters, idle
-from pyrogram.raw.functions.messages import ImportChatInvite
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
 import re
@@ -17,7 +16,7 @@ async def start_userbot(userbot):
 
 async def join(client, invite_link):
     try:
-        await client(ImportChatInvite(invite_link))
+        await client.join_chat(invite_link)
         return "Successfully joined the Channel"
     except Exception as e:
         print(e)
