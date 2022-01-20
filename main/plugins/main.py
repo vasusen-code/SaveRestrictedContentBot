@@ -32,7 +32,7 @@ async def run(client, message):
         return
     if 't.me' in link:
         try:
-            await get_msg(robot, event.sender_id, link)
+            await get_msg(robot, message.sender.id, link)
         except Exception as e:
             return await message.reply(f'Error: `{str(e)}`')
 
