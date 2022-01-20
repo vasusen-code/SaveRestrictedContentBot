@@ -1,4 +1,4 @@
-from telethon import errors
+from pyrogram import Client, filters
 from pyrogram.raw.functions.messages import ImportChatInvite
 from decouple import config
 
@@ -19,23 +19,19 @@ async def join(client, invite_link):
         
 #forcesub-------------------------------------------------------------------------------------------------------------
 
-async def forcesub(id):
+async def forcesub(bot, sender):
     FORCESUB = config("FORCESUB", default=None)
     if FORCESUB is not None:
         if not str(FORCESUB).startswith("-100"):
             FORCESUB = int("-100" + str(FORCESUB))
-    ok = False
-    try:
-        x = await Drone(GetParticipantRequest(channel=int(FORCESUB), participant=int(id)))
-        left = x.stringify()
-        if 'left' in left:
-            ok = True
-        else:
-            ok = False
-    except UserNotParticipantError:
-        ok = True 
-    return ok
-
+    if FORCESUB is not None:
+        try:
+            user = await bot.get_chat_member(FORCESUB, sender)
+            if user.status == "kicked":
+                return True
+        except UserNotParticipant:
+            return True
+        
 #Regex---------------------------------------------------------------------------------------------------------------
 #to get the url from event
 
