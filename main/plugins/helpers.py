@@ -16,8 +16,7 @@ async def start_userbot(userbot):
 
 async def join(client, invite_link):
     try:
-        hash = 't.me/joinchat/' + invite_link.split("+")[1]
-        await client.join_chat(hash)
+        await client.join_chat(invite_link)
         return "Successfully joined the Channel"
     except Exception as e:
         print(e)
