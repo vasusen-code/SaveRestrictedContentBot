@@ -16,14 +16,17 @@ async def start_userbot(userbot):
 
 async def join(client, invite_link):
     try:
-        await client.join_chat(invite_link)
+        hash = invite_link.split("+")[1]
+        await client.join_chat(hash)
         return "Successfully joined the Channel"
     except Exception as e:
         print(e)
-        if 'already' or 'Already' in str(e):
+        if 'INVITE_HASH_EXPIRED' in str(e):
+            return "Could not join. Maybe your link is expired."
+        elif 'already' or 'Already' in str(e):
             return "Already joined."
         else:
-            return "Could not join. Maybe your link is expired."
+            return f"Error:` {str(e)}`"
         
 #forcesub-------------------------------------------------------------------------------------------------------------
 
