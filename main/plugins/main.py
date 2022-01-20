@@ -4,6 +4,7 @@ from telethon import events
 from .. import robot
 from .. import bot as Drone
 
+from pyrogram import client, filters
 from main.plugins.get_msg import get_msg
 
 def get_link(string):
@@ -29,5 +30,9 @@ async def m(event):
             await get_msg(robot, event.sender_id, link)
         except Exception as e:
             await event.reply(f'Error: `{str(e)}`')
-        
-robot.run_until_disconnected()
+  
+@robot.on_message(filters.private)
+async def run(client, message):
+    pass
+
+robot.run()
