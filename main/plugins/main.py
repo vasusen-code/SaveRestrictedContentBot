@@ -1,6 +1,6 @@
 # Github.com/Vasusen-code
 
-from main.plugins.helpers import get_link, forcesub, forcesub_text, join
+from main.plugins.helpers import start, get_link, forcesub, forcesub_text, join
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION
 
 from pyrogram import Client, filters
