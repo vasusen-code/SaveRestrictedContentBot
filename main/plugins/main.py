@@ -4,11 +4,10 @@ from main.plugins.helpers import get_link, forcesub, forcesub_text, join
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION
 
 from pyrogram import Client, filters
-from pyrogram import idle
 
 import re
 import asyncio
-
+    
 Bot = Client(
     "Simple-Pyrogram-Bot",
     bot_token=BOT_TOKEN,
@@ -19,13 +18,7 @@ Bot = Client(
 userbot = Client(
     session_name=SESSION, 
     api_hash=API_HASH, 
-    api_id=API_ID
-)
-
-asnyc def start(Bot, userbot):
-    await Bot.start()
-    await userbot.start()
-    await idle()
+    api_id=API_ID)
     
 async def get_msg(userbot, client, sender, msg_link):
     chat = msg_link.split("/")[-2]
@@ -35,7 +28,7 @@ async def get_msg(userbot, client, sender, msg_link):
         await client.send_message(int(sender), msg) 
     else:
         await client.copy_message(int(sender), chat, msg_id)
-    
+
 @Bot.on_message(filters.private)
 async def clone(bot, event):
     if event.text == '/start':
