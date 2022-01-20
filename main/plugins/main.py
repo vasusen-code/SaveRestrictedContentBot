@@ -24,7 +24,6 @@ async def get_msg(userbot, client, sender, msg_link):
     chat = msg_link.split("/")[-2]
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c' in msg_link:
-        await start_userbot(userbot)
         msg = await userbot.copy_message("me", chat, msg_id)
         await client.send_message(int(sender), msg) 
     else:
@@ -41,6 +40,7 @@ async def clone(bot, event):
     if xx is True:
         await event.reply_text(text=forcesub_text)
         return
+    await start_userbot(userbot)
     if 't.me/+' in link:
         xy = await join(userbot, link) 
         await event.reply_text(text=xy)
@@ -49,6 +49,9 @@ async def clone(bot, event):
         try:
             await get_msg(userbot, bot, event.chat.id, link)
         except Exception as e:
-            return await event.reply_text(text=f'Error: `{str(e)}`')
+            if 'PEER_ID_INVALID' in str(e):
+                return await event.reply_text(text='Channel not joined, Send invite link.')
+            else:
+                return await event.reply_text(text=f'Error: `{str(e)}`')
 
 Bot.run()
