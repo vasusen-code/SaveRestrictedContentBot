@@ -1,5 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.raw.functions.messages import ImportChatInvite
+from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
+
 from decouple import config
 
 forcesub_text = 'You have to join @Dronebots to use this bot.'
