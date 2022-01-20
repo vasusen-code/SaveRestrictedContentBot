@@ -22,7 +22,7 @@ def get_link(string):
         return False
     
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
-async def run(event):
+async def x(event):
     link = get_link(event.text)
     if not link:
         return
