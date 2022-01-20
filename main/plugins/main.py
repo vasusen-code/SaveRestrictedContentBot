@@ -1,6 +1,6 @@
 # Github.com/Vasusen-code
 
-from main.plugins.helpers import get_link, forcesub_text, join
+from main.plugins.helpers import get_link, forcesub, forcesub_text, join
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION
 
 from pyrogram import Client, filters
@@ -21,19 +21,6 @@ userbot = Client(
     api_hash=API_HASH, 
     api_id=API_ID
 )
-
-async def forcesub(bot, sender):
-    FORCESUB = config("FORCESUB", default=None)
-    if FORCESUB is not None:
-        if not str(FORCESUB).startswith("-100"):
-            FORCESUB = int("-100" + str(FORCESUB))
-    if FORCESUB is not None:
-        try:
-            user = await bot.get_chat_member(FORCESUB, sender)
-            if user.status == "kicked":
-                return True
-        except UserNotParticipant:
-            return True
             
 async def get_msg(userbot, client, sender, msg_link):
     chat = msg_link.split("/")[-2]
@@ -46,6 +33,8 @@ async def get_msg(userbot, client, sender, msg_link):
     
 @Bot.on_message(filters.private)
 async def clone(bot, event):
+    if event.text == '/start':
+        await event.reply_text(text="Send me Link of any message to clone it here.\n\nFor private channel message, send invite link first.")
     link = get_link(event.text)
     if not link:
         return
