@@ -2,8 +2,11 @@
 
 import sys, time, logging
 from decouple import config
+
 from telethon import TelegramClient
 from telethon.sessions import StringSession
+
+from pyrogram import Client
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -22,3 +25,5 @@ except BaseException:
     sys.exit(1)
 
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
+
+robot = Client('robot', api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
