@@ -10,7 +10,7 @@ async def join(client, invite_link):
     except errors.InviteHashExpiredError:
         return "Wrong URL"
     
-async def force_sub(id):
+async def forcesub(id):
     FORCESUB = config("FORCESUB", default=None)
     if not str(FORCESUB).startswith("-100"):
         FORCESUB = int("-100" + str(FORCESUB))
