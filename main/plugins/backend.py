@@ -18,6 +18,16 @@ userbot = Client(
     api_id=API_ID
 )
 
+async def forcesub(bot, sender):
+    if FORCESUB is not None:
+        try:
+            user = await bot.get_chat_member(FORCESUB, sender)
+            if user.status == "kicked":
+                return True
+        except UserNotParticipant:
+            return True
+            
+
 async def get_msg(userbot, client, sender, msg_link):
     chat = msg_link.split("/")[-2]
     msg_id = int(msg_link.split("/")[-1])
