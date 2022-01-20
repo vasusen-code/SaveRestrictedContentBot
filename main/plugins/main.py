@@ -43,7 +43,7 @@ async def clone(bot, event):
     try:
         await start_userbot(userbot)
     except Exception as e:
-        if 'ConnectionError' in str(e):
+        if 'Client is already connected' in str(e):
             pass
         else:
             return
