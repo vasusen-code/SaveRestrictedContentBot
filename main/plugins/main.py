@@ -30,7 +30,7 @@ async def get_msg(userbot, client, sender, msg_link):
         try:
             msg = await userbot.get_messages(chat, msg_id)
             edit = await client.send_message(sender, 'Trying to process.')
-            file = await bot.download_media(
+            file = await userbot.download_media(
                 msg,
                 progress=progress_for_pyrogram,
                 progress_args=(
