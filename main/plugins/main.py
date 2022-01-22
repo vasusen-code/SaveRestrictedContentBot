@@ -5,6 +5,7 @@ from main.plugins.display_progress import progress_for_pyrogram
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION
 
 from pyrogram import Client, filters
+from ethon.pyfunc import video_metadata
 
 import re
 import time
@@ -40,7 +41,29 @@ async def get_msg(userbot, client, sender, msg_link):
                     time.time()
                 )
             )
-            await client.send_message(sender, str(file))
+            await edit.edit('Trying to Upload.')
+            caption = ""
+            if msg.text is not None:
+                caption = msg.text
+            data = video_metadata(file)
+            duration = data["duration"]
+            if str(file).split(".")[-1] == '.mp4':
+                upload = await bot.send_video(
+                    chat_id=update.chat.id,
+                    video=file,
+                    caption=caption,
+                    supports_streaming=True,
+                    duration=duration,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        userbot,
+                        '**UPLOADING:**',
+                        edit,
+                        time.time()
+                    )
+                )
+            else:
+                
         except Exception as e:
             await edit.edit(str(e))
     else:
