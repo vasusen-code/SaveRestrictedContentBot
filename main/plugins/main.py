@@ -45,25 +45,36 @@ async def get_msg(userbot, client, sender, msg_link):
             caption = ""
             if msg.text is not None:
                 caption = msg.text
-            data = video_metadata(file)
-            duration = data["duration"]
             if str(file).split(".")[-1] == '.mp4':
-                upload = await bot.send_video(
-                    chat_id=update.chat.id,
+                data = video_metadata(file)
+                duration = data["duration"]
+                await client.send_video(
+                    chat_id=sender,
                     video=file,
                     caption=caption,
                     supports_streaming=True,
                     duration=duration,
                     progress=progress_for_pyrogram,
                     progress_args=(
-                        userbot,
+                        client,
                         '**UPLOADING:**',
                         edit,
                         time.time()
                     )
                 )
             else:
-                
+                await client.send_document(
+                    sender,
+                    file, 
+                    caption=caption,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        client,
+                        '**UPLOADING:**',
+                        edit,
+                        time.time()
+                    )
+                )
         except Exception as e:
             await edit.edit(str(e))
     else:
