@@ -59,7 +59,8 @@ def get_link(string):
         return False
     
 #Anti-Spam---------------------------------------------------------------------------------------------------------------
-    
+
+#Set timer to avoid spam
 async def set_timer(bot, sender, list1, list2):
     now = time.time()
     list2.append(f'{now}')
