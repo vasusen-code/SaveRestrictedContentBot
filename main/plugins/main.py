@@ -61,7 +61,7 @@ async def get_msg(userbot, client, sender, msg_link):
                     caption=caption,
                     supports_streaming=True,
                     duration=duration,
-                    thumb=thumb_path
+                    thumb=thumb_path,
                     progress=progress_for_pyrogram,
                     progress_args=(
                         client,
