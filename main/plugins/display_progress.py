@@ -5,7 +5,7 @@ import json
 
 FINISHED_PROGRESS_STR = "█"
 UN_FINISHED_PROGRESS_STR = ""
-DOWNLOAD_LOCATION = /app
+DOWNLOAD_LOCATION = "/app"
 
 
 async def progress_for_pyrogram(
