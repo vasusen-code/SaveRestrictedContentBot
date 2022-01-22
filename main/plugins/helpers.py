@@ -57,3 +57,25 @@ def get_link(string):
             return False
     except Exception:
         return False
+    
+#Anti-Spam---------------------------------------------------------------------------------------------------------------
+    
+async def set_timer(bot, sender, list1, list2):
+    now = time.time()
+    list2.append(f'{now}')
+    list1.append(f'{sender}')
+    await bot.send_message(sender, 'You can start a new process again after 2 minutes.')
+    await asyncio.sleep(120)
+    list2.pop(int(timer.index(f'{now}')))
+    list1.pop(int(process1.index(f'{sender}')))
+    
+#check time left in timer
+def check_timer(sender, list1, list2):
+    if f'{sender}' in list1:
+        index = list1.index(f'{sender}')
+        last = list2[int(index)]
+        present = time.time()
+        return False, f"You have to wait {120-round(present-float(last))} seconds more to start a new process!"
+    else:
+        return True, None
+
