@@ -1,7 +1,8 @@
+from ethon.pyfunc import bash
 from pyrogram import Client, filters, idle
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
-import re
+import re, os
 import asyncio
 from decouple import config
 
@@ -81,3 +82,16 @@ def check_timer(sender, list1, list2):
     else:
         return True, None
 
+#Screenshot---------------------------------------------------------------------------------------------------------------
+
+def screenshot(video, time_stamp):
+    out = str(video).split(".")[0] + ".jpg"
+    x, y = bash(f"ffmpeg -ss {time_stamp} -i {video} -vframes 1 {out}")
+    print(x)
+    print(y)
+    if os.path.isfile(out):
+        return out
+    else:
+        None
+        
+        
