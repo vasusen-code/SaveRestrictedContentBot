@@ -25,8 +25,10 @@ async def get_msg(userbot, client, sender, msg_link):
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c' in msg_link:
         chat = int('-100' + str(msg_link.split("/")[-2]))
-        msg = await userbot.copy_message("me", chat, msg_id)
-        await client.send_message(int(sender), msg) 
+        msg = await userbot.get_messages(chat, msg_id)
+        await client.send_message(sender, 'Downloading.')
+        file = await userbot.download_media(msg) 
+        await client.send_message(sender, str(file))
     else:
         chat =  msg_link.split("/")[-2]
         await client.copy_message(int(sender), chat, msg_id)
