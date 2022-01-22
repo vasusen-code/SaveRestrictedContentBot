@@ -87,6 +87,7 @@ async def get_msg(userbot, client, sender, msg_link):
             await set_timer(client, sender, process, timer) 
         except Exception as e:
             await client.send_message(sender, F'ERROR: {str(e)}')
+            return 
     else:
         chat =  msg_link.split("/")[-2]
         await client.copy_message(int(sender), chat, msg_id)
