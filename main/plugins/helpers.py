@@ -84,7 +84,7 @@ def check_timer(sender, list1, list2):
 
 #Screenshot---------------------------------------------------------------------------------------------------------------
 
-def screenshot(video, time_stamp):
+asybc def screenshot(video, time_stamp):
     out = str(video).split(".")[0] + ".jpg"
     cmd = (f"ffmpeg -ss {time_stamp} -i {video} -vframes 1 {out}").split(" ")
     process = await asyncio.create_subprocess_exec(
