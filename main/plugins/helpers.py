@@ -1,9 +1,9 @@
-from ethon.pyfunc import bash
+#Github.com/Vasusen-code
+
 from pyrogram import Client, filters, idle
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
-import re, os
-import asyncio
+import asyncio, subprocess, re, os
 from decouple import config
 
 forcesub_text = 'You have to join @Dronebots to use this bot.'
@@ -42,7 +42,7 @@ async def forcesub(bot, sender):
     except UserNotParticipant:
         return True
     except Exception as e:
-        prit(e)
+        print(e)
         return True
         
 #Regex---------------------------------------------------------------------------------------------------------------
@@ -86,7 +86,15 @@ def check_timer(sender, list1, list2):
 
 def screenshot(video, time_stamp):
     out = str(video).split(".")[0] + ".jpg"
-    x, y = bash(f"ffmpeg -ss {time_stamp} -i {video} -vframes 1 {out}")
+    cmd = (f"ffmpeg -ss {time_stamp} -i {video} -vframes 1 {out}").split(" ")
+    process = await asyncio.create_subprocess_exec(
+         *cmd,
+         stdout=asyncio.subprocess.PIPE,
+         stderr=asyncio.subprocess.PIPE)
+        
+    stdout, stderr = await process.communicate()
+    x = stderr.decode().strip()
+    y = stdout.decode().strip()
     print(x)
     print(y)
     if os.path.isfile(out):
