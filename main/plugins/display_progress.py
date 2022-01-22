@@ -3,9 +3,9 @@ import os
 import time
 import json
 
-FINISHED_PROGRESS_STR = ""
+FINISHED_PROGRESS_STR = "█"
 UN_FINISHED_PROGRESS_STR = ""
-DOWNLOAD_LOCATION = ""
+DOWNLOAD_LOCATION = None
 
 
 async def progress_for_pyrogram(
