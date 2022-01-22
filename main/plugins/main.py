@@ -1,11 +1,13 @@
 # Github.com/Vasusen-code
 
 from main.plugins.helpers import start_userbot, get_link, forcesub, forcesub_text, join
+from main.plugins.display_progress import progress_for_pyrogram
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION
 
 from pyrogram import Client, filters
 
 import re
+import time
 import asyncio
     
 Bot = Client(
@@ -25,10 +27,22 @@ async def get_msg(userbot, client, sender, msg_link):
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c' in msg_link:
         chat = int('-100' + str(msg_link.split("/")[-2]))
-        msg = await userbot.get_messages(chat, msg_id)
-        await client.send_message(sender, 'Downloading.')
-        file = await userbot.download_media(msg) 
-        await client.send_message(sender, str(file))
+        try:
+            msg = await userbot.get_messages(chat, msg_id)
+            edit = await client.send_message(sender, 'Trying to process.')
+            file = await bot.download_media(
+                msg,
+                progress=progress_for_pyrogram,
+                progress_args=(
+                    bot,
+                    "**DOWNOOADING:**",
+                    edit,
+                    time.time()
+                )
+            )
+            await client.send_message(sender, str(file))
+        except Exception as e:
+            await edit.edit(str(e))
     else:
         chat =  msg_link.split("/")[-2]
         await client.copy_message(int(sender), chat, msg_id)
