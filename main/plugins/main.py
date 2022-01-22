@@ -42,7 +42,7 @@ async def get_msg(userbot, client, sender, msg_link):
                 progress=progress_for_pyrogram,
                 progress_args=(
                     userbot,
-                    "**DOWNOOADING:**\n\n",
+                    "**DOWNOOADING:**\n",
                     edit,
                     time.time()
                 )
@@ -63,7 +63,7 @@ async def get_msg(userbot, client, sender, msg_link):
                     progress=progress_for_pyrogram,
                     progress_args=(
                         client,
-                        '**UPLOADING:**\n\n',
+                        '**UPLOADING:**\n',
                         edit,
                         time.time()
                     )
@@ -76,7 +76,7 @@ async def get_msg(userbot, client, sender, msg_link):
                     progress=progress_for_pyrogram,
                     progress_args=(
                         client,
-                        '**UPLOADING:**\n\n',
+                        '**UPLOADING:**\n',
                         edit,
                         time.time()
                     )
