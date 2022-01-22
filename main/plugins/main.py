@@ -118,7 +118,7 @@ async def clone(bot, event):
         try:
             await get_msg(userbot, bot, event.chat.id, link)
         except Exception as e:
-            if 'INVALID' in str(e):
+            if 'CHANNEL_INVALID' in str(e):
                 return await event.reply_text(text='Channel not joined, Send invite link.')
             else:
                 return await event.reply_text(text=f'Error: `{str(e)}`')
