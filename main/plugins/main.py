@@ -1,6 +1,6 @@
 # Github.com/Vasusen-code
 
-from main.plugins.helpers import start_userbot, get_link, forcesub, forcesub_text, join, set_timer, check_timer
+from main.plugins.helpers import start_userbot, get_link, forcesub, forcesub_text, join, set_timer, check_timer, screenshot
 from main.plugins.display_progress import progress_for_pyrogram
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION
 
@@ -54,12 +54,14 @@ async def get_msg(userbot, client, sender, msg_link):
             if str(file).split(".")[-1] == 'mp4':
                 data = video_metadata(file)
                 duration = data["duration"]
+                thumb_path = screenshot(file, duration/2)
                 await client.send_video(
                     chat_id=sender,
                     video=file,
                     caption=caption,
                     supports_streaming=True,
                     duration=duration,
+                    thumb=thumb_path
                     progress=progress_for_pyrogram,
                     progress_args=(
                         client,
