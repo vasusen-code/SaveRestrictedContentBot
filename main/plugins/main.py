@@ -45,7 +45,7 @@ async def get_msg(userbot, client, sender, msg_link):
             caption = ""
             if msg.text is not None:
                 caption = msg.text
-            if str(file).split(".")[-1] == '.mp4':
+            if str(file).split(".")[-1] == 'mp4':
                 data = video_metadata(file)
                 duration = data["duration"]
                 await client.send_video(
@@ -75,6 +75,7 @@ async def get_msg(userbot, client, sender, msg_link):
                         time.time()
                     )
                 )
+            await edit.delete()
         except Exception as e:
             await edit.edit(str(e))
     else:
