@@ -32,7 +32,7 @@ async def get_msg(userbot, client, sender, msg_link):
     if 't.me/c' in msg_link:
         st, r = check_timer(sender, process, timer) 
         if st == False:
-            await client.send_message(sender, r) 
+            return await client.send_message(sender, r) 
         chat = int('-100' + str(msg_link.split("/")[-2]))
         try:
             msg = await userbot.get_messages(chat, msg_id)
