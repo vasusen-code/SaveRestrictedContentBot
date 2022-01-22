@@ -1,6 +1,6 @@
 # Github.com/Vasusen-code
 
-from main.plugins.helpers import start_userbot, get_link, forcesub, forcesub_text, join
+from main.plugins.helpers import start_userbot, get_link, forcesub, forcesub_text, join, set_timer, check_timer
 from main.plugins.display_progress import progress_for_pyrogram
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION
 
@@ -11,6 +11,9 @@ import re
 import time
 import asyncio
     
+process=[]
+timer=[]
+
 Bot = Client(
     "Simple-Pyrogram-Bot",
     bot_token=BOT_TOKEN,
@@ -27,6 +30,9 @@ async def get_msg(userbot, client, sender, msg_link):
     chat = ""
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c' in msg_link:
+        st, r = check_timer(sender, process, timer) 
+        if st == False:
+            await client.send_message(sender, r) 
         chat = int('-100' + str(msg_link.split("/")[-2]))
         try:
             msg = await userbot.get_messages(chat, msg_id)
@@ -76,6 +82,7 @@ async def get_msg(userbot, client, sender, msg_link):
                     )
                 )
             await edit.delete()
+            await set_timer(client, sender, process, timer) 
         except Exception as e:
             await edit.edit(str(e))
     else:
