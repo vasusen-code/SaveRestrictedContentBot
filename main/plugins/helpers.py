@@ -69,8 +69,8 @@ async def set_timer(bot, sender, list1, list2):
     list1.append(f'{sender}')
     await bot.send_message(sender, 'You can start a new process again after 2 minutes.')
     await asyncio.sleep(120)
-    list2.pop(int(timer.index(f'{now}')))
-    list1.pop(int(process1.index(f'{sender}')))
+    list2.pop(int(list2.index(f'{now}')))
+    list1.pop(int(list1.index(f'{sender}')))
     
 #check time left in timer
 def check_timer(sender, list1, list2):
