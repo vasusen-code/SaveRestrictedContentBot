@@ -2,11 +2,16 @@ from .. import API_ID, API_HASH, BOT_TOKEN
 
 from telethon import events, Button, TelegramClient
 
+import time, logging, os
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
 #connection
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
 bot.run_until_disconnected()
 
-st = 
+st = "Send me Link of any message to clone it here, For private channel message, send invite link first.\n\nSUPPORT: @TeamDrone\nDEV: @MaheshChauhan"
 
 @bot.on(events.NewMessage(incoming=True, pattern="/start"))
 async def start(event):
