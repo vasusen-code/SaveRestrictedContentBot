@@ -18,7 +18,7 @@ async def start(event):
     await event.reply(f'{st}', 
                       buttons=[
                               [Button.inline("SET THUMB.", data="sett"),
-                              [Button.inline("REM THUMB.", data="remt")]
+                               Button.inline("REM THUMB.", data="remt")]
                               ])
                         
 @bot.on(events.callbackquery.CallbackQuery(data="sett"))
