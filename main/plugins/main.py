@@ -103,6 +103,13 @@ async def clone(bot, event):
     if xx is True:
         await event.reply_text(text=forcesub_text)
         return
+    try:
+        await start_userbot(userbot)
+    except Exception as e:
+        if 'Client is already connected' in str(e):
+            pass
+        else:
+            return
     if 't.me/+' in link:
         xy = await join(userbot, link)
         await event.reply_text(text=xy)
@@ -117,4 +124,3 @@ async def clone(bot, event):
                 return await event.reply_text(text=f'Error: `{str(e)}`')
 
 Bot.run()
-asyncio.run(start_userbot(userbot))
