@@ -1,4 +1,5 @@
 ethon
 python-decouple
 pyrogram==1.3.5
+telethon
 tgcrypto
