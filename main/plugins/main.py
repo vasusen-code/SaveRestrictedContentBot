@@ -117,4 +117,4 @@ async def clone(bot, event):
                 return await event.reply_text(text=f'Error: `{str(e)}`')
 
 Bot.run()
-asyncio.run(start(start_userbot(userbot)))
+asyncio.run(start_userbot(userbot))
