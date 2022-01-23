@@ -1,8 +1,8 @@
 #Github.com/Vasusen-code
 
 from pyrogram import Client, filters, idle
-from pyrogram.errors import FloodWait
-from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant, INVITE_HASH_EXPIRED, INVITE_HASH_INVALID
+from pyrogram.errors import FloodWait, BadRequest
+from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
 import asyncio, subprocess, re, os, time
 from decouple import config
@@ -23,10 +23,8 @@ async def join(client, invite_link):
         return "Successfully joined the Channel"
     except USER_ALREADY_PARTICIPANT:
         return "Already Joined."
-    except INVITE_HASH_EXPIRED:
-        return "Could not join. Maybe your link is expired."
-    except INVITE_HASH_INVALID:
-        return "Invalid Link."
+    except BadRequest:
+        return "Could not join. Maybe your link is expired or Invalid."
     except FloodWait:
         return "Too many requests, try again later."
     
