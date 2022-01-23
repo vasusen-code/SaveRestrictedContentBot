@@ -1,4 +1,4 @@
-from .. import API_ID, API_HASH, BOT_TOKEN
+from .. import API_ID, API_HASH, BOT_TOKEN, ACCESS
 
 from telethon import events, Button, TelegramClient
 
@@ -20,6 +20,8 @@ async def start(event):
                               [Button.inline("SET THUMB.", data="sett"),
                                Button.inline("REM THUMB.", data="remt")]
                               ])
+    tag = f'[{event.sender.first_name}](tg://user?id={event.sender_id})'
+    await Drone.send_message(int(ACCESS_CHANNEL), f'{tag} started the BOT\nUserID: {event.sender_id}') 
                         
 @bot.on(events.callbackquery.CallbackQuery(data="sett"))
 async def sett(event):    
