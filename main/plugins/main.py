@@ -122,7 +122,10 @@ async def clone(bot, event):
             await get_msg(userbot, bot, event.chat.id, link)
         except CHANNEL_INVALID:
             return awair event.reply_texy(text='Channel not joined. Send invite link!')
-          
+        except FloodWait:
+            return await event.reply_text(text='Too many requests, try again later.')
+        except ValueError:
+            return await event.reply_text(text='Send Only message link or Private channel invites.')
         except Exception as e:
             return await event.reply_text(text=f'Error: `{str(e)}`')
 
