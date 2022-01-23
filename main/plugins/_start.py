@@ -4,6 +4,9 @@ import os
 from .. import bot, ACCESS
 from telethon import events, Button, TelegramClient
 
+from pyrogram import idle
+from main.plugins.main import Bot, userbot
+
 st = "Send me Link of any message to clone it here, For private channel message, send invite link first.\n\nSUPPORT: @TeamDrone\nDEV: @MaheshChauhan"
 
 @bot.on(events.NewMessage(incoming=True, pattern="/start"))
@@ -15,7 +18,13 @@ async def start(event):
                               ])
     tag = f'[{event.sender.first_name}](tg://user?id={event.sender_id})'
     await event.client.send_message(int(ACCESS), f'{tag} started the BOT\nUserID: {event.sender_id}') 
-                        
+    try:
+        await Bot.start()
+        await userbot.start()
+        await idle()
+    except:
+        pass
+    
 @bot.on(events.callbackquery.CallbackQuery(data="sett"))
 async def sett(event):    
     Drone = event.client                    
