@@ -4,8 +4,7 @@ from main.plugins.helpers import start_userbot, get_link, forcesub, forcesub_tex
 from main.plugins.display_progress import progress_for_pyrogram
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION, ACCESS
 
-from pyrogram.errors.exceptions.bad_request_400 import CHANNEL_INVALID
-from pyrogram.errors import FloodWait
+from pyrogram.errors import FloodWait, BadRequest
 from pyrogram import Client, filters
 from ethon.pyfunc import video_metadata
 
@@ -119,7 +118,7 @@ async def clone(bot, event):
     if 't.me' in link:
         try:
             await get_msg(userbot, bot, event.chat.id, link)
-        except CHANNEL_INVALID:
+        except BadRequest:
             return await event.reply_texy(text='Channel not joined. Send invite link!')
         except FloodWait:
             return await event.reply_text(text='Too many requests, try again later.')
