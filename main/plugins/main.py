@@ -7,10 +7,11 @@ from .. import API_ID, BOT_TOKEN, API_HASH, SESSION
 from pyrogram import Client, filters
 from ethon.pyfunc import video_metadata
 
-import re
-import time
-import asyncio
-    
+import re, time, asyncio, logging
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+
 process=[]
 timer=[]
 
