@@ -22,8 +22,11 @@ async def start(event):
         await Bot.start()
         await userbot.start()
         await idle()
-    except:
-        pass
+    except Exception as e:
+        if 'Client is already connected' in str(e):
+            pass
+        else:
+            return
     
 @bot.on(events.callbackquery.CallbackQuery(data="sett"))
 async def sett(event):    
