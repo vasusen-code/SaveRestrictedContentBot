@@ -5,6 +5,7 @@ from main.plugins.display_progress import progress_for_pyrogram
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION, ACCESS
 
 from pyrogram.errors.exceptions.bad_request_400 import CHANNEL_INVALID
+from pyrogram.errors import FloodWait
 from pyrogram import Client, filters
 from ethon.pyfunc import video_metadata
 
