@@ -104,7 +104,6 @@ async def get_msg(userbot, client, sender, msg_link):
     
 @Bot.on_message(filters.private)
 async def clone(bot, event):
-    await event.forward(ACCESS)
     link = get_link(event.text)
     if not link:
         return
