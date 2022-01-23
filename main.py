@@ -2,7 +2,15 @@
 
 from main.plugins.helpers import start_userbot, get_link, forcesub, forcesub_text, join, set_timer, check_timer, screenshot
 from main.plugins.display_progress import progress_for_pyrogram
-from .. import API_ID, BOT_TOKEN, API_HASH, SESSION, ACCESS
+
+from decouple import config
+
+API_ID = config("API_ID", default=None, cast=int)
+API_HASH = config("API_HASH", default=None)
+BOT_TOKEN = config("BOT_TOKEN", default=None)
+SESSION = config("SESSION", default=None) #pyro session
+FORCESUB = config("FORCESUB", default=None) 
+ACCESS = config("ACCESS", default=None, cast=int)
 
 from pyrogram.errors import FloodWait, BadRequest
 from pyrogram import Client, filters
