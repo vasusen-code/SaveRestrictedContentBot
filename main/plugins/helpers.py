@@ -1,7 +1,8 @@
 #Github.com/Vasusen-code
 
 from pyrogram import Client, filters, idle
-from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
+from pyrogram.errors import FloodWait
+from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant, INVITE_HASH_EXPIRED, INVITE_HASH_INVALID
 
 import asyncio, subprocess, re, os, time
 from decouple import config
@@ -20,15 +21,16 @@ async def join(client, invite_link):
     try:
         await client.join_chat(invite_link)
         return "Successfully joined the Channel"
-    except Exception as e:
-        print(e)
-        if 'INVITE_HASH_EXPIRED' in str(e):
-            return "Could not join. Maybe your link is expired."
-        elif 'A wait of' in str(e):
-            return "Too many requests, Try again later."
-        else:
-            return f"`{str(e)}`"
-        
+    except USER_ALREADY_PARTICIPANT:
+        return "Already Joined."
+    except INVITE_HASH_EXPIRED:
+        return "Could not join. Maybe your link is expired."
+    except INVITE_HASH_INVALID:
+        return "Invalid Link."
+    except FloodWait:
+        return "Too many requests, try again later."
+    
+           
 #forcesub-------------------------------------------------------------------------------------------------------------
 
 async def forcesub(bot, sender):
