@@ -9,7 +9,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 
 #connection
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
-bot.run_until_disconnected()
 
 st = "Send me Link of any message to clone it here, For private channel message, send invite link first.\n\nSUPPORT: @TeamDrone\nDEV: @MaheshChauhan"
 
@@ -57,3 +56,6 @@ async def remt(event):
     except Exception:
         await event.edit("No thumbnail saved.")                        
     
+    
+bot.run()
+
