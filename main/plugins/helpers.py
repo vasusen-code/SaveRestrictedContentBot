@@ -24,10 +24,10 @@ async def join(client, invite_link):
         print(e)
         if 'INVITE_HASH_EXPIRED' in str(e):
             return "Could not join. Maybe your link is expired."
-        elif 'already' or 'Already' in str(e):
-            return "Already joined."
+        elif 'A wait of' in str(e):
+            return "Too many requests, Try again later."
         else:
-            return f"Error:` {str(e)}`"
+            return f"`{str(e)}`"
         
 #forcesub-------------------------------------------------------------------------------------------------------------
 
