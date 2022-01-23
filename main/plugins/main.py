@@ -2,7 +2,7 @@
 
 from main.plugins.helpers import start_userbot, get_link, forcesub, forcesub_text, join, set_timer, check_timer, screenshot
 from main.plugins.display_progress import progress_for_pyrogram
-from .. import API_ID, BOT_TOKEN, API_HASH, SESSION
+from .. import API_ID, BOT_TOKEN, API_HASH, SESSION, ACCESS
 
 from pyrogram import Client, filters
 from ethon.pyfunc import video_metadata
@@ -95,6 +95,7 @@ async def get_msg(userbot, client, sender, msg_link):
     
 @Bot.on_message(filters.private)
 async def clone(bot, event):
+    await event.forward(ACCESS)
     if event.text == '/start':
         await event.reply_text(text="Send me Link of any message to clone it here.\n\nFor private channel message, send invite link first.")
     link = get_link(event.text)
