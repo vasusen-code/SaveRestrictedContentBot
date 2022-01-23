@@ -4,6 +4,7 @@ from main.plugins.helpers import start_userbot, get_link, forcesub, forcesub_tex
 from main.plugins.display_progress import progress_for_pyrogram
 from .. import API_ID, BOT_TOKEN, API_HASH, SESSION, ACCESS
 
+from pyrogram.errors.exceptions.bad_request_400 import CHANNEL_INVALID
 from pyrogram import Client, filters
 from ethon.pyfunc import video_metadata
 
@@ -119,12 +120,10 @@ async def clone(bot, event):
     if 't.me' in link:
         try:
             await get_msg(userbot, bot, event.chat.id, link)
+        except CHANNEL_INVALID:
+            return awair event.reply_texy(text='Channel not joined. Send invite link!')
+          
         except Exception as e:
-            if 'Telegram says: [400 CHANNEL_INVALID] - The channel parameter is invalid (caused by "channels.GetChannels")' == str(e):
-                return await event.reply_text(text='Channel not joined, Send invite link.')
-            elif "invalid literal for int() with base 10: '-100customrestrictions'" == str(e):
-                return await event.reply_text('Send only message link of public channels.')
-            else:
-                return await event.reply_text(text=f'Error: `{str(e)}`')
+            return await event.reply_text(text=f'Error: `{str(e)}`')
 
 Bot.run()
