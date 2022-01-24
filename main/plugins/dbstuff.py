@@ -8,7 +8,7 @@ from main.Database.database import Database
 
 #Database command handling--------------------------------------------------------------------------
 
-db = Database(MONGODB_URI, 'videoconvertor')
+db = Database(MONGODB_URI, 'saverestricted')
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def incomming(event):
