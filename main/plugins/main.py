@@ -1,6 +1,6 @@
 # Github.com/Vasusen-code
 
-from main.plugins.helpers import start_userbot, get_link, forcesub, forcesub_text, join, set_timer, check_timer, screenshot
+from main.plugins.helpers import start_bot, get_link, forcesub, forcesub_text, join, set_timer, check_timer, screenshot
 from main.plugins.display_progress import progress_for_pyrogram
 
 from decouple import config
