@@ -11,10 +11,27 @@ forcesub_text = 'You have to join @Dronebots to use this bot.'
 
 #Multi client-------------------------------------------------------------------------------------------------------------
 
-async def start_bot(bot):
-    await bot.start()
-    await idle()
-    
+async def start_bot(sender):
+    MONGODB_URI = config("MONGODB_URI", default=None)
+    db = Database(MONGODB_URI, 'saverestricted')
+    x = await db.get_credentials(sender)
+    if x[0] and x[1] and x[3] is not None:
+        try:
+            userbot = Client(
+                session_name=x[2], 
+                api_hash=x[1], 
+                api_id=int(x[0]))
+            await userbot.start()
+            await idle()
+            return True, userbot
+        except ValueError:
+            return False, "INVALID API_ID: Logout and Login back with correct `API_ID`"
+        except 
+            return True, userbot
+        except
+            return False, f"Error: {str(e)}"
+    else:
+        return None
 #Join private chat-------------------------------------------------------------------------------------------------------------
 
 async def join(client, invite_link):
