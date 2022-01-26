@@ -17,4 +17,5 @@ A simple telegram bot to save restricted content with custom thumbmail support b
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
 
 # Notice
-if you see any message like `ERROR R12` in heroku logs, just restart. 
+- if you see any message like `ERROR R12` in heroku logs, just restart. 
+- `CHANNEL INVALID` if channel not joined. 
