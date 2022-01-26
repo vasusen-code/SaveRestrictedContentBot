@@ -14,7 +14,7 @@ from pyrogram.errors import FloodWait, BadRequest
 from pyrogram import Client, filters
 from ethon.pyfunc import video_metadata
 
-import re, time, asyncio, logging
+import re, time, asyncio, logging, os
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
