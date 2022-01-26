@@ -35,18 +35,23 @@ userbot = Client(
     session_name=SESSION, 
     api_hash=API_HASH, 
     api_id=API_ID)
-    
-async def get_msg(userbot, client, sender, msg_link):
+  
+def thumbnail(sender):
+    if os.path.exists(f'{sender}.jpg'):
+        return f'{sender}.jpg'
+    else:
+         return None
+      
+async def get_msg(userbot, client, sender, msg_link, edit):
     chat = ""
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c/' in msg_link:
         st, r = check_timer(sender, process, timer) 
         if st == False:
-            return await client.send_message(sender, r) 
+            return await edit.edit(r) 
         chat = int('-100' + str(msg_link.split("/")[-2]))
         try:
             msg = await userbot.get_messages(chat, msg_id)
-            edit = await client.send_message(sender, 'Trying to process.')
             file = await userbot.download_media(
                 msg,
                 progress=progress_for_pyrogram,
@@ -81,10 +86,12 @@ async def get_msg(userbot, client, sender, msg_link):
                     )
                 )
             else:
+                thumb_path=thumbnail(sender)
                 await client.send_document(
                     sender,
                     file, 
                     caption=caption,
+                    thumb=thumb_path,
                     progress=progress_for_pyrogram,
                     progress_args=(
                         client,
@@ -96,34 +103,34 @@ async def get_msg(userbot, client, sender, msg_link):
             await edit.delete()
             await set_timer(client, sender, process, timer) 
         except Exception as e:
-            await client.send_message(sender, F'ERROR: {str(e)}')
+            await edit.edit(f'ERROR: {str(e)}')
             return 
     else:
         chat =  msg_link.split("/")[-2]
         await client.copy_message(int(sender), chat, msg_id)
-    
-@Bot.on_message(filters.private)
+        await edit.delete()
+        
+@Bot.on_message(filters.private & filters.incoming)
 async def clone(bot, event):
     link = get_link(event.text)
     if not link:
         return
     xx = await forcesub(bot, event.chat.id)
     if xx is True:
-        await event.reply_text(text=forcesub_text)
+        await event.reply(forcesub_text)
         return
+    edit = await bot.send_message(event.chat.id, 'Trying to process.')
     if 't.me/+' in link:
         xy = await join(userbot, link)
-        await event.reply_text(text=xy)
+        await edit.edit(xy)
         return 
     if 't.me' in link:
         try:
             await get_msg(userbot, bot, event.chat.id, link)
-        except BadRequest:
-            return await event.reply_texy(text='Channel not joined. Send invite link!')
         except FloodWait:
-            return await event.reply_text(text='Too many requests, try again later.')
+            return await edit.edit(text='Too many requests, try again later.')
         except ValueError:
-            return await event.reply_text(text='Send Only message link or Private channel invites.')
+            return await edit.edit(text='Send Only message link or Private channel invites.')
         except Exception as e:
-            return await event.reply_text(text=f'Error: `{str(e)}`')         
+            return await edit.edit(text=f'Error: `{str(e)}`')         
           
