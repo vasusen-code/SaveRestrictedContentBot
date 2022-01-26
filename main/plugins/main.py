@@ -1,6 +1,6 @@
 # Github.com/Vasusen-code
 
-from main.plugins.helpers import start_bot, get_link, forcesub, forcesub_text, join, set_timer, check_timer, screenshot
+from main.plugins.helpers import get_link, join, screenshot
 from main.plugins.display_progress import progress_for_pyrogram
 
 from decouple import config
@@ -9,8 +9,6 @@ API_ID = config("API_ID", default=None, cast=int)
 API_HASH = config("API_HASH", default=None)
 BOT_TOKEN = config("BOT_TOKEN", default=None)
 SESSION = config("SESSION", default=None) #pyro session
-FORCESUB = config("FORCESUB", default=None) 
-ACCESS = config("ACCESS", default=None, cast=int)
 
 from pyrogram.errors import FloodWait, BadRequest
 from pyrogram import Client, filters
@@ -20,9 +18,6 @@ import re, time, asyncio, logging
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-
-process=[]
-timer=[]
 
 Bot = Client(
     "Simple-Pyrogram-Bot",
@@ -46,9 +41,6 @@ async def get_msg(userbot, client, sender, msg_link, edit):
     chat = ""
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c/' in msg_link:
-        st, r = check_timer(sender, process, timer) 
-        if st == False:
-            return await edit.edit(r) 
         chat = int('-100' + str(msg_link.split("/")[-2]))
         try:
             msg = await userbot.get_messages(chat, msg_id)
@@ -101,7 +93,6 @@ async def get_msg(userbot, client, sender, msg_link, edit):
                     )
                 )
             await edit.delete()
-            await set_timer(client, sender, process, timer) 
         except Exception as e:
             await edit.edit(f'ERROR: {str(e)}')
             return 
@@ -115,10 +106,6 @@ async def clone(bot, event):
     link = get_link(event.text)
     if not link:
         return
-    xx = await forcesub(bot, event.chat.id)
-    if xx is True:
-        await event.reply(forcesub_text)
-        return
     edit = await bot.send_message(event.chat.id, 'Trying to process.')
     if 't.me/+' in link:
         xy = await join(userbot, link)
@@ -126,11 +113,11 @@ async def clone(bot, event):
         return 
     if 't.me' in link:
         try:
-            await get_msg(userbot, bot, event.chat.id, link)
+            await get_msg(userbot, bot, event.chat.id, link, edit) 
         except FloodWait:
-            return await edit.edit(text='Too many requests, try again later.')
+            return await edit.edit('Too many requests, try again later.')
         except ValueError:
-            return await edit.edit(text='Send Only message link or Private channel invites.')
+            return await edit.edit('Send Only message link or Private channel invites.')
         except Exception as e:
-            return await edit.edit(text=f'Error: `{str(e)}`')         
+            return await edit.edit(f'Error: `{str(e)}`')         
           
