@@ -24,6 +24,7 @@ async def start(event):
         if 'Client is already connected' in str(e):
             pass
         else:
+            await event.clinet.send_message(event.chat_id, "Error while starting Client, check if your API and SESSION is right.")
             return
     
 @bot.on(events.callbackquery.CallbackQuery(data="sett"))
