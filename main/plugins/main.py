@@ -58,7 +58,11 @@ async def get_msg(userbot, client, sender, msg_link, edit):
             caption = ""
             if msg.text is not None:
                 caption = msg.text
-            if str(file).split(".")[-1] == 'mp4':
+            if str(file).split(".")[-1] == 'mkv' or 'mp4' or 'webm':
+                if str(file).split(".")[-1] == 'webm' or 'mkv':
+                    path = str(file).split(".")[0] + ".mp4"
+                    os.rename(file, path) 
+                    file = str(file).split(".")[0] + ".mp4"
                 data = video_metadata(file)
                 duration = data["duration"]
                 thumb_path = await screenshot(file, duration/2, sender)
