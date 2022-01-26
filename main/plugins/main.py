@@ -102,9 +102,12 @@ async def get_msg(userbot, client, sender, msg_link, edit):
         await edit.delete()
         
 @Bot.on_message(filters.private & filters.incoming)
-async def clone(bot, event):            
-    link = get_link(event.text)
-    if not link:
+async def clone(bot, event):
+    try:
+        link = get_link(event.text)
+        if not link:
+            return
+    except TypeError:
         return
     edit = await bot.send_message(event.chat.id, 'Trying to process.')
     if 't.me/+' in link:
