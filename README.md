@@ -4,12 +4,12 @@
 
 # Variables
 
-• `API_ID`
-• `API_HASH`
-• `SESSION` - Pyrogram string session
-• `BOT TOKEN` 
+- `API_ID`
+- `API_HASH`
+- `SESSION` - Pyrogram string session
+- `BOT TOKEN` 
 
 # Builpacks
 
-• `heroku/python`
-• `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
+- `heroku/python`
+- `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
