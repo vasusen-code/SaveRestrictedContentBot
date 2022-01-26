@@ -3,7 +3,3 @@ python-decouple
 pyrogram==1.3.5
 telethon
 tgcrypto
-pymongo
-motor
-pymongo[srv]
-dnspython
