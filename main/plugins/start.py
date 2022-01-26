@@ -16,8 +16,6 @@ async def start(event):
                               [Button.inline("SET THUMB.", data="sett"),
                                Button.inline("REM THUMB.", data="remt")]
                               ])
-    tag = f'[{event.sender.first_name}](tg://user?id={event.sender_id})'
-    await event.client.send_message(int(ACCESS), f'{tag} started the BOT\nUserID: {event.sender_id}') 
     try:
         await Bot.start()
         await userbot.start()
