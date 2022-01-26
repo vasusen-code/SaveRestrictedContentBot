@@ -4,7 +4,6 @@ A simple telegram bot to save restricted content with custom thumbmail support b
 
 <p><a href="https://t.me/MaheshChauhan"> <img src="https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=telegram&logoColor=white" width="100""/></a></p>
 
-
 # Variables
 
 - `API_ID`
@@ -16,3 +15,6 @@ A simple telegram bot to save restricted content with custom thumbmail support b
 
 - `heroku/python`
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
+
+# Notice
+if you see any message like `ERROR R12` in heroku logs, just restart. 
