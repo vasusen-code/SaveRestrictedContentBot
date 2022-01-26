@@ -1,37 +1,13 @@
 #Github.com/Vasusen-code
 
-from pyrogram import Client, filters, idle
+from pyrogram import Client
 from pyrogram.errors import FloodWait, BadRequest
-from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
 import asyncio, subprocess, re, os, time
 from decouple import config
 
 forcesub_text = 'You have to join @Dronebots to use this bot.'
 
-#Multi client-------------------------------------------------------------------------------------------------------------
-
-async def start_bot(sender):
-    MONGODB_URI = config("MONGODB_URI", default=None)
-    db = Database(MONGODB_URI, 'saverestricted')
-    x = await db.get_credentials(sender)
-    if x[0] and x[1] and x[3] is not None:
-        try:
-            userbot = Client(
-                session_name=x[2], 
-                api_hash=x[1], 
-                api_id=int(x[0]))
-            await userbot.start()
-            await idle()
-            return True, userbot
-        except ValueError:
-            return False, "INVALID API_ID: Logout and Login back with correct `API_ID`"
-        except 
-            return True, userbot
-        except
-            return False, f"Error: {str(e)}"
-    else:
-        return None
 #Join private chat-------------------------------------------------------------------------------------------------------------
 
 async def join(client, invite_link):
@@ -45,22 +21,6 @@ async def join(client, invite_link):
     except Exception as e:
         return f"{str(e)}"
            
-#forcesub-------------------------------------------------------------------------------------------------------------
-
-async def forcesub(bot, sender):
-    FORCESUB = config("FORCESUB", default=None)
-    if not str(FORCESUB).startswith("-100"):
-        FORCESUB = int("-100" + str(FORCESUB))
-    try:
-        user = await bot.get_chat_member(FORCESUB, sender)
-        if user.status == "kicked":
-            return True
-    except UserNotParticipant:
-        return True
-    except Exception as e:
-        print(e)
-        return True
-        
 #Regex---------------------------------------------------------------------------------------------------------------
 #to get the url from event
 
