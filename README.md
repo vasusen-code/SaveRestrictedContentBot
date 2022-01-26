@@ -9,7 +9,7 @@ A simple telegram bot to save restricted content with custom thumbmail support b
 - `API_ID`
 - `API_HASH`
 - `SESSION` - Pyrogram string session
-Get pyrogram string session from [BOT](t.me/SessionStringGeneratorZBot) or [Replit](https://replit.com/@dashezup/generate-pyrogram-session-string).
+Get pyrogram string session from [BOT](https://t.me/SessionStringGeneratorZBot) or [Replit](https://replit.com/@dashezup/generate-pyrogram-session-string).
 - `BOT TOKEN` 
 
 # Builpacks
