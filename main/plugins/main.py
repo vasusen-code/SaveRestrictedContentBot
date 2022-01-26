@@ -102,12 +102,7 @@ async def get_msg(userbot, client, sender, msg_link, edit):
         await edit.delete()
         
 @Bot.on_message(filters.private & filters.incoming)
-async def clone(bot, event):
-    if (str(event.text)).lower().startswith("/clone"):
-        try:
-            x = (event.text).split("/clone ")[1]
-            
-            
+async def clone(bot, event):            
     link = get_link(event.text)
     if not link:
         return
