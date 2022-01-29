@@ -1,7 +1,7 @@
 #ChauhanMahesh/Vasusen/DroneBots/COL
 
 from telethon.sessions import StringSession
-from telethon import TelegramClient
+from telethon.sync import TelegramClient
 from decouple import config
 import logging
 import time
