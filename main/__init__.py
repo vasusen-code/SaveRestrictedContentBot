@@ -17,7 +17,7 @@ SESSION = config("SESSION", default=None)
 
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
 
-client = TelegramClient(StringSession(SESSION) , APP_ID, API_HASH)
+client = TelegramClient(StringSession(SESSION) , API_ID, API_HASH)
 
 try:
     client.start()
