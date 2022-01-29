@@ -11,6 +11,7 @@ from telethon.tl.types import DocumentAttributeVideo
 from ethon.pyfunc import video_metadata
 from ethon.telefunc import fast_upload, fast_download
 
+from main.plugins.pyroplug import copy_message
 from main.plugins.pyroplug import Bot as pyrClient
 from main.plugins.helpers import get_link, join, screenshot
 
@@ -41,8 +42,8 @@ async def clone(event):
                     await edit.edit(str(e))
         if 't.me/c/' in link:
              try:
-                 chat =  int(msg_link.split("/")[-2])
-                 msg_id = int(msg_link.split("/")[-1])
+                 chat =  int(link.split("/")[-2])
+                 msg_id = int(link.split("/")[-1])
                  await edit.edit("Trying to Process.")
                  file = await userbot.get_messages(chat, ids=msg_id)
                  if not file:
