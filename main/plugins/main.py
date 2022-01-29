@@ -69,7 +69,7 @@ async def clone(event):
                      if file.text:
                          caption=file.text
                      uploader = await fast_download(name, name, time.time(), event.client, edit, '**UPLOADING:**')
-                     await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb attributes=attributes, force_document=False)
+                     await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb, attributes=attributes, force_document=False)
                      await edit.delete()
                  else:
                      caption = name
