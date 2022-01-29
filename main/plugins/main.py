@@ -79,8 +79,8 @@ async def clone(event):
                      if file.text:
                          caption=file.text
                      thumb=None
-                     if os.path.exists(f'{event.sender}.jpg'):
-                         thumb = f'{event.sender}.jpg'
+                     if os.path.exists(f'{event.sender_id}.jpg'):
+                         thumb = f'{event.sender_id}.jpg'
                      uploader = await fast_upload(name, name, time.time(), event.client, edit, '**UPLOADING:**')
                      await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb, force_document=True)
                      await edit.delete()
