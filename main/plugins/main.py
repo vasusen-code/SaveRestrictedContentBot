@@ -24,13 +24,14 @@ async def clone(event):
         return
     edit = await event.reply('Trying to process.')
     if 't.me/+' in link:
-        xy = await join(userbot, link)
-        await edit.edit(xy)
+        x, y = await join(userbot, link)
+        await edit.edit(y)
         return 
     if 't.me' in link:
         if not 't.me/c/' in link:
             try:
                 await copy_message(pyrClient, link) 
+                await edit.edit
             except ValueError:
                 await edit.edit("Send me only message link or Invite of private channel.")
             except Exception as e:
