@@ -1,15 +1,15 @@
 #Github.com/Vasusen-code
 
 import os
-from .. import bot
-from telethon import events, Button, TelegramClient
+from .. import bot as Drone
+from telethon import events, Button
 
 from pyrogram import idle
-from main.plugins.main import Bot, userbot
+from main.plugins.pyroplug import Bot
 
 st = "Send me Link of any message to clone it here, For private channel message, send invite link first.\n\n**SUPPORT:** @TeamDrone\n**DEV:** @MaheshChauhan"
 
-@bot.on(events.NewMessage(incoming=True, pattern="/start"))
+@Drone.on(events.NewMessage(incoming=True, pattern="/start"))
 async def start(event):
     await event.reply(f'{st}', 
                       buttons=[
@@ -18,16 +18,15 @@ async def start(event):
                               ])
     try:
         await Bot.start()
-        await userbot.start()
         await idle()
     except Exception as e:
         if 'Client is already connected' in str(e):
             pass
         else:
-            await event.client.send_message(event.chat_id, "Error while starting Client, check if your API and SESSION is right.")
+            await event.client.send_message(event.chat_id, "Error while starting bot using pyrogram.Client")
             return
     
-@bot.on(events.callbackquery.CallbackQuery(data="sett"))
+@Drone.on(events.callbackquery.CallbackQuery(data="sett"))
 async def sett(event):    
     Drone = event.client                    
     button = await event.get_message()
@@ -51,7 +50,7 @@ async def sett(event):
         os.rename(path, f'./{event.sender_id}.jpg')
         await t.edit("Temporary thumbnail saved!")
         
-@bot.on(events.callbackquery.CallbackQuery(data="remt"))
+@Drone.on(events.callbackquery.CallbackQuery(data="remt"))
 async def remt(event):  
     Drone = event.client            
     await event.edit('Trying.')
