@@ -42,9 +42,8 @@ async def clone(event):
                     await edit.edit(str(e))
         if 't.me/c/' in link:
              try:
-                 chat =  int(link.split("/")[-2])
+                 chat =  int('-100' + str(link.split("/")[-2]))
                  msg_id = int(link.split("/")[-1])
-                 await edit.edit("Trying to Process.")
                  file = await userbot.get_messages(chat, ids=msg_id)
                  if not file:
                      await edit.edit("Couldn't get message!")
