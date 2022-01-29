@@ -47,8 +47,10 @@ async def clone(event):
                  file = await userbot.get_messages(chat, ids=msg_id)
                  if not file:
                      await edit.edit("Couldn't get message!")
+                     return
                  if file and file.text and not file.media:
                      await edit.edit(file.text)
+                     return
                  name = file.file.name
                  if not name:
                      if not file.file.mime_type:
