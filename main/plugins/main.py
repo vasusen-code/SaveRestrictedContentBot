@@ -33,14 +33,21 @@ async def clone(event):
                 await copy_message(pyrClient, link) 
             except ValueError:
                 await edit.edit("Send me only message link or Invite of private channel.")
-            except Exception:
-                await edit.edit("Couldn't clone message, maybe i am banned from the given chat.")
+            except Exception as e:
+                if 'username' in str(e):
+                    await edit.edit("Couldn't clone message, maybe i am banned from the given chat.")
+                else:
+                    await edit.edit(str(e))
         if 't.me/c/' in link:
              try:
                  chat =  int(msg_link.split("/")[-2])
                  msg_id = int(msg_link.split("/")[-1])
                  await edit.edit("Trying to Process.")
                  file = await userbot.get_messages(chat, ids=msg_id)
+                 if not file:
+                     await edit.edit("Couldn't get message!")
+                 if file and file.text and not file.media:
+                     await edit.edit(file.text)
                  name = file.file.name
                  if not name:
                      if not file.file.mime_type:
@@ -63,6 +70,18 @@ async def clone(event):
                              caption=file.text
                      uploader = await fast_download(name, name, time.time(), event.client, edit, '**UPLOADING:**')
                      await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb attributes=attributes, force_document=False)
+                     await edit.delete()
+                 else:
+                     caption = name
+                         if file.text:
+                             caption=file.text
+                     thumb=None
+                     if os.path.exists(f'{event.sender}.jpg'):
+                         thumb = f'{event.sender}.jpg'
+                     uploader = await fast_download(name, name, time.time(), event.client, edit, '**UPLOADING:**')
+                     await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb, force_document=True)
+                     await edit.delete()
+             except
                      
                                 
                                 
