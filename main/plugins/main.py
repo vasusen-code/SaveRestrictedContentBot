@@ -66,15 +66,15 @@ async def clone(event):
                      attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
                      thumb = await screenshot(name, duration/2, event.sender_id)
                      caption = name
-                         if file.text:
-                             caption=file.text
+                     if file.text:
+                         caption=file.text
                      uploader = await fast_download(name, name, time.time(), event.client, edit, '**UPLOADING:**')
                      await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb attributes=attributes, force_document=False)
                      await edit.delete()
                  else:
                      caption = name
-                         if file.text:
-                             caption=file.text
+                     if file.text:
+                         caption=file.text
                      thumb=None
                      if os.path.exists(f'{event.sender}.jpg'):
                          thumb = f'{event.sender}.jpg'
