@@ -1,14 +1,18 @@
 #Github.com/Vasusen-code
 
+import time, os
+
 from .. import bot as Drone
 from .. import userbot
 
 from telethon import events
+from telethon.tl.types import DocumentAttributeVideo
 
 from ethon.pyfunc import video_metadata
-from ethon.telefunc import fast_upload,fast_download
+from ethon.telefunc import fast_upload, fast_download
 
 from main.plugins.pyroplug import Bot as pyrClient
+from main.plugins.helpers import get_link, join, screenshot
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def clone(event):
@@ -35,4 +39,32 @@ async def clone(event):
              try:
                  chat =  int(msg_link.split("/")[-2])
                  msg_id = int(msg_link.split("/")[-1])
-                 await event.
+                 await edit.edit("Trying to Process.")
+                 file = await userbot.get_messages(chat, ids=msg_id)
+                 name = file.file.name
+                 if not name:
+                     if not file.file.mime_type:
+                         await edit.edit("Couldn't fetch Name/Mime for the file.")
+                         return
+                     else:
+                         if 'mp4' or 'x-matroska' in file.file.mime_type:
+                             name = f'{chat}' + '-' + f'{msg_id}' + '.mp4'
+                 await fast_download(name, file.document, userbot, edit, time.time(), '**DOWNLOADING:**')
+                 await edit.edit("Preparing to upload.")
+                 if 'mp4' in name:
+                     metadata = video_metadata(name)
+                     height = metadata["height"]
+                     width = metadata["width"]
+                     duration = metadata["duration"]
+                     attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
+                     thumb = await screenshot(name, duration/2, event.sender_id)
+                     caption = name
+                         if file.text:
+                             caption=file.text
+                     uploader = await fast_download(name, name, time.time(), event.client, edit, '**UPLOADING:**')
+                     await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb attributes=attributes, force_document=False)
+                     
+                                
+                                
+                                
+                                
