@@ -81,7 +81,9 @@ async def clone(event):
                      uploader = await fast_download(name, name, time.time(), event.client, edit, '**UPLOADING:**')
                      await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb, force_document=True)
                      await edit.delete()
-             except
+             except Exception as e:
+                 print(e)
+                 await edit.edit("Failed, try again!")
                      
                                 
                                 
