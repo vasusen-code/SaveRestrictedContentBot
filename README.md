@@ -4,6 +4,10 @@ A simple telegram bot to save restricted content with custom thumbmail support b
 
 <p><a href="https://t.me/MaheshChauhan"> <img src="https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=telegram&logoColor=white" width="100""/></a></p>
 
+Upcoming features:
+- Save multiple content at once/Save in range
+- Will add custom Forcesub 
+
 # Variables
 
 - `API_ID`
