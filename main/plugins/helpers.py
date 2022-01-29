@@ -1,7 +1,7 @@
 #Github.com/Vasusen-code
 
-from pyrogram import Client
-from pyrogram.errors import FloodWait, BadRequest
+from telethon.tl.functions.messages import ImportChatInviteRequest
+from telethon import errors, events
 
 import asyncio, subprocess, re, os, time
 
@@ -9,15 +9,15 @@ import asyncio, subprocess, re, os, time
 
 async def join(client, invite_link):
     try:
-        await client.join_chat(invite_link)
-        return "Successfully joined the Channel"
-    except BadRequest:
-        return "Could not join. Maybe your link is expired or Invalid."
-    except FloodWait:
-        return "Too many requests, try again later."
-    except Exception as e:
-        return f"{str(e)}"
-           
+        await client(ImportChatInviteRequest(invite_link))
+        return True, "Successfully joined the Channel."
+    except errors.UserAlreadyParticipantError:
+        return False, "You have already joined the Channel."
+    except errors.InviteHashExpiredError:
+        return False, "Link Expired/Wrong URL."
+    except FloodWaitError:
+        return False, "Too many requests, try again later!"
+    
 #Regex---------------------------------------------------------------------------------------------------------------
 #to get the url from event
 
