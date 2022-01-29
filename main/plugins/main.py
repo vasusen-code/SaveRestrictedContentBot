@@ -30,8 +30,8 @@ async def clone(event):
     if 't.me' in link:
         if not 't.me/c/' in link:
             try:
-                await copy_message(pyrClient, link) 
-                await edit.edit
+                await copy_message(pyrClient, event.sender_id, link) 
+                await edit.delete()
             except ValueError:
                 await edit.edit("Send me only message link or Invite of private channel.")
             except Exception as e:
