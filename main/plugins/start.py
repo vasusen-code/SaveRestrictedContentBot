@@ -60,4 +60,5 @@ async def remt(event):
     except Exception:
         await event.edit("No thumbnail saved.")                        
     
+
     
