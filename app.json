@@ -29,7 +29,7 @@
             "value": ""
         },
         "FORCESUB": {
-            "description": "Public Channel id to forcesub.",
+            "description": "Public Channel username to forcesub.",
             "value": ""
         }
     },
