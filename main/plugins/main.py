@@ -11,7 +11,6 @@ from telethon.tl.types import DocumentAttributeVideo
 from ethon.pyfunc import video_metadata
 from ethon.telefunc import fast_upload, fast_download
 
-from main.plugins.pyroplug import copy_message
 from main.plugins.pyroplug import Bot as pyrClient
 from main.plugins.helpers import get_link, join, screenshot
 
