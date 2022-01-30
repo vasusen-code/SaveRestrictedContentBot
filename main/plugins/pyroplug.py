@@ -4,7 +4,7 @@ import asyncio
 
 from .. import API_ID, API_HASH, BOT_TOKEN
  
-from pyrogram import Client, idle
+from pyrogram import Client, filters, idle
 
 Bot = Client(
     "SaveRestricted",
