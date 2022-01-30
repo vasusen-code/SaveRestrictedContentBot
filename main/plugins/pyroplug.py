@@ -20,4 +20,4 @@ async def run_bot():
     await Bot.start()
     await idle()
    
-Bot.loop.run_until_complete(run_bot())
+asyncio.run(run_bot(Bot))
