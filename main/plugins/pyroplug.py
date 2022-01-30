@@ -19,6 +19,5 @@ async def copy_message(client, sender, msg_link):
 async def run_bot():
     await Bot.start()
     await idle()
-
-if __name__ == "__main__":
-    Bot.loop.run_until_complete(run_bot())
+   
+Bot.loop.run_until_complete(run_bot())
