@@ -6,8 +6,6 @@ A simple telegram bot to save restricted content with custom thumbmail support b
 
 Upcoming features:
 - Save multiple content at once/Save in range
-- Will add custom Forcesub 
-- Caption support
 
 # Variables
 
