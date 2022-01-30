@@ -58,7 +58,7 @@ async def clone(event):
                              name = f'{chat}' + '-' + f'{msg_id}' + '.mp4'
                  await fast_download(name, file.document, userbot, edit, time.time(), '**DOWNLOADING:**')
                  await edit.edit("Preparing to upload.")
-                 if 'mp4' or 'mkv' in name:
+                 if '.mp4' or '.mkv' in name:
                      metadata = video_metadata(name)
                      height = metadata["height"]
                      width = metadata["width"]
