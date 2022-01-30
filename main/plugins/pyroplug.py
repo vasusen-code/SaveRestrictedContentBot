@@ -1,5 +1,7 @@
 # Github.com/Vasusen-code
 
+import asyncio
+
 from .. import API_ID, API_HASH, BOT_TOKEN
  
 from pyrogram import Client, idle
