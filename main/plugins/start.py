@@ -7,15 +7,11 @@ from telethon import events, Button
 from pyrogram import idle
 from main.plugins.pyroplug import Bot
 
-st = "Send me Link of any message to clone it here, For private channel message, send invite link first.\n\n**SUPPORT:** @TeamDrone\n**DEV:** @MaheshChauhan"
+from ethon.mystarts import start_srb
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/start"))
 async def start(event):
-    await event.reply(f'{st}', 
-                      buttons=[
-                              [Button.inline("SET THUMB.", data="sett"),
-                               Button.inline("REM THUMB.", data="remt")]
-                              ])
+    await start_srb(event)
     try:
         await Bot.start()
         await idle()
