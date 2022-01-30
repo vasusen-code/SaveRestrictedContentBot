@@ -28,7 +28,7 @@ async def clone(event):
         await edit.edit(y)
         return 
     if 't.me' in link:
-        if not 't.me/c/' and not 't.me/joinchat/' in link:
+        if not 't.me/c/' in link:
             chat =  link.split("/")[-2]
             msg_id = link.split("/")[-1]
             await edit.edit(f'cloning {chat}-{msg_id}')
