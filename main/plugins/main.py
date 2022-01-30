@@ -17,15 +17,15 @@ from main.plugins.helpers import get_link, join, screenshot
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def clone(event):
-    s, r = await force_sub(event.client, fs, event.sender_id)
-    if s == True:
-        await event.reply(r)
-        return
     try:
         link = get_link(event.text)
         if not link:
             return
     except TypeError:
+        return
+    s, r = await force_sub(event.client, fs, event.sender_id)
+    if s == True:
+        await event.reply(r)
         return
     edit = await event.reply('Trying to process.')
     if 't.me/+' in link:
