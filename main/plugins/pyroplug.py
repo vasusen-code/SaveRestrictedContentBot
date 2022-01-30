@@ -18,8 +18,3 @@ async def copy_message(client, sender, msg_link):
     msg_id = msg_link.split("/")[-1]
     await client.copy_message(int(sender), chat, msg_id)
 
-async def run_bot(Bot):
-    await Bot.start()
-    await idle()
-   
-asyncio.run(run_bot(Bot))
