@@ -14,7 +14,8 @@ Upcoming features:
 - `SESSION` - Telethon string session
 Get Telethon string session from [BOT](https://t.me/SessionStringGeneratorZBot) 
 - `BOT TOKEN` 
-
+- FORCESUB - Public channel username without '@'
+  
 # Builpacks
 
 - `heroku/python`
