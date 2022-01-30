@@ -23,6 +23,7 @@ async def clone(event):
     s, r = await force_sub(event.client, int(FORCESUB), event.sender_id)
     if s == True:
         await event.reply(r)
+        return
     try:
         link = get_link(event.text)
         if not link:
