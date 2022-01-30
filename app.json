@@ -29,7 +29,7 @@
             "value": ""
         },
         "FORCESUB": {
-            "description": "Public Channel username to forcesub.",
+            "description": "Public Channel username without using '@' to forcesub.",
             "value": ""
         }
     },
