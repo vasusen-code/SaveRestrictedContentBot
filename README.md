@@ -14,13 +14,8 @@ Upcoming features:
 - `SESSION` - Telethon string session
 Get Telethon string session from [BOT](https://t.me/SessionStringGeneratorZBot) 
 - `BOT TOKEN` 
-- FORCESUB - Public channel username without '@'
+- `FORCESUB` - Public channel username without '@'
   
-# Builpacks
-
-- `heroku/python`
-- `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
-
 # Issues
 - if you see any message like `ERROR R12` in heroku logs, just restart. 
 - `CHANNEL INVALID` if channel not joined. 
@@ -30,3 +25,8 @@ Get Telethon string session from [BOT](https://t.me/SessionStringGeneratorZBot)
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
 
 if deploy button doesn't work, then deploy `manually.`
+
+Buildpacks for manual :
+
+- `heroku/python`
+- `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
