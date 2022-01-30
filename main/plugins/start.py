@@ -4,24 +4,12 @@ import os
 from .. import bot as Drone
 from telethon import events, Button
 
-from pyrogram import idle
 from main.plugins.pyroplug import Bot
 
 from ethon.mystarts import start_srb
-
-@Drone.on(events.NewMessage(incoming=True, pattern="/start"))
-async def start(event):
-    await start_srb(event)
-    try:
-        await Bot.start()
-        await idle()
-    except Exception as e:
-        if 'Client is already connected' in str(e):
-            pass
-        else:
-            await event.client.send_message(event.chat_id, "Error while starting bot using pyrogram.Client")
-            return
     
+S = '/' + 's' + 't' + 'a' + 'r' + 't'
+
 @Drone.on(events.callbackquery.CallbackQuery(data="set"))
 async def sett(event):    
     Drone = event.client                    
@@ -55,6 +43,8 @@ async def remt(event):
         await event.edit('Removed!')
     except Exception:
         await event.edit("No thumbnail saved.")                        
-    
-
+  
+@Drone.on(events.NewMessage(incoming=True, pattern=f"{S}"))
+async def start(event):
+    await start_srb(event)
     
