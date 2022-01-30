@@ -1,4 +1,5 @@
 ethon
-python-decouple
-pyrogram
 tgcrypto
+pyrogram
+python-decouple
+https://github.com/New-dev0/Telethon/archive/Vector.zip
