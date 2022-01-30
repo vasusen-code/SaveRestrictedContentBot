@@ -48,4 +48,13 @@ async def remt(event):
 @Drone.on(events.NewMessage(incoming=True, pattern=f"{S}"))
 async def start(event):
     await start_srb(event)
+    try:
+        await Bot.start()
+        await idle()
+    except Exception as e:
+        if 'Client is already connected' in str(e):
+            pass
+        else:
+            await event.client.send_message(event.chat_id, "Error while starting bot using pyrogram.Client")
+            return
     
