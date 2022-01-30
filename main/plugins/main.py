@@ -3,7 +3,8 @@
 import time, os
 
 from .. import bot as Drone
-from .. import userbot, FORCESUB
+from .. import userbot
+from .. import FORCESUB as fs
 
 from telethon import events
 from telethon.tl.types import DocumentAttributeVideo
@@ -16,6 +17,9 @@ from main.plugins.helpers import get_link, join, screenshot
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def clone(event):
+    FORCESUB = fs
+    if not str(fs).startswith("-100"):
+        FORCESUB = int("-100" + str(fs))
     s, r = await force_sub(event.client, int(FORCESUB), event.sender_id)
     if s == True:
         await event.reply(r)
