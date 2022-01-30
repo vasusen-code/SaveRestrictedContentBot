@@ -22,7 +22,7 @@ async def start(event):
             await event.client.send_message(event.chat_id, "Error while starting bot using pyrogram.Client")
             return
     
-@Drone.on(events.callbackquery.CallbackQuery(data="sett"))
+@Drone.on(events.callbackquery.CallbackQuery(data="set"))
 async def sett(event):    
     Drone = event.client                    
     button = await event.get_message()
@@ -46,7 +46,7 @@ async def sett(event):
         os.rename(path, f'./{event.sender_id}.jpg')
         await t.edit("Temporary thumbnail saved!")
         
-@Drone.on(events.callbackquery.CallbackQuery(data="remt"))
+@Drone.on(events.callbackquery.CallbackQuery(data="rem"))
 async def remt(event):  
     Drone = event.client            
     await event.edit('Trying.')
