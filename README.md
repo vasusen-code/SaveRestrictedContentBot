@@ -13,8 +13,8 @@ Upcoming features:
 
 - `API_ID`
 - `API_HASH`
-- `SESSION` - Pyrogram string session
-Get pyrogram string session from [BOT](https://t.me/SessionStringGeneratorZBot) or [Replit](https://replit.com/@dashezup/generate-pyrogram-session-string).
+- `SESSION` - Telethon string session
+Get Telethon string session from [BOT](https://t.me/SessionStringGeneratorZBot) 
 - `BOT TOKEN` 
 
 # Builpacks
