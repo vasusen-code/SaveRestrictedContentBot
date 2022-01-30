@@ -29,11 +29,11 @@ async def clone(event):
         await edit.edit(y)
         return 
     if 't.me' in link:
-        if not 't.me/c/' in link:
+        if not 't.me/c/' and not 't.me/joinchat/' in link:
             try:
                 chat = link.split("/")[-2]
                 msg_id = int(link.split("/")[-1])
-                await event.client.forward_messages(event.sender_id, msg_id, chat) 
+                await event.client.forward_messages(event.sender_id, msg_id, chat, drop_author=True)
                 await edit.delete()
             except ValueError:
                 await edit.edit("Send me only message link or Invite of private channel.")
