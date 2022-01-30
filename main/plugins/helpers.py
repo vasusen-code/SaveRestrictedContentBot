@@ -9,7 +9,8 @@ import asyncio, subprocess, re, os, time
 
 async def join(client, invite_link):
     try:
-        await client(ImportChatInviteRequest(invite_link))
+        hash_ = invite_link.split("+")[1]
+        await client(ImportChatInviteRequest(hash_))
         return True, "Successfully joined the Channel."
     except errors.UserAlreadyParticipantError:
         return False, "You have already joined the Channel."
