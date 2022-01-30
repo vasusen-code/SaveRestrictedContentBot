@@ -25,7 +25,11 @@
             "value": ""
         },
         "SESSION": {
-            "description": "pyrogram string session.",
+            "description": "Telethon string session.",
+            "value": ""
+        },
+        "FORCESUB": {
+            "description": "Public Channel username without using '@' to forcesub.",
             "value": ""
         }
     },

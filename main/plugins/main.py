@@ -1,130 +1,94 @@
-# Github.com/Vasusen-code
+#Github.com/Vasusen-code
 
-from main.plugins.helpers import get_link, join, screenshot
-from main.plugins.display_progress import progress_for_pyrogram
+import time, os
 
-from decouple import config
+from .. import bot as Drone
+from .. import userbot
+from .. import FORCESUB as fs
 
-API_ID = config("API_ID", default=None, cast=int)
-API_HASH = config("API_HASH", default=None)
-BOT_TOKEN = config("BOT_TOKEN", default=None)
-SESSION = config("SESSION", default=None) #pyro session
+from telethon import events
+from telethon.tl.types import DocumentAttributeVideo
 
-from pyrogram.errors import FloodWait, BadRequest
-from pyrogram import Client, filters
 from ethon.pyfunc import video_metadata
+from ethon.telefunc import fast_upload, fast_download, force_sub
 
-import re, time, asyncio, logging, os
+from main.plugins.pyroplug import Bot as pyrClient
+from main.plugins.helpers import get_link, join, screenshot
 
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-
-Bot = Client(
-    "Simple-Pyrogram-Bot",
-    bot_token=BOT_TOKEN,
-    api_id=int(API_ID),
-    api_hash=API_HASH
-)
-
-userbot = Client(
-    session_name=SESSION, 
-    api_hash=API_HASH, 
-    api_id=API_ID)
-  
-def thumbnail(sender):
-    if os.path.exists(f'{sender}.jpg'):
-        return f'{sender}.jpg'
-    else:
-         return None
-      
-async def get_msg(userbot, client, sender, msg_link, edit):
-    chat = ""
-    msg_id = int(msg_link.split("/")[-1])
-    if 't.me/c/' in msg_link:
-        chat = int('-100' + str(msg_link.split("/")[-2]))
-        try:
-            msg = await userbot.get_messages(chat, msg_id)
-            file = await userbot.download_media(
-                msg,
-                progress=progress_for_pyrogram,
-                progress_args=(
-                    userbot,
-                    "**DOWNLOADING:**\n",
-                    edit,
-                    time.time()
-                )
-            )
-            await edit.edit('Trying to Upload.')
-            caption = ""
-            if msg.text is not None:
-                caption = msg.text
-            if str(file).split(".")[-1] == 'mkv' or 'mp4' or 'webm':
-                if str(file).split(".")[-1] == 'webm' or 'mkv':
-                    path = str(file).split(".")[0] + ".mp4"
-                    os.rename(file, path) 
-                    file = str(file).split(".")[0] + ".mp4"
-                data = video_metadata(file)
-                duration = data["duration"]
-                thumb_path = await screenshot(file, duration/2, sender)
-                await client.send_video(
-                    chat_id=sender,
-                    video=file,
-                    caption=caption,
-                    supports_streaming=True,
-                    duration=duration,
-                    thumb=thumb_path,
-                    progress=progress_for_pyrogram,
-                    progress_args=(
-                        client,
-                        '**UPLOADING:**\n',
-                        edit,
-                        time.time()
-                    )
-                )
-            else:
-                thumb_path=thumbnail(sender)
-                await client.send_document(
-                    sender,
-                    file, 
-                    caption=caption,
-                    thumb=thumb_path,
-                    progress=progress_for_pyrogram,
-                    progress_args=(
-                        client,
-                        '**UPLOADING:**\n',
-                        edit,
-                        time.time()
-                    )
-                )
-            await edit.delete()
-        except Exception as e:
-            await edit.edit(f'ERROR: {str(e)}')
-            return 
-    else:
-        chat =  msg_link.split("/")[-2]
-        await client.copy_message(int(sender), chat, msg_id)
-        await edit.delete()
-        
-@Bot.on_message(filters.private & filters.incoming)
-async def clone(bot, event):
+@Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
+async def clone(event):
     try:
         link = get_link(event.text)
         if not link:
             return
     except TypeError:
         return
-    edit = await bot.send_message(event.chat.id, 'Trying to process.')
+    s, r = await force_sub(event.client, fs, event.sender_id)
+    if s == True:
+        await event.reply(r)
+        return
+    edit = await event.reply('Trying to process.')
     if 't.me/+' in link:
-        xy = await join(userbot, link)
-        await edit.edit(xy)
+        x, y = await join(userbot, link)
+        await edit.edit(y)
         return 
     if 't.me' in link:
-        try:
-            await get_msg(userbot, bot, event.chat.id, link, edit) 
-        except FloodWait:
-            return await edit.edit('Too many requests, try again later.')
-        except ValueError:
-            return await edit.edit('Send Only message link or Private channel invites.')
-        except Exception as e:
-            return await edit.edit(f'Error: `{str(e)}`')         
-          
+        if not 't.me/c/' in link:
+            chat =  link.split("/")[-2]
+            msg_id = link.split("/")[-1]
+            await edit.edit(f'cloning {chat}-{msg_id}')
+        if 't.me/c/' in link:
+             try:
+                 chat =  int('-100' + str(link.split("/")[-2]))
+                 msg_id = int(link.split("/")[-1])
+                 file = await userbot.get_messages(chat, ids=msg_id)
+                 if not file:
+                     await edit.edit("Couldn't get message!")
+                     return
+                 if file and file.text and not file.media:
+                     await edit.edit(file.text)
+                     return
+                 name = file.file.name
+                 if not name:
+                     if not file.file.mime_type:
+                         await edit.edit("Couldn't fetch Name/Mime for the file.")
+                         return
+                     else:
+                         if 'mp4' or 'x-matroska' in file.file.mime_type:
+                             name = f'{chat}' + '-' + f'{msg_id}' + '.mp4'
+                 await fast_download(name, file.document, userbot, edit, time.time(), '**DOWNLOADING:**')
+                 await edit.edit("Preparing to upload.")
+                 if '.mp4' or '.mkv' in name:
+                     metadata = video_metadata(name)
+                     height = metadata["height"]
+                     width = metadata["width"]
+                     duration = metadata["duration"]
+                     attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
+                     thumb = await screenshot(name, duration/2, event.sender_id)
+                     caption = name
+                     if file.text:
+                         caption=file.text
+                     uploader = await fast_upload(name, name, time.time(), event.client, edit, '**UPLOADING:**')
+                     await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb, attributes=attributes, force_document=False)
+                     await edit.delete()
+                 else:
+                     caption = name
+                     if file.text:
+                         caption=file.text
+                     thumb=None
+                     if os.path.exists(f'{event.sender_id}.jpg'):
+                         thumb = f'{event.sender_id}.jpg'
+                     uploader = await fast_upload(name, name, time.time(), event.client, edit, '**UPLOADING:**')
+                     await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb, force_document=True)
+                     await edit.delete()
+             except Exception as e:
+                 print(e)
+                 if 'Peer'in str(e):
+                     await edit.edit("Channel not found, have you joined it?")
+                     return
+                 await edit.edit("Failed, try again!")
+                     
+                                
+                                
+                                
+                                

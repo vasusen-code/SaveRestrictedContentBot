@@ -6,22 +6,16 @@ A simple telegram bot to save restricted content with custom thumbmail support b
 
 Upcoming features:
 - Save multiple content at once/Save in range
-- Will add custom Forcesub 
-- Caption support
 
 # Variables
 
 - `API_ID`
 - `API_HASH`
-- `SESSION` - Pyrogram string session
-Get pyrogram string session from [BOT](https://t.me/SessionStringGeneratorZBot) or [Replit](https://replit.com/@dashezup/generate-pyrogram-session-string).
+- `SESSION` - Telethon string session
+Get Telethon string session from [BOT](https://t.me/SessionStringGeneratorZBot) 
 - `BOT TOKEN` 
-
-# Builpacks
-
-- `heroku/python`
-- `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
-
+- `FORCESUB` - Public channel username without '@'
+  
 # Issues
 - if you see any message like `ERROR R12` in heroku logs, just restart. 
 - `CHANNEL INVALID` if channel not joined. 
@@ -31,3 +25,8 @@ Get pyrogram string session from [BOT](https://t.me/SessionStringGeneratorZBot) 
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
 
 if deploy button doesn't work, then deploy `manually.`
+
+Buildpacks for manual :
+
+- `heroku/python`
+- `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
