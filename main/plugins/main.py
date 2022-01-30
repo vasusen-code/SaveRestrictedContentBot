@@ -9,6 +9,7 @@ from .. import FORCESUB as fs
 from telethon import events
 from telethon.tl.types import DocumentAttributeVideo
 
+from ethon.pyutils import file_extension
 from ethon.pyfunc import video_metadata
 from ethon.telefunc import fast_upload, fast_download, force_sub
 
@@ -58,7 +59,7 @@ async def clone(event):
                              name = f'{chat}' + '-' + f'{msg_id}' + '.mp4'
                  await fast_download(name, file.document, userbot, edit, time.time(), '**DOWNLOADING:**')
                  await edit.edit("Preparing to upload.")
-                 if name.split(".")[-1] == 'mkv' or 'mp4':
+                 if file_extension(name) == 'mkv' or 'mp4':
                      metadata = video_metadata(name)
                      height = metadata["height"]
                      width = metadata["width"]
