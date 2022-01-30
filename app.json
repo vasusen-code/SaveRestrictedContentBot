@@ -25,7 +25,7 @@
             "value": ""
         },
         "SESSION": {
-            "description": "pyrogram string session.",
+            "description": "Telethon string session.",
             "value": ""
         },
         "FORCESUB": {
