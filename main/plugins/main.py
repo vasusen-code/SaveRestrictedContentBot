@@ -3,19 +3,22 @@
 import time, os
 
 from .. import bot as Drone
-from .. import userbot
+from .. import userbot, FORCESUB
 
 from telethon import events
 from telethon.tl.types import DocumentAttributeVideo
 
 from ethon.pyfunc import video_metadata
-from ethon.telefunc import fast_upload, fast_download
+from ethon.telefunc import fast_upload, fast_download, force_sub
 
 from main.plugins.pyroplug import Bot as pyrClient
 from main.plugins.helpers import get_link, join, screenshot
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def clone(event):
+    s, r = await force_sub(event.client, int(FORCESUB), event.sender_id)
+    if s == True:
+        await event.reply(r)
     try:
         link = get_link(event.text)
         if not link:
