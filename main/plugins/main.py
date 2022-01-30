@@ -88,6 +88,7 @@ async def clone(event):
                  print(e)
                  if 'Peer'in str(e):
                      await edit.edit("Channel not found, have you joined it?")
+                     return
                  await edit.edit("Failed, try again!")
                      
                                 
