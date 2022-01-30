@@ -30,16 +30,9 @@ async def clone(event):
         return 
     if 't.me' in link:
         if not 't.me/c/' and not 't.me/joinchat/' in link:
-            try:
-                await copy_message(pyrClient, event.sender_id, link)
-                await edit.delete()
-            except ValueError:
-                await edit.edit("Send me only message link or Invite of private channel.")
-            except Exception as e:
-                if 'username' in str(e):
-                    await edit.edit("Couldn't clone message, maybe i am banned from the given chat.")
-                else:
-                    await edit.edit(str(e))
+            chat =  link.split("/")[-2]
+            msg_id = link.split("/")[-1]
+            await edit.edit(f'cloning {chat}-{msg_id}')
         if 't.me/c/' in link:
              try:
                  chat =  int('-100' + str(link.split("/")[-2]))
