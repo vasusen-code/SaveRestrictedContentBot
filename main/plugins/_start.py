@@ -3,9 +3,6 @@
 import os
 from .. import bot as Drone
 from telethon import events, Button
-from pyrogram import Client, idle
-
-from main.plugins.pyroplug import Bot
 
 from ethon.mystarts import start_srb
     
