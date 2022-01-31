@@ -41,7 +41,7 @@ async def screenshot(video, time_stamp, sender):
     if os.path.exists(f'{sender}.jpg'):
         return f'{sender}.jpg'
     out = str(video).split(".")[0] + ".jpg"
-    cmd = (f"ffmpeg -i {video} -ss {time_stamp} -frames:v 1 {out}").split(" ")
+    cmd = (f"ffmpeg -i {video} -ss {time_stamp} -frames:v 1 {out} -y").split(" ")
     process = await asyncio.create_subprocess_exec(
          *cmd,
          stdout=asyncio.subprocess.PIPE,
