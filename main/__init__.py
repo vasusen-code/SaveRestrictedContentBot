@@ -37,7 +37,6 @@ Bot = Client(
 
 try:
     Bot.start()
-    idle()
 except Exception as e:
     print(e)
     sys.exit(1)
