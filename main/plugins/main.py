@@ -71,6 +71,7 @@ async def clone(event):
                      uploader = await fast_upload(name, name, time.time(), event.client, edit, '**UPLOADING:**')
                      await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb, attributes=attributes, force_document=False)
                      await edit.delete()
+                     os.remove(name)
                  elif 'x-matroska' in file.file.mime_type:
                      metadata = video_metadata(name)
                      height = metadata["height"]
@@ -84,6 +85,7 @@ async def clone(event):
                      uploader = await fast_upload(name, name, time.time(), event.client, edit, '**UPLOADING:**')
                      await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb, attributes=attributes, force_document=False)
                      await edit.delete()
+                     os.remove(name)
                  else:
                      caption = name
                      if file.text:
@@ -94,6 +96,7 @@ async def clone(event):
                      uploader = await fast_upload(name, name, time.time(), event.client, edit, '**UPLOADING:**')
                      await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb, force_document=True)
                      await edit.delete()
+                     os.remove(name)
              except Exception as e:
                  print(e)
                  if 'Peer'in str(e):
