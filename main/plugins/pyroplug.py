@@ -2,16 +2,9 @@
 
 import asyncio
 
-from .. import API_ID, API_HASH, BOT_TOKEN
- 
-from pyrogram import Client, filters, idle
+from .. import Bot
 
-Bot = Client(
-    "SaveRestricted",
-    bot_token=BOT_TOKEN,
-    api_id=int(API_ID),
-    api_hash=API_HASH
-)
+from pyrogram import Client, filters 
 
 @Bot.on_message(filters.private & filters.outgoing)
 async def _(bot, event):

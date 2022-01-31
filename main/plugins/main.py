@@ -12,7 +12,6 @@ from telethon.tl.types import DocumentAttributeVideo
 from ethon.pyfunc import video_metadata
 from ethon.telefunc import fast_upload, fast_download, force_sub
 
-from main.plugins.pyroplug import Bot as pyrClient
 from main.plugins.helpers import get_link, join, screenshot
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))

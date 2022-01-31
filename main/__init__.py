@@ -1,7 +1,10 @@
 #ChauhanMahesh/Vasusen/DroneBots/COL
 
+from pyrogram import Client
+
 from telethon.sessions import StringSession
 from telethon.sync import TelegramClient
+
 from decouple import config
 import logging, time, sys
 
@@ -23,4 +26,17 @@ try:
     userbot.start()
 except BaseException:
     print("Userbot Error ! Have you added a STRING_SESSION in deploying??")
+    sys.exit(1)
+
+Bot = Client(
+    "SaveRestricted",
+    bot_token=BOT_TOKEN,
+    api_id=int(API_ID),
+    api_hash=API_HASH
+)    
+
+try:
+    Bot.start()
+except Exception as e:
+    print(e)
     sys.exit(1)
