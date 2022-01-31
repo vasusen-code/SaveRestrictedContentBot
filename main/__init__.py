@@ -1,6 +1,6 @@
 #ChauhanMahesh/Vasusen/DroneBots/COL
 
-from pyrogram import Client, filters
+from pyrogram import Client
 
 from telethon.sessions import StringSession
 from telethon.sync import TelegramClient
