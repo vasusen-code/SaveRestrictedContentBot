@@ -4,6 +4,7 @@ from telethon.tl.functions.messages import ImportChatInviteRequest
 from telethon import errors, events
 
 import asyncio, subprocess, re, os, time
+from pathlib import Path
 
 #Join private chat-------------------------------------------------------------------------------------------------------------
 
@@ -51,7 +52,7 @@ async def screenshot(video, time_stamp, sender):
     y = stdout.decode().strip()
     print(x)
     print(y)
-    if os.path.exists(out):
+    if os.path.exists(str(Path(out))):
         return out
     else:
         None
