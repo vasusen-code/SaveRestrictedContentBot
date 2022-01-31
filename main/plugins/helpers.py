@@ -37,10 +37,10 @@ def get_link(string):
 #Screenshot---------------------------------------------------------------------------------------------------------------
 
 async def screenshot(video, time_stamp, sender):
-    if os.path.isfile(f'{sender}.jpg'):
+    if os.path.exists(f'{sender}.jpg'):
         return f'{sender}.jpg'
     out = str(video).split(".")[0] + ".jpg"
-    cmd = (f"ffmpeg -ss {time_stamp} -i {video} -vframes 1 {out}").split(" ")
+    cmd = (f"ffmpeg -i {video} -ss {time_stamp} -frames:v 1 {out}").split(" ")
     process = await asyncio.create_subprocess_exec(
          *cmd,
          stdout=asyncio.subprocess.PIPE,
@@ -51,7 +51,7 @@ async def screenshot(video, time_stamp, sender):
     y = stdout.decode().strip()
     print(x)
     print(y)
-    if os.path.isfile(out):
+    if os.path.exists(out):
         return out
     else:
         None
