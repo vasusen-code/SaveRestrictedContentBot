@@ -45,9 +45,18 @@ async def clone(event):
                  if not file:
                      await edit.edit("Couldn't get message!")
                      return
-                 if file and file.text and not file.file.name:
-                     await edit.edit(file.text)
-                     return
+                 if file and file.text:
+                     try:
+                         if not file.media:
+                             await edit.edit(file.text)
+                             return
+                         if not file.file.name:
+                             await edit.edit(file.text)
+                             return
+                     except:
+                         if file.media.webpage:
+                             await edit.edit(file.text)
+                             return
                  name = file.file.name
                  if not name:
                      if not file.file.mime_type:
