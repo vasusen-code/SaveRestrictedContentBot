@@ -13,13 +13,20 @@ Made by: Mahesh Chauhan
 # Variables
 
 - `API_ID`
-- `API_HASH`
-- `SESSION` Get Telethon string session from [BOT](https://t.me/SessionStringGeneratorZBot) 
-- `BOT TOKEN` 
-- `FORCESUB` - Public channel username without '@'
-  
-* [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
 
+- `API_HASH`
+
+- `SESSION` 
+- 
+Get Telethon string session from
+
+[![BOT](https://t.me/badge/github/vasusen-code/saverestrictedcontentbot)](https://t.me/SessionStringGeneratorZBot) 
+  
+[![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
+
+- `BOT TOKEN` 
+
+- `FORCESUB` - Public channel username without '@'
 
 # Deploy
 
