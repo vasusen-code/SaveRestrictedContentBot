@@ -4,7 +4,7 @@
 
 A stable telegram bot to get restricted messages with custom thumbnail support. 
 
-- works for both public and private
+- works for both public and private channels
 - Custom thumbnail support for Pvt medias
 - supports text and webpage media messages
 - Faster speed
