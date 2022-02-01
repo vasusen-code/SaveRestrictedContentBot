@@ -20,8 +20,8 @@ Made by: Mahesh Chauhan
 - 
 Get Telethon string session from
 
-[![Telegram Bot](https://telegram.me/telegram/button.svg)](https://deploy.ultroid.tech)
- 
+<p><a href="https://t.me/SessionStringGeneratorZBot"> <img src="https://img.shields.io/badge/Telegram Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
+
 [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
 
 - `BOT TOKEN` 
