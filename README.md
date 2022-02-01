@@ -18,15 +18,15 @@ Made by: Mahesh Chauhan
 
 - `SESSION`
 
+- `BOT TOKEN` 
+
+- `FORCESUB` - Public channel username without '@'
+
 Get Telethon string session from
 
 <p><a href="https://t.me/SessionStringGeneratorZBot"> <img src="https://img.shields.io/badge/Telegram Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
 [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
-
-- `BOT TOKEN` 
-
-- `FORCESUB` - Public channel username without '@'
 
 # Deploy
 
