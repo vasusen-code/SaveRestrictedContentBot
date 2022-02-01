@@ -1,5 +1,5 @@
 <h1 align="center">
-  <b>ʂᴀᴠᴇ ʀᴇʂᴛʀɪᴄᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ ʙᴏᴛ</b>
+  <b>Save restricted content Bot</b>
 </h1> 
 
 A stable telegram bot to get restricted messages with custom thumbnail support. 
