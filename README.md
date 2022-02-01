@@ -18,9 +18,6 @@ Get Telethon string session from [BOT](https://t.me/SessionStringGeneratorZBot)
 - `BOT TOKEN` 
 - `FORCESUB` - Public channel username without '@'
   
-# Issues
-- if you see any message like `ERROR R12` in heroku logs, just restart. 
-
 # Deploy
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-white?style=for-the-badge&logo=heroku&logoColor=blue" width="200""/></a></p>
 
