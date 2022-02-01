@@ -20,8 +20,8 @@ Made by: Mahesh Chauhan
 - 
 Get Telethon string session from
 
-[![BOT](https://t.me/badge/github/vasusen-code/saverestrictedcontentbot)](https://t.me/SessionStringGeneratorZBot) 
-  
+[![Telegram Bot](https://telegram.me/telegram/button.svg)](https://deploy.ultroid.tech)
+ 
 [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
 
 - `BOT TOKEN` 
