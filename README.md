@@ -4,7 +4,7 @@ A simple telegram bot to save restricted content with custom thumbmail support b
 
 <p><a href="https://t.me/MaheshChauhan"> <img src="https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=telegram&logoColor=white" width="100""/></a></p>
 
-<p><a href="https://t.me/TeamDrone"> <img src="https://img.shields.io/badge/Support-blueviolet?style=for-the-badge&logo=telegram&logoColor=white" width="100""/></a></p>
+<p><a href="https://t.me/TeamDrone"> <img src="https://img.shields.io/badge/Support-darkblue?style=for-the-badge&logo=telegram&logoColor=white" width="100""/></a></p>
 
 <p align="left"><a href="https://github.com/vasusen-code/saverestrictedcontentbot"><img src="https://github-readme-stats.vercel.app/api/pin?username=vasusen-code&show_icons=true&theme=midnight&hide_border=true&repo=saverestrictedcontentbot"></a></p>
   
