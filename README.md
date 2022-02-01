@@ -13,8 +13,7 @@ Upcoming features:
 
 - `API_ID`
 - `API_HASH`
-- `SESSION` - Telethon string session
-Get Telethon string session from [BOT](https://t.me/SessionStringGeneratorZBot) 
+- `SESSION` - Get Telethon string session from [BOT](https://t.me/SessionStringGeneratorZBot) 
 - `BOT TOKEN` 
 - `FORCESUB` - Public channel username without '@'
   
