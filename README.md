@@ -1,4 +1,6 @@
-# Save Restricted Content Bot
+<h1 align="center">
+  <b>sᴀᴠᴇ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ ʙᴏᴛ</b>
+</h1>
 
 A simple telegram bot to save restricted content with custom thumbmail support by Mahesh Chauhan.
 
