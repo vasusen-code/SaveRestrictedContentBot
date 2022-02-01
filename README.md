@@ -16,8 +16,8 @@ Made by: Mahesh Chauhan
 
 - `API_HASH`
 
-- `SESSION` 
-- 
+- `SESSION`
+
 Get Telethon string session from
 
 <p><a href="https://t.me/SessionStringGeneratorZBot"> <img src="https://img.shields.io/badge/Telegram Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
