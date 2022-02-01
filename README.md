@@ -14,10 +14,13 @@ Made by: Mahesh Chauhan
 
 - `API_ID`
 - `API_HASH`
-- `SESSION` - Get Telethon string session from [BOT](https://t.me/SessionStringGeneratorZBot) 
+- `SESSION` Get Telethon string session from [BOT](https://t.me/SessionStringGeneratorZBot) 
 - `BOT TOKEN` 
 - `FORCESUB` - Public channel username without '@'
   
+* [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
+
+
 # Deploy
 
 <p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-white?style=for-the-badge&logo=heroku&logoColor=blue" width="200""/></a></p>
