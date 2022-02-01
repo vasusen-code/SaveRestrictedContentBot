@@ -1,8 +1,6 @@
 <h1 align="center">
-  <b>sᴀᴠᴇ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ ʙᴏᴛ</b>
-</h1>
-
-A simple telegram bot to save restricted content with custom thumbmail support by Mahesh Chauhan.
+  <b>ѕᴀᴠᴇ ʀᴇѕᴛʀɪᴄᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ ʙᴏᴛ</b>
+</h1> 
 
 <p><a href="https://t.me/MaheshChauhan"> <img src="https://img.shields.io/badge/Telegram-white?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
