@@ -26,7 +26,7 @@ Made by: Mahesh Chauhan
 
 - `BOT TOKEN` 
 
-- `FORCESUB` - Public channel username without '@'
+- `FORCESUB` - Public channel username without '@'. Don't forget to add bot in channel as administrator. 
 
 Get Telethon string session from
 
