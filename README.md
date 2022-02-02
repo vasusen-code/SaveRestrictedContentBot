@@ -36,6 +36,7 @@ Get Telethon string session from
 
 # Deploy
   
+- Fork the repo, and star it
 - create app in heroku
 - go to settings of app>> config vars>> add all variables
 - add buildpacks
