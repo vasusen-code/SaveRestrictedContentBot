@@ -2,15 +2,13 @@
   <b>Save restricted content Bot</b>
 </h1> 
 
-A stable telegram bot to get restricted messages with custom thumbnail support. 
+A stable telegram bot to get restricted messages with custom thumbnail support , made by @MaheshChauhan. 
 
 - works for both public and private channels
 - Custom thumbnail support for Pvt medias
 - supports text and webpage media messages
 - Faster speed
 - Forcesubscribe available 
-
-Made by: Mahesh Chauhan
 
 <p><a href="https://t.me/MaheshChauhan"> <img src="https://img.shields.io/badge/Telegram-white?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
