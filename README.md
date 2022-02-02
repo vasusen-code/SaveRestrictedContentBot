@@ -35,11 +35,13 @@ Get Telethon string session from
 [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
 
 # Deploy
-
-<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-white?style=for-the-badge&logo=heroku&logoColor=blue" width="200""/></a></p>
-
-if deploy button doesn't work, then deploy `manually.`
-
+  
+- create app in heroku
+- go to settings of app>> config vars>> add all variables
+- add buildpacks
+- connect to github and deploy
+- turn on dynos
+  
 Buildpacks for manual deploy:
 
 - `heroku/python`
