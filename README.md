@@ -26,7 +26,13 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
 
 - `FORCESUB` - Public channel username without '@'. Don't forget to add bot in channel as administrator. 
 
-Get Telethon string session from
+Get API_ID & API_HASH from:
+
+<p><a href="https://t.me/USETGSBOT"> <img src="https://img.shields.io/badge/Telegram Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
+
+<p><a href="my.telegram.org/auth"> <img src="https://img.shields.io/badge/Telegram Org-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
+
+Get Telethon string session from:
 
 <p><a href="https://t.me/SessionStringGeneratorZBot"> <img src="https://img.shields.io/badge/Telegram Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
