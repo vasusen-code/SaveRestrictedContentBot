@@ -15,11 +15,13 @@ from ethon.telefunc import fast_upload, fast_download, force_sub
 
 from main.plugins.helpers import get_link, screenshot
 
-def sleeptime(_range):
-    if _range < 25:
-        return _range
-    else:
-        return 60
+def sleeptime(i):
+    if i < 25:
+        return 5
+    if i < 50 and i > 25:
+        return 10
+    if i < 100 and i > 50:
+        return 15
 
 async def get_pvt_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
@@ -82,16 +84,16 @@ async def private_batch(event, chat, offset, _range):
     for i in range(_range):
         try:
             try:
-                await get_pvt_content(event, chat, int(offset + _range)) 
+                await get_pvt_content(event, chat, int(offset + i)) 
             except:
-                await get_res_content(event, chat, int(offset + _range)) 
+                await get_res_content(event, chat, int(offset + i)) 
         except FloodWaitError as fw:
             await asyncio.sleep(fw.seconds + 10)
             try:
                 await get_pvt_content(event, chat, int(offset + _range)) 
             except:
                 await get_res_content(event, chat, int(offset + _range)) 
-        timer = sleeptime(_range) 
+        timer = sleeptime(int(i)) 
         protection = await event.client.send_message(event.chat_id, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
         time.sleep(timer)
         await protection.delete()
@@ -104,10 +106,38 @@ async def batch(event):
     if s == True:
         await event.reply(r)
         return       
-    await event.client.send_message(event.chat_id, "Send me the message link you want to start saving from as reply to this message.", buttons=Button.force_reply())
-    
-        
-        
+    async with Drone.conversation(event.chat_id) as conv: 
+        try:
+            await conv.send_message("Send me the message link you want to start saving from, as a reply to this message.", buttons=Button.force_reply())
+            try:
+                link = await conv.get_reply()
+            except:
+                return await conv.send_message("Cannot wait more longer for your response!")
+            if not 't.me/c/' in link:
+                return await conv.send_message("Batch supported only for private restricted channels only!")
+            try:
+                _link = get_link(link)
+                chat = int(_link.split("/")[-2])
+                id = int(_link.split("/")[-1])
+            except:
+                return await conv.send_message("**Invalid link!**")
+            await conv.send_message("Send me the number of files/range you want to save after the given message, as a reply to this message.", buttons=Button.force_reply())
+            try:
+                _range = await conv.get_reply()
+            except:
+                return await conv.send_message("Cannot wait more longer for your response!")
+            try:
+                value = int(_range)
+                if value > 100:
+                    return await conv.send_message("You can only get 100 files in a single batch.")
+            except ValueError:
+                return await conv.send_message("Range must be an integer!")
+            try:
+                await userbot.get_messages(chat, ids=id)
+            except:
+                return await conv.send_message("Have you joined the channel?")
+            await private_batch(event, chat, id, value) 
+            
         
         
         
