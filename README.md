@@ -30,7 +30,7 @@ Get API_ID & API_HASH from:
 
 <p><a href="https://t.me/USETGSBOT"> <img src="https://img.shields.io/badge/Telegram Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
-<p><a href="my.telegram.org/auth"> <img src="https://img.shields.io/badge/Telegram Org-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
+<p><a href="https://my.telegram.org/auth"> <img src="https://img.shields.io/badge/Telegram Org-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
 Get Telethon string session from:
 
