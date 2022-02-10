@@ -96,9 +96,16 @@ async def private_batch(event, chat, offset, _range):
         time.sleep(timer)
         await protection.delete()
         
-        
-        
-        
+@Drone.on(events.NewMessage(incoming=True, from_users=AUTH, pattern='/batch'))
+async def batch(event):
+    if not e.is_private:
+        return
+    s, r = await force_sub(event.client, fs, event.sender_id)
+    if s == True:
+        await event.reply(r)
+        return       
+    await event.client.send_message(event.chat_id, "Send me the message link you want to start saving from as reply to this message.", buttons=Button.force_reply())
+    
         
         
         
