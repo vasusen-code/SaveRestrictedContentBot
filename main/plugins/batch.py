@@ -21,18 +21,24 @@ from main.plugins.helpers import get_link, screenshot
 
 ft = f"To use this bot you've to join @{fs}."
 
+batch = []
+
 async def get_pvt_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
     await event.client.send_message(event.chat_id, msg) 
     
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH, pattern='/batch'))
-async def batch(event):
+async def _batch(event):
     if not event.is_private:
         return
+    # wtf is the use of fsub here if the command is meant for the owner? 
+    # well am too lazy to clean 
     s, r = await force_sub(event.client, fs, event.sender_id, ft) 
     if s == True:
         await event.reply(r)
         return       
+    if f'{event.sender_id}' in batch:
+        return await event.reply("You've already started one batch, wait for it to complete you dumbfuck owner!")
     async with Drone.conversation(event.chat_id) as conv: 
         if s != True:
             await conv.send_message("Send me the message link you want to start saving from, as a reply to this message.", buttons=Button.force_reply())
@@ -50,7 +56,7 @@ async def batch(event):
             except Exception as e:
                 print(e)
                 return await conv.send_message("**Invalid link!**")
-            await conv.send_message("Send me the number of files/range you want to save after the given message, as a reply to this message.", buttons=Button.force_reply())
+            await conv.send_message("Send me the number of files/range you want to save from the given message, as a reply to this message.", buttons=Button.force_reply())
             try:
                 _range = await conv.get_reply()
             except Exception as e:
@@ -59,7 +65,7 @@ async def batch(event):
             try:
                 value = int(_range.text)
                 if value > 100:
-                    return await conv.send_message("You can only get 100 files in a single batch.")
+                    return await conv.send_message("You can only get upto 100 files in a single batch.")
             except ValueError:
                 return await conv.send_message("Range must be an integer!")
             try:
@@ -68,10 +74,13 @@ async def batch(event):
                 print(e)
                 return await conv.send_message("Have you joined the channel?")
             try:
+                batch.append(f'{event.sender_id}')
                 await private_batch(event, chat, id, value) 
                 conv.cancel()
+                batch.pop(0)
             except Exception as e:
                 print(e)
+                batch.pop(0)
                 pass
             
 async def private_batch(event, chat, offset, _range):
