@@ -34,10 +34,10 @@ async def batch(event):
                 link = await conv.get_reply()
             except:
                 return await conv.send_message("Cannot wait more longer for your response!")
-            if not 't.me/c/' in link:
+            if not 't.me/c/' in link.text:
                 return await conv.send_message("Batch supported only for private restricted channels only!")
             try:
-                _link = get_link(link)
+                _link = get_link(link.text)
                 chat = int(_link.split("/")[-2])
                 id = int(_link.split("/")[-1])
             except:
