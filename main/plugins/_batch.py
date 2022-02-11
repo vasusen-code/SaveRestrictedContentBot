@@ -80,13 +80,13 @@ async def private_batch(event, chat, offset, _range):
         try:
             try:
                 await get_pvt_content(event, chat, int(offset + i)) 
-            except:
+            except Exception:
                 await get_res_content(event, chat, int(offset + i)) 
         except FloodWaitError as fw:
             await asyncio.sleep(fw.seconds + 10)
             try:
                 await get_pvt_content(event, chat, int(offset + i)) 
-            except:
+            except Exception:
                 await get_res_content(event, chat, int(offset + i)) 
         protection = await event.client.send_message(event.chat_id, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
         time.sleep(timer)
@@ -102,9 +102,6 @@ async def get_res_content(event, chat, id):
             await event.client.send_message(event.chat_id, msg.text)
         if not msg.media:
             await event.client.send_message(event.chat_id, msg.text)
-        if msg.media.webpage and not msg.document:
-            await event.client.send_message(event.chat_id, msg.text)
-        return
     except Exception as e:
         print(e)
         return await event.client.send_message(event.chat_id, msg.text)
