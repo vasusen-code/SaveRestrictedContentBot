@@ -28,7 +28,7 @@ async def batch(event):
         await event.reply(r)
         return       
     async with Drone.conversation(event.chat_id) as conv: 
-        if s != True
+        if s != True:
             await conv.send_message("Send me the message link you want to start saving from, as a reply to this message.", buttons=Button.force_reply())
             try:
                 link = await conv.get_reply()
