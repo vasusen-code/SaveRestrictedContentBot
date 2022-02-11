@@ -62,7 +62,32 @@ async def batch(event):
             except Exception as e:
                 print(e)
                 pass
-            
+            conv.cancel()
+
+async def private_batch(event, chat, offset, _range):
+    for i in range(_range):
+        print(f"Starting a batch transfer for {_range} files")
+        timer = 60
+        if i < 25:
+            timer = 5
+        if i < 50 and i > 25:
+            timer = 10
+        if i < 100 and i > 50:
+            timer = 15
+        try:
+            try:
+                await get_pvt_content(event, chat, int(offset + i)) 
+            except:
+                await get_res_content(event, chat, int(offset + i)) 
+        except FloodWaitError as fw:
+            await asyncio.sleep(fw.seconds + 10)
+            try:
+                await get_pvt_content(event, chat, int(offset + i)) 
+            except:
+                await get_res_content(event, chat, int(offset + i)) 
+        protection = await event.client.send_message(event.chat_id, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
+        time.sleep(timer)
+        await protection.delete()
             
 async def get_res_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
@@ -117,29 +142,3 @@ async def get_res_content(event, chat, id):
         await edit.delete()
         os.remove(name)
         
-async def private_batch(event, chat, offset, _range):
-    for i in range(_range):
-        print(f"Starting a batch transfer for {_range} files")
-        timer = 60
-        if i < 25:
-            timer = 5
-        if i < 50 and i > 25:
-            timer = 10
-        if i < 100 and i > 50:
-            timer = 15
-        try:
-            try:
-                await get_pvt_content(event, chat, int(offset + i)) 
-            except:
-                await get_res_content(event, chat, int(offset + i)) 
-        except FloodWaitError as fw:
-            await asyncio.sleep(fw.seconds + 10)
-            try:
-                await get_pvt_content(event, chat, int(offset + i)) 
-            except:
-                await get_res_content(event, chat, int(offset + i)) 
-        protection = await event.client.send_message(event.chat_id, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
-        time.sleep(timer)
-        await protection.delete()
-        
-
