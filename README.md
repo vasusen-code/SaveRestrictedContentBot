@@ -30,7 +30,7 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
 
 <p><a href="https://my.telegram.org/auth"> <img src="https://img.shields.io/badge/Telegram Org-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
-<p><a href="https://t.me/SessionStringGeneratorZBot"> <img src="https://img.shields.io/badge/Session Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
+<p><a href="https://t.me/SessionStringGeneratorZBot"> <img src="https://img.shields.io/badge/Session Bot-grey?style=for-the-badge&logo=web&logoColor=black" width="100""/></a></p>
 
 [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
 
@@ -50,4 +50,4 @@ Buildpacks for manual deploy:
 
 # Upcoming features:
 
-- Save multiple content at once/Save in range
+- Save multiple content at once/Save in range for public channels
