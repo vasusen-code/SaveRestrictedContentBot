@@ -15,6 +15,8 @@ from ethon.telefunc import fast_upload, fast_download, force_sub
 
 from main.plugins.helpers import get_link, screenshot
 
+ft = f"To use this bot you've to join @{fs}."
+
 async def get_pvt_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
     await event.client.send_message(event.chat_id, msg) 
@@ -23,7 +25,7 @@ async def get_pvt_content(event, chat, id):
 async def batch(event):
     if not event.is_private:
         return
-    s, r = await force_sub(event.client, fs, event.sender_id)
+    s, r = await force_sub(event.client, fs, event.sender_id, ft) 
     if s == True:
         await event.reply(r)
         return       
