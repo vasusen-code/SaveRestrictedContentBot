@@ -50,7 +50,7 @@ async def get_res_content(event, chat, id):
             return
         else:
             if 'mp4' or 'x-matroska' in msg.file.mime_type:
-            name = f'{chat}' + '-' + f'{id}' + '.mp4'
+                name = f'{chat}' + '-' + f'{id}' + '.mp4'
     edit = await event.client.send_message(event.chat_id, "Preparing to Download!")
     await fast_download(name, msg.document, userbot, edit, time.time(), '**DOWNLOADING:**')
     await edit.edit("Preparing to upload.")
