@@ -16,6 +16,11 @@ from main.plugins.helpers import get_link, join, screenshot
 
 ft = f"To use this bot you've to join @{fs}."
 
+# To-Do:
+# Make these codes shorter and clean
+# Add batch for Public messages
+# replace pyroplug with telethon plugin for public channel
+
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def clone(event):
     if event.is_reply:
