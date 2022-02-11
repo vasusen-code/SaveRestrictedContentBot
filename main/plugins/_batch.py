@@ -99,13 +99,12 @@ async def get_res_content(event, chat, id):
         await event.client.send_message(event.chat_id, f"Couldn't get this message:\n\nchannel:` {chat}`\nid: `{id}`")
         return
     try:
-        if not msg.media:
+        if msg.text and not msg.media:
             await event.client.send_message(event.chat_id, msg.text)
-        if not msg.file.name:
+        if msg.media.webpage:
             await event.client.send_message(event.chat_id, msg.text)
-    except Exception as e:
-        print(e)
-        return await event.client.send_message(event.chat_id, msg.text)
+    except Exception:
+        pass
     name = msg.file.name
     if not name:
         if not msg.file.mime_type:
@@ -117,7 +116,7 @@ async def get_res_content(event, chat, id):
     edit = await event.client.send_message(event.chat_id, "Preparing to Download!")
     await fast_download(name, msg.document, userbot, edit, time.time(), '**DOWNLOADING:**')
     await edit.edit("Preparing to upload.")
-    if 'mp4' in file.file.mime_type or 'x-matroska' in file.file.mime_type:
+    if 'mp4' in msg.file.mime_type or 'x-matroska' in msg.file.mime_type:
         metadata = video_metadata(name)
         height = metadata["height"]
         width = metadata["width"]
