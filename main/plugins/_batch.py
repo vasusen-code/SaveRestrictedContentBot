@@ -32,7 +32,8 @@ async def batch(event):
             await conv.send_message("Send me the message link you want to start saving from, as a reply to this message.", buttons=Button.force_reply())
             try:
                 link = await conv.get_reply()
-            except:
+            except Exception as e:
+                print(e)
                 return await conv.send_message("Cannot wait more longer for your response!")
             if not 't.me/c/' in link.text:
                 return await conv.send_message("Batch supported only for private restricted channels only!")
@@ -40,12 +41,14 @@ async def batch(event):
                 _link = get_link(link.text)
                 chat = int((str(_link)).split("/")[-2])
                 id = int((str(_link)).split("/")[-1])
-            except:
+            except Exception as e:
+                print(e)
                 return await conv.send_message("**Invalid link!**")
             await conv.send_message("Send me the number of files/range you want to save after the given message, as a reply to this message.", buttons=Button.force_reply())
             try:
                 _range = await conv.get_reply()
-            except:
+            except Exception as e:
+                print(e)
                 return await conv.send_message("Cannot wait more longer for your response!")
             try:
                 value = int(_range.text)
@@ -55,7 +58,8 @@ async def batch(event):
                 return await conv.send_message("Range must be an integer!")
             try:
                 await userbot.get_messages(chat, ids=id)
-            except:
+            except Exception as e:
+                print(e)
                 return await conv.send_message("Have you joined the channel?")
             try:
                 await private_batch(event, chat, id, value) 
