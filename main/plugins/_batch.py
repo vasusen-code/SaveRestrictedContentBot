@@ -48,7 +48,7 @@ async def batch(event):
             except:
                 return await conv.send_message("Cannot wait more longer for your response!")
             try:
-                value = int(_range)
+                value = int(_range.text)
                 if value > 100:
                     return await conv.send_message("You can only get 100 files in a single batch.")
             except ValueError:
