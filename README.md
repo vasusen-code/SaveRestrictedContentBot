@@ -24,15 +24,13 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
 - `AUTH` - Owner user id
 - `FORCESUB` - Public channel username without '@'. Don't forget to add bot in channel as administrator. 
 
-Get API_ID & API_HASH from:
+# Get API & TELETHON string session from:
 
-<p><a href="https://t.me/USETGSBOT"> <img src="https://img.shields.io/badge/Telegram Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
+<p><a href="https://t.me/USETGSBOT"> <img src="https://img.shields.io/badge/API scrap Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
 <p><a href="https://my.telegram.org/auth"> <img src="https://img.shields.io/badge/Telegram Org-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
-Get Telethon string session from:
-
-<p><a href="https://t.me/SessionStringGeneratorZBot"> <img src="https://img.shields.io/badge/Telegram Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
+<p><a href="https://t.me/SessionStringGeneratorZBot"> <img src="https://img.shields.io/badge/Session Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
 [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
 
