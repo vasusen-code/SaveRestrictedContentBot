@@ -62,8 +62,8 @@ async def batch(event):
             except Exception as e:
                 print(e)
                 pass
-    
-async def get_res_content(event, chat, id):
+            
+async def get_res_content(event, chat, id):    
     msg = await userbot.get_messages(chat, ids=id)
     if msg is None:
         await event.client.send_message(event.chat_id, f"Couldn't get this message:\n\nchannel:` {chat}`\nid: `{id}`")
