@@ -16,6 +16,9 @@ from main.plugins.helpers import get_link, join, screenshot
 
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def clone(event):
+    reply = event.get_reply_message()
+    if reply:
+        return
     try:
         link = get_link(event.text)
         if not link:
