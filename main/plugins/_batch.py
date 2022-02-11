@@ -7,7 +7,7 @@ from .. import bot as Drone
 from .. import userbot, AUTH
 from .. import FORCESUB as fs
 
-from telethon import events, Button
+from telethon import events, Button, errors
 from telethon.tl.types import DocumentAttributeVideo
 
 from ethon.pyfunc import video_metadata
@@ -83,7 +83,7 @@ async def private_batch(event, chat, offset, _range):
                 await get_pvt_content(event, chat, int(offset + i)) 
             except Exception:
                 await get_res_content(event, chat, int(offset + i)) 
-        except FloodWaitError as fw:
+        except errors.FloodWaitError as fw:
             await asyncio.sleep(fw.seconds + 10)
             try:
                 await get_pvt_content(event, chat, int(offset + i)) 
