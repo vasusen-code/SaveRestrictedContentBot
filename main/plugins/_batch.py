@@ -18,7 +18,51 @@ from main.plugins.helpers import get_link, screenshot
 async def get_pvt_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
     await event.client.send_message(event.chat_id, msg) 
-
+    
+@Drone.on(events.NewMessage(incoming=True, from_users=AUTH, pattern='/batch'))
+async def batch(event):
+    if not e.is_private:
+        return
+    s, r = await force_sub(event.client, fs, event.sender_id)
+    if s == True:
+        await event.reply(r)
+        return       
+    async with Drone.conversation(event.chat_id) as conv: 
+        try:
+            await conv.send_message("Send me the message link you want to start saving from, as a reply to this message.", buttons=Button.force_reply())
+            try:
+                link = await conv.get_reply()
+            except:
+                return await conv.send_message("Cannot wait more longer for your response!")
+            if not 't.me/c/' in link:
+                return await conv.send_message("Batch supported only for private restricted channels only!")
+            try:
+                _link = get_link(link)
+                chat = int(_link.split("/")[-2])
+                id = int(_link.split("/")[-1])
+            except:
+                return await conv.send_message("**Invalid link!**")
+            await conv.send_message("Send me the number of files/range you want to save after the given message, as a reply to this message.", buttons=Button.force_reply())
+            try:
+                _range = await conv.get_reply()
+            except:
+                return await conv.send_message("Cannot wait more longer for your response!")
+            try:
+                value = int(_range)
+                if value > 100:
+                    return await conv.send_message("You can only get 100 files in a single batch.")
+            except ValueError:
+                return await conv.send_message("Range must be an integer!")
+            try:
+                await userbot.get_messages(chat, ids=id)
+            except:
+                return await conv.send_message("Have you joined the channel?")
+            try:
+                await private_batch(event, chat, id, value) 
+            except Exception as e:
+                print(e)
+                pass
+    
 async def get_res_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
     if msg is None:
@@ -94,53 +138,4 @@ async def private_batch(event, chat, offset, _range):
         time.sleep(timer)
         await protection.delete()
         
-@Drone.on(events.NewMessage(incoming=True, from_users=AUTH, pattern='/batch'))
-async def batch(event):
-    if not e.is_private:
-        return
-    s, r = await force_sub(event.client, fs, event.sender_id)
-    if s == True:
-        await event.reply(r)
-        return       
-    async with Drone.conversation(event.chat_id) as conv: 
-        try:
-            await conv.send_message("Send me the message link you want to start saving from, as a reply to this message.", buttons=Button.force_reply())
-            try:
-                link = await conv.get_reply()
-            except:
-                return await conv.send_message("Cannot wait more longer for your response!")
-            if not 't.me/c/' in link:
-                return await conv.send_message("Batch supported only for private restricted channels only!")
-            try:
-                _link = get_link(link)
-                chat = int(_link.split("/")[-2])
-                id = int(_link.split("/")[-1])
-            except:
-                return await conv.send_message("**Invalid link!**")
-            await conv.send_message("Send me the number of files/range you want to save after the given message, as a reply to this message.", buttons=Button.force_reply())
-            try:
-                _range = await conv.get_reply()
-            except:
-                return await conv.send_message("Cannot wait more longer for your response!")
-            try:
-                value = int(_range)
-                if value > 100:
-                    return await conv.send_message("You can only get 100 files in a single batch.")
-            except ValueError:
-                return await conv.send_message("Range must be an integer!")
-            try:
-                await userbot.get_messages(chat, ids=id)
-            except:
-                return await conv.send_message("Have you joined the channel?")
-            try:
-                await private_batch(event, chat, id, value) 
-            except Exception as e:
-                print(e)
-                pass
-            
-           
-        
-        
-        
-        
-        
+
