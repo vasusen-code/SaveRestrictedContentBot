@@ -98,9 +98,9 @@ async def get_res_content(event, chat, id):
         await event.client.send_message(event.chat_id, f"Couldn't get this message:\n\nchannel:` {chat}`\nid: `{id}`")
         return
     try:
-        if not msg.document:
-            await event.client.send_message(event.chat_id, msg.text)
         if not msg.media:
+            await event.client.send_message(event.chat_id, msg.text)
+        if not msg.file.name:
             await event.client.send_message(event.chat_id, msg.text)
     except Exception as e:
         print(e)
