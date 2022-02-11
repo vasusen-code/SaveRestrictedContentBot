@@ -132,8 +132,13 @@ async def batch(event):
                 await userbot.get_messages(chat, ids=id)
             except:
                 return await conv.send_message("Have you joined the channel?")
-            await private_batch(event, chat, id, value) 
+            try:
+                await private_batch(event, chat, id, value) 
+            except Exception as e:
+                print(e)
+                pass
             
+           
         
         
         
