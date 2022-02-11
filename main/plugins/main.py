@@ -49,16 +49,12 @@ async def clone(event):
                      return
                  if file and file.text:
                      try:
-                         if not file.media:
-                             await edit.edit(file.text)
-                             return
-                         if not file.file.name:
-                             await edit.edit(file.text)
-                             return
-                     except:
-                         if file.media.webpage:
-                             await edit.edit(file.text)
-                             return
+                         if msg.text and not msg.media:
+                             await event.client.send_message(event.chat_id, msg.text)
+                         if msg.media.webpage:
+                             await event.client.send_message(event.chat_id, msg.text)
+                     except Exception:
+                         pass
                  name = file.file.name
                  if not name:
                      if not file.file.mime_type:
