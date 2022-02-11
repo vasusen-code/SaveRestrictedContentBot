@@ -15,14 +15,6 @@ from ethon.telefunc import fast_upload, fast_download, force_sub
 
 from main.plugins.helpers import get_link, screenshot
 
-def sleeptime(i):
-    if i < 25:
-        return 5
-    if i < 50 and i > 25:
-        return 10
-    if i < 100 and i > 50:
-        return 15
-
 async def get_pvt_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
     await event.client.send_message(event.chat_id, msg) 
@@ -90,10 +82,14 @@ async def private_batch(event, chat, offset, _range):
         except FloodWaitError as fw:
             await asyncio.sleep(fw.seconds + 10)
             try:
-                await get_pvt_content(event, chat, int(offset + _range)) 
+                await get_pvt_content(event, chat, int(offset + i)) 
             except:
-                await get_res_content(event, chat, int(offset + _range)) 
-        timer = sleeptime(int(i)) 
+                await get_res_content(event, chat, int(offset + i)) 
+        timer = 60
+        if i < 25:
+            timer = i
+        if i < 50 and i > 25:
+            timer = i
         protection = await event.client.send_message(event.chat_id, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
         time.sleep(timer)
         await protection.delete()
