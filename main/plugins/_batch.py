@@ -118,6 +118,14 @@ async def get_res_content(event, chat, id):
         
 async def private_batch(event, chat, offset, _range):
     for i in range(_range):
+        print(f"Starting a batch transfer for {_range} files")
+        timer = 60
+        if i < 25:
+            timer = 5
+        if i < 50 and i > 25:
+            timer = 10
+        if i < 100 and i > 50:
+            timer = 15
         try:
             try:
                 await get_pvt_content(event, chat, int(offset + i)) 
@@ -129,11 +137,6 @@ async def private_batch(event, chat, offset, _range):
                 await get_pvt_content(event, chat, int(offset + i)) 
             except:
                 await get_res_content(event, chat, int(offset + i)) 
-        timer = 60
-        if i < 25:
-            timer = i
-        if i < 50 and i > 25:
-            timer = i
         protection = await event.client.send_message(event.chat_id, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
         time.sleep(timer)
         await protection.delete()
