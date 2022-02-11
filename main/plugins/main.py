@@ -14,6 +14,8 @@ from ethon.telefunc import fast_upload, fast_download, force_sub
 
 from main.plugins.helpers import get_link, join, screenshot
 
+ft = f"To use this bot you've to join @{fs}."
+
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def clone(event):
     if event.is_reply:
@@ -24,7 +26,7 @@ async def clone(event):
             return
     except TypeError:
         return
-    s, r = await force_sub(event.client, fs, event.sender_id)
+    s, r = await force_sub(event.client, fs, event.sender_id, ft)
     if s == True:
         await event.reply(r)
         return
