@@ -28,7 +28,7 @@ async def batch(event):
         await event.reply(r)
         return       
     async with Drone.conversation(event.chat_id) as conv: 
-        try:
+        if, s != True
             await conv.send_message("Send me the message link you want to start saving from, as a reply to this message.", buttons=Button.force_reply())
             try:
                 link = await conv.get_reply()
@@ -38,8 +38,8 @@ async def batch(event):
                 return await conv.send_message("Batch supported only for private restricted channels only!")
             try:
                 _link = get_link(link.text)
-                chat = int(_link.split("/")[-2])
-                id = int(_link.split("/")[-1])
+                chat = int((str(_link)).split("/")[-2])
+                id = int((str(_link)).split("/")[-1])
             except:
                 return await conv.send_message("**Invalid link!**")
             await conv.send_message("Send me the number of files/range you want to save after the given message, as a reply to this message.", buttons=Button.force_reply())
@@ -57,10 +57,11 @@ async def batch(event):
                 await userbot.get_messages(chat, ids=id)
             except:
                 return await conv.send_message("Have you joined the channel?")
-            await private_batch(event, chat, id, value) 
-            conv.cancel()
-        except Exception as e:
-            print(e)
+            try:
+                await private_batch(event, chat, id, value) 
+                conv.cancel()
+            except Exception as e:
+                print(e)
             
 async def private_batch(event, chat, offset, _range):
     for i in range(_range):
