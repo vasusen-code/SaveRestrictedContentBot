@@ -4,7 +4,7 @@
 import time, os
 
 from .. import bot as Drone
-from .. import userbot
+from .. import userbot, AUTH
 from .. import FORCESUB as fs
 
 from telethon import events
