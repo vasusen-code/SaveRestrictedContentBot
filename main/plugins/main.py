@@ -14,15 +14,19 @@ from ethon.telefunc import fast_upload, fast_download, force_sub
 
 from main.plugins.helpers import get_link, join, screenshot
 
+ft = f"To use this bot you've to join @{fs}."
+
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def clone(event):
+    if event.is_reply:
+        return
     try:
         link = get_link(event.text)
         if not link:
             return
     except TypeError:
         return
-    s, r = await force_sub(event.client, fs, event.sender_id)
+    s, r = await force_sub(event.client, fs, event.sender_id, ft)
     if s == True:
         await event.reply(r)
         return
@@ -46,16 +50,12 @@ async def clone(event):
                      return
                  if file and file.text:
                      try:
-                         if not file.media:
-                             await edit.edit(file.text)
-                             return
-                         if not file.file.name:
-                             await edit.edit(file.text)
-                             return
-                     except:
-                         if file.media.webpage:
-                             await edit.edit(file.text)
-                             return
+                         if msg.text and not msg.media:
+                             await event.client.send_message(event.chat_id, msg.text)
+                         if msg.media.webpage:
+                             await event.client.send_message(event.chat_id, msg.text)
+                     except Exception:
+                         pass
                  name = file.file.name
                  if not name:
                      if not file.file.mime_type:
