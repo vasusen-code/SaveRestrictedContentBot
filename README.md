@@ -26,7 +26,7 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
 
 # Get API & TELETHON string session from:
 
-<p><a href="https://t.me/USETGSBOT"> <img src="https://img.shields.io/badge/API scrap Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
+<p><a href="https://t.me/USETGSBOT"> <img src="https://img.shields.io/badge/API scrap Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a>
 
 <p><a href="https://my.telegram.org/auth"> <img src="https://img.shields.io/badge/Telegram Org-grey?style=for-the-badge&logo=internet" width="100""/></a></p>
 
