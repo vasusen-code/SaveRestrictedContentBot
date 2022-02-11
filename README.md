@@ -9,21 +9,19 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
 - supports text and webpage media messages
 - Faster speed
 - Forcesubscribe available 
+- `/batch` - (For owner only) Use this command to save upto 100 files from a pvt restricted channel at once.
 
 <p><a href="https://t.me/MaheshChauhan"> <img src="https://img.shields.io/badge/Telegram-white?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
 <p><a href="https://t.me/TeamDrone"> <img src="https://img.shields.io/badge/Support-white?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
-  
+
 # Variables
 
 - `API_ID`
-
 - `API_HASH`
-
 - `SESSION`
-
 - `BOT TOKEN` 
-
+- `AUTH` - Owner user id
 - `FORCESUB` - Public channel username without '@'. Don't forget to add bot in channel as administrator. 
 
 Get API_ID & API_HASH from:
