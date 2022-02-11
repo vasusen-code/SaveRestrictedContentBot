@@ -70,7 +70,6 @@ async def batch(event):
             
 async def private_batch(event, chat, offset, _range):
     for i in range(_range):
-        print(f"Starting a batch transfer for {_range} files")
         timer = 60
         if i < 25:
             timer = 5
