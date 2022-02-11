@@ -1,7 +1,6 @@
 #Github.com-Vasusen-code
 
-
-ethon
+ethon==1.3.5
 cryptg
 tgcrypto
 pyrogram
