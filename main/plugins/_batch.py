@@ -21,7 +21,7 @@ async def get_pvt_content(event, chat, id):
     
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH, pattern='/batch'))
 async def batch(event):
-    if not e.is_private:
+    if not event.is_private:
         return
     s, r = await force_sub(event.client, fs, event.sender_id)
     if s == True:
