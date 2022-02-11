@@ -25,14 +25,12 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
 - `FORCESUB` - Public channel username without '@'. Don't forget to add bot in channel as administrator. 
 
 # Get API & TELETHON string session from:
+ 
+API: [API scrapper Bot](https://t.me/USETGSBOT) or [Telegram.org](https://my.telegram.org/auth)
 
-<p><a href="https://t.me/USETGSBOT"> <img src="https://img.shields.io/badge/API scrap Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a>
+TELETHON SESSION: [SessionGen Bot](https://t.me/SessionStringGeneratorZBot) or [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
 
-<p><a href="https://my.telegram.org/auth"> <img src="https://img.shields.io/badge/Telegram Org-grey?style=for-the-badge&logo=internet" width="100""/></a></p>
-
-<p><a href="https://t.me/SessionStringGeneratorZBot"> <img src="https://img.shields.io/badge/Session Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
-
-[![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
+BOT TOKEN: @Botfather on telegram
 
 # Deploy
   
