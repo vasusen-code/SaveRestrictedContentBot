@@ -125,16 +125,16 @@ async def get_res_content(event, chat, id):
         attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
         thumb = await screenshot(name, duration/2, event.sender_id)
         caption = name
-        if file.text:
-            caption=file.text
+        if msg.text:
+            caption=msg.text
         uploader = await fast_upload(name, name, time.time(), event.client, edit, '**UPLOADING:**')
         await event.client.send_file(event.chat_id, uploader, caption=caption, thumb=thumb, attributes=attributes, force_document=False)
         await edit.delete()
         os.remove(name)
     else:
         caption = name
-        if file.text:
-            caption=file.text
+        if msg.text:
+            caption=msg.text
         thumb=None
         if os.path.exists(f'{event.sender_id}.jpg'):
             thumb = f'{event.sender_id}.jpg'
