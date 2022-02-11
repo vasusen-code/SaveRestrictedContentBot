@@ -57,12 +57,11 @@ async def batch(event):
                 await userbot.get_messages(chat, ids=id)
             except:
                 return await conv.send_message("Have you joined the channel?")
-            try:
-                await private_batch(event, chat, id, value) 
-            except Exception as e:
-                print(e)
+            await private_batch(event, chat, id, value) 
             conv.cancel()
-
+        except Exception as e:
+            print(e)
+            
 async def private_batch(event, chat, offset, _range):
     for i in range(_range):
         print(f"Starting a batch transfer for {_range} files")
