@@ -7,7 +7,7 @@ from .. import bot as Drone
 from .. import userbot, AUTH
 from .. import FORCESUB as fs
 
-from telethon import events
+from telethon import events, Button
 from telethon.tl.types import DocumentAttributeVideo
 
 from ethon.pyfunc import video_metadata
