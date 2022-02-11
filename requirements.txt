@@ -1,9 +1,10 @@
 #Github.com-Vasusen-code
 
+git+https://github.com/LonamiWebs/Telethon
+
 ethon==1.3.5
 cryptg
 tgcrypto
 pyrogram
 python-decouple
 telethon-tgcrypto
-https://github.com/New-dev0/Telethon/archive/Vector.zip #Until telethon update
