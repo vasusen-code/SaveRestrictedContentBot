@@ -61,7 +61,6 @@ async def batch(event):
                 await private_batch(event, chat, id, value) 
             except Exception as e:
                 print(e)
-                pass
             conv.cancel()
 
 async def private_batch(event, chat, offset, _range):
