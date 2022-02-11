@@ -28,7 +28,7 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
 
 <p><a href="https://t.me/USETGSBOT"> <img src="https://img.shields.io/badge/API scrap Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
-<p><a href="https://my.telegram.org/auth"> <img src="https://img.shields.io/badge/Telegram Org-grey?style=for-the-badge&logo=browser" width="100""/></a></p>
+<p><a href="https://my.telegram.org/auth"> <img src="https://img.shields.io/badge/Telegram Org-grey?style=for-the-badge&logo=internet" width="100""/></a></p>
 
 <p><a href="https://t.me/SessionStringGeneratorZBot"> <img src="https://img.shields.io/badge/Session Bot-grey?style=for-the-badge&logo=telegram&logoColor=blue" width="100""/></a></p>
 
