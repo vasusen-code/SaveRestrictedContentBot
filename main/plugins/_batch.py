@@ -39,7 +39,7 @@ async def batch(event):
                 return await conv.send_message("Batch supported only for private restricted channels only!")
             try:
                 _link = get_link(link.text)
-                chat = int((str(_link)).split("/")[-2])
+                chat = int('-100' + (str(_link)).split("/")[-2])
                 id = int((str(_link)).split("/")[-1])
             except Exception as e:
                 print(e)
