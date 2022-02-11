@@ -1,6 +1,10 @@
 #Tg:MaheshChauhan/DroneBots
 #Github.com/Vasusen-code
 
+"""
+Plugin for private channels only!
+"""
+
 import time, os
 
 from .. import bot as Drone
