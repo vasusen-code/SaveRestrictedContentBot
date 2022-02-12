@@ -8,7 +8,7 @@ Plugin for private channels only!
 import time, os
 
 from .. import bot as Drone
-from .. import userbot, AUTH
+from .. import userbot, Bot, AUTH
 from .. import FORCESUB as fs
 
 from telethon import events, Button, errors
@@ -69,13 +69,18 @@ async def _batch(event):
             except ValueError:
                 return await conv.send_message("Range must be an integer!")
             try:
-                await userbot.get_messages(chat, ids=id)
+                await userbot.get_messages(chat, int(id))
             except Exception as e:
                 print(e)
                 return await conv.send_message("Have you joined the channel?")
             try:
+                await Bot.get_messages(chat, int(id))
+            except Exception as e:
+                print(e)
+                return await conv.send_message("Maybe i am banned from this chat!")
+            try:
                 batch.append(f'{event.sender_id}')
-                await private_batch(event, chat, id, value) 
+               # await get_msg(userbot, Bot, id, value) 
                 conv.cancel()
                 batch.pop(0)
             except Exception as e:
