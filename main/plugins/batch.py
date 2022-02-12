@@ -44,18 +44,13 @@ async def _batch(event):
             await conv.send_message("Send me the message link you want to start saving from, as a reply to this message.", buttons=Button.force_reply())
             try:
                 link = await conv.get_reply()
+                try:
+                    _link = get_link(link.text)
+                except Exception:
+                    await conv.send_message("No link found.")
             except Exception as e:
                 print(e)
                 return await conv.send_message("Cannot wait more longer for your response!")
-            if not 't.me/c/' in link.text:
-                return await conv.send_message("Batch supported only for private restricted channels only!")
-            try:
-                _link = get_link(link.text)
-                chat = int('-100' + (str(_link)).split("/")[-2])
-                id = int((str(_link)).split("/")[-1])
-            except Exception as e:
-                print(e)
-                return await conv.send_message("**Invalid link!**")
             await conv.send_message("Send me the number of files/range you want to save from the given message, as a reply to this message.", buttons=Button.force_reply())
             try:
                 _range = await conv.get_reply()
@@ -68,25 +63,15 @@ async def _batch(event):
                     return await conv.send_message("You can only get upto 100 files in a single batch.")
             except ValueError:
                 return await conv.send_message("Range must be an integer!")
-            try:
-                await userbot.get_messages(chat, int(id))
-            except Exception as e:
-                print(e)
-                return await conv.send_message("Have you joined the channel?")
-            try:
-                await Bot.get_messages(chat, int(id))
-            except Exception as e:
-                print(e)
-                return await conv.send_message("Maybe i am banned from this chat!")
-            try:
-                batch.append(f'{event.sender_id}')
-               # await get_msg(userbot, Bot, id, value) 
-                conv.cancel()
-                batch.pop(0)
-            except Exception as e:
-                print(e)
-                batch.pop(0)
-                pass
+            s, r = await check(userbot, client, _link)
+            if s != True:
+                await conv.send_message(r)
+                return
+            batch.append(f'{event.sender_id}')
+            await run_batch(
+            conv.cancel()
+            batch.pop(0)
+            
             
 async def private_batch(event, chat, offset, _range):
     for i in range(_range):
@@ -98,16 +83,10 @@ async def private_batch(event, chat, offset, _range):
         if i < 100 and i > 50:
             timer = 15
         try:
-            try:
-                await get_pvt_content(event, chat, int(offset + i)) 
-            except Exception:
-                await get_res_content(event, chat, int(offset + i)) 
+            await get_bulk_msg(userbot, Bot, sender, link, i) 
         except errors.FloodWaitError as fw:
             await asyncio.sleep(fw.seconds + 10)
-            try:
-                await get_pvt_content(event, chat, int(offset + i)) 
-            except Exception:
-                await get_res_content(event, chat, int(offset + i)) 
+            await get_bulk_msg(userbot, Bot, sender, link, i)
         protection = await event.client.send_message(event.chat_id, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
         time.sleep(timer)
         await protection.delete()
