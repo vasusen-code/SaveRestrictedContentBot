@@ -5,6 +5,7 @@ import time, os
 from .. import bot as Drone
 from .. import userbot, Bot
 from .. import FORCESUB as fs
+from main.plugins.pyrogplug import get_msg
 
 from telethon import events
 from telethon.tl.types import DocumentAttributeVideo
