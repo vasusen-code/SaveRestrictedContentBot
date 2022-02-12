@@ -27,7 +27,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link):
                 msg,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    userbot,
+                    client,
                     "**DOWNLOADING:**\n",
                     edit,
                     time.time()
