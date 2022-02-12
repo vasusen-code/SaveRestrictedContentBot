@@ -4,6 +4,7 @@ import asyncio, time, os
 
 from .. import Bot
 from main.plugins.progress import progress_for_pyrogram
+from main.plugins.helpers import screenshot
 
 from pyrogram import Client, filters 
 from ethon.pyfunc import video_metadata
