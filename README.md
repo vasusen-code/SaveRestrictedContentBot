@@ -1,3 +1,5 @@
+# Don't deploy upto next update(batch for pvt), stay connected to @MaheshChauhan on tg. 
+
 <h1 align="center">
   <b>Save restricted content Bot</b>
 </h1> 
