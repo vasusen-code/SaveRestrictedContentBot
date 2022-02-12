@@ -3,6 +3,7 @@
 import asyncio
 
 from .. import Bot
+from main.plugins.progress import progress_for_pyrogram
 
 from pyrogram import Client, filters 
 from ethon.pyfunc import video_metadata
@@ -49,8 +50,8 @@ async def get_msg(userbot, client, sender, msg_link, edit):
             )
             await edit.edit('Trying to Upload.')
             caption = ""
-            if msg.text is not None:
-                caption = msg.text
+            if msg.caption is not None:
+                caption = msg.caption
             if str(file).split(".")[-1] == 'mkv' or 'mp4' or 'webm':
                 if str(file).split(".")[-1] == 'webm' or 'mkv':
                     path = str(file).split(".")[0] + ".mp4"
