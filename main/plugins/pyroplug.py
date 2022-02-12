@@ -15,6 +15,23 @@ def thumbnail(sender):
     else:
          return None
       
+async def check(userbot, client, link):
+    msg_id = int(msg_link.split("/")[-1])
+    if 't.me/c/' in link:
+        try:
+            chat = int('-100' + str(link.split("/")[-2]))
+            await userbot.get_messages(chat, msg_id)
+        except ValueError:
+            return False, "**Invalid Link!**"
+        except Exception:
+            return False, "Have you joined the channel?"
+    else:
+        try:
+            chat = str(link.split("/")[-2])
+            await client.get_messages(chat, msg_id)
+        except Exception:
+            return False, "Maybe bot is banned from the chat, or your link is invalid!"
+            
 async def get_msg(userbot, client, sender, edit_id, msg_link):
     edit = ""
     chat = ""
