@@ -104,7 +104,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link):
             print(e)
         await edit.delete()
         
-async def get_msg(userbot, client, sender, msg_link, _range):
+async def get_bulk_msg(userbot, client, sender, msg_link, _range):
     edit = await client.send_message(sender, 'Processing!')
     edit_id = edit.message_id
     chat = ""
