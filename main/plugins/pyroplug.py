@@ -19,10 +19,21 @@ async def get_msg(userbot, client, sender, edit_id, msg_link):
     chat = ""
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c/' in msg_link:
-        edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
+        edit = await client.edit_message_text(sender, edit_id, "Processing!")
         chat = int('-100' + str(msg_link.split("/")[-2]))
         try:
             msg = await userbot.get_messages(chat, msg_id)
+            if msg.media:
+                if 'web_page' in msg.media:
+                    await client.send_message(sender, msg.text.markdown)
+                    await edit.delete()
+                    return
+            if not msg.media:
+                if msg.text:
+                    await client.send_message(sender, msg.text.markdown)
+                    await edit.delete()
+                    return
+            await edit.edit("Trying to Download.")
             file = await userbot.download_media(
                 msg,
                 progress=progress_for_pyrogram,
