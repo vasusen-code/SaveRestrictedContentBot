@@ -32,7 +32,8 @@ def thumbnail(sender):
     else:
          return None
       
-async def get_msg(userbot, client, sender, msg_link, edit):
+async def get_msg(userbot, client, sender, msg_link):
+    edit = await client.send_message(sender, "Trying to Download.")
     chat = ""
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c/' in msg_link:
@@ -49,7 +50,7 @@ async def get_msg(userbot, client, sender, msg_link, edit):
                     time.time()
                 )
             )
-            await edit.edit('Trying to Upload.')
+            await edit.edit('Prearing to Upload!')
             caption = ""
             if msg.caption is not None:
                 caption = msg.caption
