@@ -16,6 +16,7 @@ def thumbnail(sender):
          return None
       
 async def get_msg(userbot, client, sender, edit_id, msg_link):
+    edit = ""
     chat = ""
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c/' in msg_link:
@@ -25,12 +26,12 @@ async def get_msg(userbot, client, sender, edit_id, msg_link):
             if msg.media:
                 if 'web_page' in msg.media:
                     await client.send_message(sender, msg.text.markdown)
-                    await edit.delete()
+                    await edit.delete(sender, edit_id)
                     return
             if not msg.media:
                 if msg.text:
                     await client.send_message(sender, msg.text.markdown)
-                    await edit.delete()
+                    await edit.delete(sender, edit_id)
                     return
             edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
             file = await userbot.download_media(
@@ -87,7 +88,10 @@ async def get_msg(userbot, client, sender, edit_id, msg_link):
                 )
             await edit.delete()
         except Exception as e:
-            await edit.edit(f'ERROR: {str(e)}')
+            if 'CHANNEL' in str(e).split("_") and 'INVALID' in str(e).split("_"):
+                await client.edit_message_text(sender, edit_id, "Have you joined the channel?")
+                return 
+            await client.edit_message_text(sender, edit_id, f'ERROR: {str(e)}')
             return 
     else:
         edit = await client.edit_message_text(sender, "Cloning.")
