@@ -26,12 +26,12 @@ async def get_msg(userbot, client, sender, edit_id, msg_link):
             if msg.media:
                 if 'web_page' in msg.media:
                     await client.send_message(sender, msg.text.markdown)
-                    await edit.delete(sender, edit_id)
+                    await client.delete(sender, edit_id)
                     return
             if not msg.media:
                 if msg.text:
                     await client.send_message(sender, msg.text.markdown)
-                    await edit.delete(sender, edit_id)
+                    await client.delete(sender, edit_id)
                     return
             edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
             file = await userbot.download_media(
