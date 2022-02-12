@@ -15,11 +15,11 @@ def thumbnail(sender):
     else:
          return None
       
-async def get_msg(userbot, client, sender, msg_link):
-    edit = await client.send_message(sender, "Trying to Download.")
+async def get_msg(userbot, client, sender, edit_id, msg_link):
     chat = ""
     msg_id = int(msg_link.split("/")[-1])
     if 't.me/c/' in msg_link:
+        edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
         chat = int('-100' + str(msg_link.split("/")[-2]))
         try:
             msg = await userbot.get_messages(chat, msg_id)
@@ -80,6 +80,7 @@ async def get_msg(userbot, client, sender, msg_link):
             await edit.edit(f'ERROR: {str(e)}')
             return 
     else:
+        edit = await client.edit_message_text(sender, "Cloning.")
         chat =  msg_link.split("/")[-2]
         await client.copy_message(int(sender), chat, msg_id)
         await edit.delete()
