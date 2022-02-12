@@ -25,13 +25,15 @@ async def get_msg(userbot, client, sender, edit_id, msg_link):
             msg = await userbot.get_messages(chat, msg_id)
             if msg.media:
                 if 'web_page' in msg.media:
+                    edit = await client.edit_message_text(sender, edit_id, "Cloning.")
                     await client.send_message(sender, msg.text.markdown)
-                    await client.delete(sender, edit_id)
+                    await edit.delete()
                     return
             if not msg.media:
                 if msg.text:
+                    edit = await client.edit_message_text(sender, edit_id, "Cloning.")
                     await client.send_message(sender, msg.text.markdown)
-                    await client.delete(sender, edit_id)
+                    await edit.delete()
                     return
             edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
             file = await userbot.download_media(
@@ -45,7 +47,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link):
                 )
             )
             await edit.edit('Prearing to Upload!')
-            caption = ""
+            caption = str(file)
             if msg.caption is not None:
                 caption = msg.caption
             if str(file).split(".")[-1] == 'mkv' or 'mp4' or 'webm':
@@ -94,7 +96,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link):
             await client.edit_message_text(sender, edit_id, f'ERROR: {str(e)}')
             return 
     else:
-        edit = await client.edit_message_text(sender, "Cloning.")
+        edit = await client.edit_message_text(sender, edit_id, "Cloning.")
         chat =  msg_link.split("/")[-2]
         await client.copy_message(int(sender), chat, msg_id)
         await edit.delete()
