@@ -21,12 +21,15 @@ AUTH = config("AUTH", default=None, cast=int)
 
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
 
-userbot = TelegramClient(StringSession(SESSION) , API_ID, API_HASH)
+userbot = Client(
+    session_name=SESSION, 
+    api_hash=API_HASH, 
+    api_id=API_ID)
 
 try:
     userbot.start()
 except BaseException:
-    print("Userbot Error ! Have you added a STRING_SESSION in deploying??")
+    print("Userbot Error ! Have you added SESSION while deploying??")
     sys.exit(1)
 
 Bot = Client(
