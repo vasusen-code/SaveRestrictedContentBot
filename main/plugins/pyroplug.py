@@ -1,6 +1,6 @@
 # Github.com/Vasusen-code
 
-import asyncio, time
+import asyncio, time, os
 
 from .. import Bot
 from main.plugins.progress import progress_for_pyrogram
