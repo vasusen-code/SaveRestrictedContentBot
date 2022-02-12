@@ -5,6 +5,7 @@ import asyncio
 from .. import Bot
 
 from pyrogram import Client, filters 
+from ethon.pyfunc import video_metadata
 
 @Bot.on_message(filters.private & filters.outgoing)
 async def _(bot, event):
