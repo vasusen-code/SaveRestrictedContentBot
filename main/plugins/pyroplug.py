@@ -129,6 +129,7 @@ async def get_bulk_msg(userbot, client, sender, msg_link, _range):
     chat = ""
     msg_id = int(msg_link.split("/")[-1] + str(_range))
     if 't.me/c/' in msg_link:
+        _chat = int(msg_link.split("/")[-2])
         chat = int('-100' + str(msg_link.split("/")[-2]))
         try:
             msg = await userbot.get_messages(chat, msg_id)
@@ -200,7 +201,7 @@ async def get_bulk_msg(userbot, client, sender, msg_link, _range):
             await edit.delete()
         except Exception as e:
             print(e)
-            await client.send_message(sender, f"Couldn't get this message: `t.me/c/{chat.spilt("-100")[1]}/{msg_id}`")
+            await client.send_message(sender, f"Couldn't get this message: `t.me/c/{_chat}/{msg_id}`")
             return 
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
