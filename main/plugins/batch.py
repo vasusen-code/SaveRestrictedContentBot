@@ -71,12 +71,12 @@ async def _batch(event):
                 await conv.send_message(r)
                 return
             batch.append(f'{event.sender_id}')
-            await run_batch(userbot, Bot, event.sender_id, _link) 
+            await run_batch(userbot, Bot, event.sender_id, _link, _range) 
             conv.cancel()
             batch.pop(0)
             
             
-async def run_batch(userbot, client, sender, link):
+async def run_batch(userbot, client, sender, link, _range):
     for i in range(_range):
         timer = 60
         if i < 25:
