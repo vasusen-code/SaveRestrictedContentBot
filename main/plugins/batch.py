@@ -2,7 +2,7 @@
 #Github.com/Vasusen-code
 
 """
-Plugin for private channels only!
+Plugin for both public & private channels!
 """
 
 import time, os
@@ -13,6 +13,8 @@ from .. import FORCESUB as fs
 
 from telethon import events, Button, errors
 from telethon.tl.types import DocumentAttributeVideo
+
+from pyrogram.errors import FloodWait
 
 from ethon.pyfunc import video_metadata
 from ethon.telefunc import fast_upload, fast_download, force_sub
@@ -73,7 +75,7 @@ async def _batch(event):
             batch.pop(0)
             
             
-async def private_batch(event, chat, offset, _range):
+async def run_batch(userbot, client, sender, link):
     for i in range(_range):
         timer = 60
         if i < 25:
@@ -82,15 +84,22 @@ async def private_batch(event, chat, offset, _range):
             timer = 10
         if i < 100 and i > 50:
             timer = 15
+        if not 't.me/c/' in link:
+            if i < 25:
+                timer = 2
+            else:
+                timer = 3
         try:
-            await get_bulk_msg(userbot, Bot, sender, link, i) 
-        except errors.FloodWaitError as fw:
-            await asyncio.sleep(fw.seconds + 10)
-            await get_bulk_msg(userbot, Bot, sender, link, i)
+            await get_bulk_msg(userbot, client, sender, link, i) 
+        except FloodWait as fw:
+            await asyncio.sleep(fw.seconds + 5)
+            await get_bulk_msg(userbot, client, sender, link, i)
         protection = await event.client.send_message(event.chat_id, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
         time.sleep(timer)
         await protection.delete()
             
+                
+# This function is of no use, not cleaning incase may need it if again pyrogram >> Telethon!
 async def get_res_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
     if msg is None:
