@@ -138,12 +138,11 @@ async def get_bulk_msg(userbot, client, sender, msg_link, _range):
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
                     return
-            if not msg.media:
-                if msg.text:
-                    edit = await client.edit_message_text(sender, edit_id, "Cloning.")
-                    await client.send_message(sender, msg.text.markdown)
-                    await edit.delete()
-                    return
+            if msg.text:
+                edit = await client.edit_message_text(sender, edit_id, "Cloning.")
+                await client.send_message(sender, msg.text.markdown)
+                await edit.delete()
+                return
             edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
             file = await userbot.download_media(
                 msg,
