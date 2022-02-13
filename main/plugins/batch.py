@@ -10,6 +10,7 @@ import time, os
 from .. import bot as Drone
 from .. import userbot, Bot, AUTH
 from .. import FORCESUB as fs
+from main.plugins.pyroplug import check, get_bulk_msg
 
 from telethon import events, Button, errors
 from telethon.tl.types import DocumentAttributeVideo
