@@ -100,7 +100,7 @@ async def run_batch(userbot, client, sender, link):
         await protection.delete()
             
                 
-# This function is of no use, not cleaning incase may need it if again pyrogram >> Telethon!
+# This function is not in use, not cleaning incase may need it if again pyrogram >> Telethon!
 async def get_res_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
     if msg is None:
