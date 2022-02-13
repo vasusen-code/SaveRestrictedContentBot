@@ -21,6 +21,7 @@ async def check(userbot, client, link):
         try:
             chat = int('-100' + str(link.split("/")[-2]))
             await userbot.get_messages(chat, msg_id)
+            return True, None
         except ValueError:
             return False, "**Invalid Link!**"
         except Exception:
@@ -29,6 +30,7 @@ async def check(userbot, client, link):
         try:
             chat = str(link.split("/")[-2])
             await client.get_messages(chat, msg_id)
+            return True, None
         except Exception:
             return False, "Maybe bot is banned from the chat, or your link is invalid!"
             
