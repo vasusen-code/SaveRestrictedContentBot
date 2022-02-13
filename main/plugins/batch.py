@@ -66,7 +66,7 @@ async def _batch(event):
                     return await conv.send_message("You can only get upto 100 files in a single batch.")
             except ValueError:
                 return await conv.send_message("Range must be an integer!")
-            s, r = await check(userbot, client, _link)
+            s, r = await check(userbot, Bot, _link)
             if s != True:
                 await conv.send_message(r)
                 return
