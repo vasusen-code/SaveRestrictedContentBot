@@ -92,6 +92,19 @@ async def get_msg(userbot, client, sender, edit_id, msg_link):
                         time.time()
                     )
                 )
+            elif str(file).split(".")[-1] == 'jpg' or 'jpeg' or 'png':
+                await client.send_photo(
+                    sender,
+                    file, 
+                    caption=caption,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        client,
+                        '**UPLOADING:**\n',
+                        edit,
+                        time.time()
+                    )
+                )
             else:
                 thumb_path=thumbnail(sender)
                 await client.send_document(
@@ -175,6 +188,19 @@ async def get_bulk_msg(userbot, client, sender, msg_link, _range):
                     supports_streaming=True,
                     duration=duration,
                     thumb=thumb_path,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        client,
+                        '**UPLOADING:**\n',
+                        edit,
+                        time.time()
+                    )
+                )
+            elif str(file).split(".")[-1] == 'jpg' or 'jpeg' or 'png':
+                await client.send_photo(
+                    sender,
+                    file, 
+                    caption=caption,
                     progress=progress_for_pyrogram,
                     progress_args=(
                         client,
