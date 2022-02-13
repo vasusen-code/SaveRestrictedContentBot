@@ -138,11 +138,12 @@ async def get_bulk_msg(userbot, client, sender, msg_link, _range):
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
                     return
-            if msg.text:
-                edit = await client.edit_message_text(sender, edit_id, "Cloning.")
-                await client.send_message(sender, msg.text.markdown)
-                await edit.delete()
-                return
+            if not msg.media:
+                if msg.text:
+                    edit = await client.edit_message_text(sender, edit_id, "Cloning.")
+                    await client.send_message(sender, msg.text.markdown)
+                    await edit.delete()
+                    return
             edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
             file = await userbot.download_media(
                 msg,
@@ -199,7 +200,7 @@ async def get_bulk_msg(userbot, client, sender, msg_link, _range):
             await edit.delete()
         except Exception as e:
             print(e)
-            await client.send_message(sender, f"Couldn't get this message: `t.me/c/{chat}/{msg_id}`")
+            await client.send_message(sender, f"Couldn't get this message: `t.me/c/{chat.spilt("-100")[1]}/{msg_id}`")
             return 
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
