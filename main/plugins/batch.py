@@ -15,7 +15,7 @@ from main.plugins.pyroplug import check, get_bulk_msg
 from telethon import events, Button, errors
 from telethon.tl.types import DocumentAttributeVideo
 
-from pyrogram imporr Client 
+from pyrogram import Client 
 from pyrogram.errors import FloodWait
 
 from ethon.pyfunc import video_metadata
