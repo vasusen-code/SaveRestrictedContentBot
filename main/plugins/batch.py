@@ -15,6 +15,7 @@ from main.plugins.pyroplug import check, get_bulk_msg
 from telethon import events, Button, errors
 from telethon.tl.types import DocumentAttributeVideo
 
+from pyrogram imporr Client 
 from pyrogram.errors import FloodWait
 
 from ethon.pyfunc import video_metadata
@@ -95,7 +96,7 @@ async def run_batch(userbot, client, sender, link, _range):
         except FloodWait as fw:
             await asyncio.sleep(fw.seconds + 5)
             await get_bulk_msg(userbot, client, sender, link, i)
-        protection = await event.client.send_message(event.chat_id, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
+        protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
         time.sleep(timer)
         await protection.delete()
             
