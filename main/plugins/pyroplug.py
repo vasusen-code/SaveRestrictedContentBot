@@ -127,7 +127,7 @@ async def get_bulk_msg(userbot, client, sender, msg_link, _range):
     edit = await client.send_message(sender, 'Processing!')
     edit_id = edit.message_id
     chat = ""
-    msg_id = int(msg_link.split("/")[-1] + _range)
+    msg_id = int(msg_link.split("/")[-1] + str(_range))
     if 't.me/c/' in msg_link:
         chat = int('-100' + str(msg_link.split("/")[-2]))
         try:
