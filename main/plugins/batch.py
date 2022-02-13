@@ -71,7 +71,7 @@ async def _batch(event):
                 await conv.send_message(r)
                 return
             batch.append(f'{event.sender_id}')
-            await run_batch(userbot, Bot, event.sender_id, _link, _range) 
+            await run_batch(userbot, Bot, event.sender_id, _link, value) 
             conv.cancel()
             batch.pop(0)
             
