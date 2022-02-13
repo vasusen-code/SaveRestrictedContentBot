@@ -198,15 +198,17 @@ async def get_bulk_msg(userbot, client, sender, msg_link, _range):
                     )
                 )
             await edit.delete()
-        except Exception:
-            await client.send_message(sender, f"Couldn't get this message: `t.me/c/{Chat}/{msg_id}`")
+        except Exception as e:
+            print(e)
+            await client.send_message(sender, f"Couldn't get this message: `t.me/c/{chat}/{msg_id}`")
             return 
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
         chat =  msg_link.split("/")[-2]
         try:
             await client.copy_message(int(sender), chat, msg_id)
-        except Exception:
-            return await client.send_message(sender, f"Couldn't get this message: `t.me/{Chat}/{msg_id}`")
+        except Exception as e:
+            print(e)
+            return await client.send_message(sender, f"Couldn't get this message: `t.me/{chat}/{msg_id}`")
         await edit.delete()
         
