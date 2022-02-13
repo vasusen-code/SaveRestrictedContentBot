@@ -17,7 +17,7 @@ async def join(client, invite_link):
         return False, "You have already joined the Channel."
     except errors.InviteHashExpiredError:
         return False, "Link Expired/Wrong URL."
-    except FloodWaitError:
+    except errors.FloodWaitError:
         return False, "Too many requests, try again later!"
     
 #Regex---------------------------------------------------------------------------------------------------------------
