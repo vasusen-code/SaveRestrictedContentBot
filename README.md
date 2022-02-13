@@ -11,7 +11,8 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
 - supports text and webpage media messages
 - Faster speed
 - Forcesubscribe available 
-- `/batch` - (For owner only) Use this command to save upto 100 files from a pvt restricted channel at once.
+- `/batch` - (For owner only) Use this command to save upto 100 files from a pvt or public restricted channel at once.
+- Time delay is added to avoid FloodWait and keep user account safe. 
 
 # Variables
 
@@ -22,11 +23,11 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
 - `AUTH` - Owner user id
 - `FORCESUB` - Public channel username without '@'. Don't forget to add bot in channel as administrator. 
 
-# Get API & TELETHON string session from:
+# Get API & PYROGRAM string session from:
  
 API: [API scrapper Bot](https://t.me/USETGSBOT) or [Telegram.org](https://my.telegram.org/auth)
 
-TELETHON SESSION: [SessionGen Bot](https://t.me/SessionStringGeneratorZBot) or [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
+PYROGRAM SESSION: [SessionGen Bot](https://t.me/SessionStringGeneratorZBot) or [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
 
 BOT TOKEN: @Botfather on telegram
 
@@ -43,7 +44,3 @@ Buildpacks for manual deploy:
 
 - `heroku/python`
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
-
-# Upcoming features:
-
-- Save multiple content at once/Save in range for public channels
