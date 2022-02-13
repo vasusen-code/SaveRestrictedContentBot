@@ -16,7 +16,7 @@ def thumbnail(sender):
          return None
       
 async def check(userbot, client, link):
-    msg_id = int(msg_link.split("/")[-1])
+    msg_id = int(link.split("/")[-1])
     if 't.me/c/' in link:
         try:
             chat = int('-100' + str(link.split("/")[-2]))
