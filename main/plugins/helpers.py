@@ -1,6 +1,6 @@
 #Github.com/Vasusen-code
 
-from telethon.tl.functions.messages import ImportChatInviteRequest
+from pyrogram.errors import FloodWait, BadRequest
 from telethon import errors, events
 
 import asyncio, subprocess, re, os, time
@@ -10,15 +10,15 @@ from pathlib import Path
 
 async def join(client, invite_link):
     try:
-        hash_ = invite_link.split("+")[1]
-        await client(ImportChatInviteRequest(hash_))
-        return True, "Successfully joined the Channel."
-    except errors.UserAlreadyParticipantError:
-        return False, "You have already joined the Channel."
-    except errors.InviteHashExpiredError:
-        return False, "Link Expired/Wrong URL."
-    except errors.FloodWaitError:
-        return False, "Too many requests, try again later!"
+        await client.join_chat(invite_link)
+        return "Successfully joined the Channel"
+    except BadRequest:
+        return "Could not join. Maybe your link is expired or Invalid."
+    except FloodWait:
+        return "Too many requests, try again later."
+    except Exception as e:
+        print(e)
+        return "Could not join, try joining manually."
     
 #Regex---------------------------------------------------------------------------------------------------------------
 #to get the url from event
@@ -37,11 +37,11 @@ def get_link(string):
     
 #Screenshot---------------------------------------------------------------------------------------------------------------
 
-async def screenshot(video, time_stamp, sender):
+async def screenshot(video, sender):
     if os.path.exists(f'{sender}.jpg'):
         return f'{sender}.jpg'
     out = str(video).split(".")[0] + ".jpg"
-    cmd = (f"ffmpeg -ss {time_stamp} -i {video} -vframes 1 {out} -y").split(" ")
+    cmd = (f"ffmpeg -ss 00:00:00 -i {video} -vframes 1 {out} -y").split(" ")
     process = await asyncio.create_subprocess_exec(
          *cmd,
          stdout=asyncio.subprocess.PIPE,
