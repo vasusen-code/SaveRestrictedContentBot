@@ -8,6 +8,7 @@ from main.plugins.helpers import screenshot
 
 from pyrogram import Client, filters 
 from ethon.pyfunc import video_metadata
+from telethon import events
 
 def thumbnail(sender):
     if os.path.exists(f'{sender}.jpg'):
@@ -92,19 +93,9 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
                         time.time()
                     )
                 )
-            elif str(file).split(".")[-1] == 'jpg' or 'jpeg' or 'png':
-                await client.send_photo(
-                    sender,
-                    file, 
-                    caption=caption,
-                    progress=progress_for_pyrogram,
-                    progress_args=(
-                        client,
-                        '**UPLOADING:**\n',
-                        edit,
-                        time.time()
-                    )
-                )
+            elif str(file).split(".")[-1] == 'jpg' or 'jpeg' or 'png' or 'webp':
+                await edit.edit("Uploading photo.")
+                await bot.send_file(sender, file, caption=caption)
             else:
                 thumb_path=thumbnail(sender)
                 await client.send_document(
