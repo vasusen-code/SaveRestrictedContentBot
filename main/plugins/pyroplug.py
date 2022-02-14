@@ -146,14 +146,14 @@ async def get_bulk_msg(userbot, client, sender, msg_link, _range):
         chat = int('-100' + str(msg_link.split("/")[-2]))
         try:
             msg = await userbot.get_messages(chat, msg_id)
-            if msg.media:
-                if 'web_page' in msg.media:
+            if not msg.media:
+                if msg.text:
                     edit = await client.edit_message_text(sender, edit_id, "Cloning.")
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
                     return
-            if not msg.media:
-                if msg.text:
+            if msg.media:
+                if 'web_page' in msg.media:
                     edit = await client.edit_message_text(sender, edit_id, "Cloning.")
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
@@ -173,11 +173,7 @@ async def get_bulk_msg(userbot, client, sender, msg_link, _range):
             caption = str(file)
             if msg.caption is not None:
                 caption = msg.caption
-            if str(file).split(".")[-1] == 'mkv' or 'mp4' or 'webm':
-                if str(file).split(".")[-1] == 'webm' or 'mkv':
-                    path = str(file).split(".")[0] + ".mp4"
-                    os.rename(file, path) 
-                    file = str(file).split(".")[0] + ".mp4"
+            if str(file).split(".")[-1] == 'mkv' or 'mp4':
                 data = video_metadata(file)
                 duration = data["duration"]
                 thumb_path = await screenshot(file, duration/2, sender)
