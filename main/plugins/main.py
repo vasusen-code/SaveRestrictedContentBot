@@ -42,5 +42,5 @@ async def clone(event):
         await edit.edit(y)
         return 
     if 't.me/' in link:
-        await get_msg(userbot, Bot, event.sender_id, edit.id, link)
+        await get_msg(userbot, Bot, event.sender_id, edit.id, link, 0)
         
