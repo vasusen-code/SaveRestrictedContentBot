@@ -7,6 +7,8 @@ Plugin for both public & private channels!
 
 import time, os
 
+import asyncio
+
 from .. import bot as Drone
 from .. import userbot, Bot, AUTH
 from .. import FORCESUB as fs
@@ -20,6 +22,7 @@ from pyrogram import Client
 from pyrogram.errors import FloodWait
 
 from ethon.pyfunc import video_metadata
+from ethon.telefunc import force_sub
 
 ft = f"To use this bot you've to join @{fs}."
 
