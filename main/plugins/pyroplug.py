@@ -70,8 +70,8 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
             caption = str(file)
             if msg.caption is not None:
                 caption = msg.caption
-            if str(file).split(".")[-1] == 'mkv' or 'mp4' or 'webm':
-                if str(file).split(".")[-1] == 'webm' or 'mkv':
+            if str(file).split(".")[-1] in ['mkv', 'mp4', 'webm']
+                if str(file).split(".")[-1] in ['webm', 'mkv']
                     path = str(file).split(".")[0] + ".mp4"
                     os.rename(file, path) 
                     file = str(file).split(".")[0] + ".mp4"
@@ -93,7 +93,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
                         time.time()
                     )
                 )
-            elif str(file).split(".")[-1] == 'jpg' or 'jpeg' or 'png' or 'webp':
+            elif str(file).split(".")[-1] in ['jpg', 'jpeg', 'png', 'webp']:
                 await edit.edit("Uploading photo.")
                 await bot.send_file(sender, file, caption=caption)
             else:
