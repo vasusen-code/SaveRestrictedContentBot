@@ -138,6 +138,6 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
             return await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
         await edit.delete()
         
-async def get_bulk_msg(userbot, client, sender, edit_id, msg_link, i):
+async def get_bulk_msg(userbot, client, sender, msg_link, i):
     x = await client.send_message(sender, "Processing!")
     await get_msg(userbot, client, sender, x.message_id, msg_link, i) 
