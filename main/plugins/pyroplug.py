@@ -2,7 +2,7 @@
 
 import asyncio, time, os
 
-from .. import Bot
+from .. import Bot, bot
 from main.plugins.progress import progress_for_pyrogram
 from main.plugins.helpers import screenshot
 
