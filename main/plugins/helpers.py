@@ -37,23 +37,29 @@ def get_link(string):
     
 #Screenshot---------------------------------------------------------------------------------------------------------------
 
-async def screenshot(video, sender):
+def hhmmss(seconds):
+    x = time.strftime('%H:%M:%S',time.gmtime(seconds))
+    return x
+
+async def screenshot(video, duration, sender):
     if os.path.exists(f'{sender}.jpg'):
         return f'{sender}.jpg'
-    out = str(video).split(".")[0] + ".jpg"
-    cmd = (f"ffmpeg -ss 00:00:00 -i {video} -vframes 1 {out} -y").split(" ")
+    time_stamp = hhmmss(int(duration)/2)
+    out = dt.now().isoformat("_", "seconds") + ".jpg"
+    cmd = ["ffmpeg",
+           "-ss",
+           f"{time_stamp}", 
+           "-i",
+           f"{video}",
+           "-frames:v",
+           "1", 
+           f"{out}",
+           "-y"
+          ]
+    print(cmd)
     process = await asyncio.create_subprocess_exec(
-         *cmd,
-         stdout=asyncio.subprocess.PIPE,
-         stderr=asyncio.subprocess.PIPE)
-        
-    stdout, stderr = await process.communicate()
-    x = stderr.decode().strip()
-    y = stdout.decode().strip()
-    print(x)
-    print(y)
-    if os.path.exists(str(Path(out))):
-        return out
-    else:
-        None
+        *cmd,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE
+    )
         
