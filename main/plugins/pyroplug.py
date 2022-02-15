@@ -77,7 +77,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
                     file = str(file).split(".")[0] + ".mp4"
                 data = video_metadata(file)
                 duration = data["duration"]
-                thumb_path = await screenshot(file, sender)
+                thumb_path = await screenshot(file, duration, sender)
                 await client.send_video(
                     chat_id=sender,
                     video=file,
