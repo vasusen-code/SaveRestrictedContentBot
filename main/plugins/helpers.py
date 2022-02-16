@@ -1,6 +1,6 @@
 #Github.com/Vasusen-code
 
-from pyrogram.errors import FloodWait, BadRequest
+from pyrogram.errors import FloodWait, InviteHashInvalid, InviteHashExpired, UserAlreadyParticipant
 from telethon import errors, events
 
 import asyncio, subprocess, re, os, time
@@ -12,7 +12,9 @@ async def join(client, invite_link):
     try:
         await client.join_chat(invite_link)
         return "Successfully joined the Channel"
-    except BadRequest:
+    except UserAlreadyParticipant:
+        return "User is already a participant."
+    except (InviteHashInvalid, InviteHashExpired):
         return "Could not join. Maybe your link is expired or Invalid."
     except FloodWait:
         return "Too many requests, try again later."
