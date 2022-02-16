@@ -37,8 +37,8 @@ async def clone(event):
         return
     edit = await event.reply("Processing!")
     if 't.me/+' in link:
-        x, y = await join(userbot, link)
-        await edit.edit(y)
+        Q = await join(userbot, link)
+        await edit.edit(Q)
         return 
     if 't.me/' in link:
         await get_msg(userbot, Bot, event.sender_id, edit.id, link, 0)
