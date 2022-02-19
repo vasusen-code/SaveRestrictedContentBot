@@ -59,10 +59,15 @@ async def screenshot(video, duration, sender):
            f"{out}",
            "-y"
           ]
-    print(cmd)
     process = await asyncio.create_subprocess_exec(
         *cmd,
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE
     )
-        
+    stdout, stderr = await process.communicate()
+    x = stderr.decode().strip()
+    y = stdout.decode().strip()
+    if os.path.isfile(out):
+        return out
+    else:
+        None       
