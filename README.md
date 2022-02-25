@@ -19,7 +19,7 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
 - `API_ID`
 - `API_HASH`
 - `SESSION`
-- `BOT TOKEN` 
+- `BOT_TOKEN` 
 - `AUTH` - Owner user id
 - `FORCESUB` - Public channel username without '@'. Don't forget to add bot in channel as administrator. 
 
