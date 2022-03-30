@@ -6,14 +6,11 @@ from .. import bot as Drone
 from .. import userbot, Bot
 from .. import FORCESUB as fs
 from main.plugins.pyroplug import get_msg
+from main.plugins.helpers import get_link, join, screenshot
 
 from telethon import events
-from telethon.tl.types import DocumentAttributeVideo
 
-from ethon.pyfunc import video_metadata
-from ethon.telefunc import fast_upload, fast_download, force_sub
-
-from main.plugins.helpers import get_link, join, screenshot
+from ethon.telefunc import force_sub
 
 ft = f"To use this bot you've to join @{fs}."
 
