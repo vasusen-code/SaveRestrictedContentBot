@@ -17,6 +17,8 @@ from main.plugins.helpers import get_link, join, screenshot
 
 ft = f"To use this bot you've to join @{fs}."
 
+message = "Send me the message link you want to start saving from, as a reply to this message."
+          
 # To-Do:
 # Make these codes shorter and clean
 # ofc will never do it. 
@@ -24,7 +26,9 @@ ft = f"To use this bot you've to join @{fs}."
 @Drone.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def clone(event):
     if event.is_reply:
-        return
+        reply = await event.get_reply_message()
+        if reply.text == message:
+            return
     try:
         link = get_link(event.text)
         if not link:
