@@ -33,6 +33,8 @@ BOT TOKEN: @Botfather on telegram
 
 # Deploy
   
+Deploy your bot on `heroku`
+
 - Fork the repo, and star it
 - create app in heroku
 - go to settings of app>> config vars>> add all variables
@@ -44,3 +46,7 @@ Buildpacks for manual deploy:
 
 - `heroku/python`
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
+
+Deploy your bot on `Okteto`
+  
+[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://cloud.okteto.com)
