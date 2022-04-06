@@ -17,8 +17,13 @@ API_HASH = config("API_HASH", default=None)
 BOT_TOKEN = config("BOT_TOKEN", default=None)
 SESSION = config("SESSION", default=None)
 FORCESUB = config("FORCESUB", default=None)
-AUTH = config("AUTH", default=None, cast=int)
+AUTH = []
 
+auth = config("AUTH", default=None, cast=int)
+ids = auth.split(",")
+for id in ids:
+    AUTH.append(int(id))
+    
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
 
 userbot = Client(
