@@ -1,15 +1,13 @@
 {
-    "name": "SafeRestrictedContentBot",
-    "description": ".A stable telegram bot to get restricted messages with custom thumbnail support.",
+    "name": "Save Restricted",
+    "description": "Save restricted content",
     "logo": "",
     "keywords": [
-        "Best",
-        "telegram",
-        "bot"
+        "save restricted bot",
     ],
-    "repository": "https://github.com/NOF34R/SaveRestrictedContentBot.git",
+    "repository": "https://github.com/vasusen-code/SaveRestrictedContentBot",
     "website": "",
-    "success_url": "https://t.me/startdoingnow",
+    "success_url": "https://t.me/DroneBots",
     "env": {
         "API_HASH": {
             "description": "Your API HASH from my.telegram.org",
@@ -23,16 +21,16 @@
             "description": "Bot token, get it from @BotFather.",
             "value": ""
         },
+        "SESSION": {
+            "description": "pyrogram string session.",
+            "value": ""
+        },
         "AUTH": {
-            "description": "Bot owner's UserID.",
+            "description": "USER ID of bot owner",
             "value": ""
         },
         "FORCESUB": {
-            "description": "Channel id to which u want user be force subcribed.(Should be public)",
-            "value": ""
-        },
-        "SESSION": {
-            "description": "pyrogram string.",
+            "description": "Public channel username without using '@'.",
             "value": ""
         }
     },
