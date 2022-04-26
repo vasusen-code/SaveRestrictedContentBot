@@ -1,0 +1,47 @@
+{
+    "name": "SafeRestrictedContentBot",
+    "description": ".A stable telegram bot to get restricted messages with custom thumbnail support.",
+    "logo": "",
+    "keywords": [
+        "Best",
+        "telegram",
+        "bot"
+    ],
+    "repository": "https://github.com/NOF34R/SaveRestrictedContentBot.git",
+    "website": "",
+    "success_url": "https://t.me/startdoingnow",
+    "env": {
+        "API_HASH": {
+            "description": "Your API HASH from my.telegram.org",
+            "value": ""
+        },
+        "API_ID": {
+            "description": "Your API ID from my.telegram.org",
+            "value": ""
+        },
+        "BOT_TOKEN": {
+            "description": "Bot token, get it from @BotFather.",
+            "value": ""
+        },
+        "AUTH": {
+            "description": "Bot owner's UserID.",
+            "value": ""
+        },
+        "FORCESUB": {
+            "description": "Channel id to which u want user be force subcribed.(Should be public)",
+            "value": ""
+        },
+        "SESSION": {
+            "description": "pyrogram string.",
+            "value": ""
+        }
+    },
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        },
+        {
+            "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+        }
+    ]
+}
