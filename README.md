@@ -32,6 +32,8 @@ PYROGRAM SESSION: [SessionGen Bot](https://t.me/SessionStringGeneratorZBot) or [
 BOT TOKEN: @Botfather on telegram
 
 # Deploy
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?https://github.com/NOF34R/SaveRestrictedContentBot)
   
 Deploy your bot on `heroku`
 
