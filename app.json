@@ -5,7 +5,7 @@
     "keywords": [
         "save restricted bot",
     ],
-    "repository": "https://github.com/vasusen-code/SaveRestrictedContentBot",
+    "repository": "https://github.com/NOF34R/SaveRestrictedContentBot",
     "website": "",
     "success_url": "https://t.me/DroneBots",
     "env": {
