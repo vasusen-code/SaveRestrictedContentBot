@@ -1,0 +1,45 @@
+{
+    "name": "Save Restricted",
+    "description": "Save restricted content",
+    "logo": "",
+    "keywords": [
+        "save restricted bot",
+    ],
+    "repository": "https://github.com/NOF34R/SaveRestrictedContentBot",
+    "website": "",
+    "success_url": "https://t.me/DroneBots",
+    "env": {
+        "API_HASH": {
+            "description": "Your API HASH from my.telegram.org",
+            "value": ""
+        },
+        "API_ID": {
+            "description": "Your API ID from my.telegram.org",
+            "value": ""
+        },
+        "BOT_TOKEN": {
+            "description": "Bot token, get it from @BotFather.",
+            "value": ""
+        },
+        "SESSION": {
+            "description": "pyrogram string session.",
+            "value": ""
+        },
+        "AUTH": {
+            "description": "USER ID of bot owner",
+            "value": ""
+        },
+        "FORCESUB": {
+            "description": "Public channel username without using '@'.",
+            "value": ""
+        }
+    },
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        },
+        {
+            "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+        }
+    ]
+}
