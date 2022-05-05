@@ -35,7 +35,7 @@ BOT TOKEN: @Botfather on telegram
   
 Deploy your bot on `heroku`
 
-- Star the repo, and fork it
+- Star the repo, and fork it in desktop mode
 - create app in heroku
 - go to settings of app>> config vars>> add all variables
 - add buildpacks
