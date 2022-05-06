@@ -34,10 +34,6 @@
         "FORCESUB": {
             "description": "Username name of public channel without using '@'.",
             "value": ""
-        },
-        "BOT_UN": {
-            "description": "Your bot username here. Do not use '@'.",
-            "value": ""
         }
     },
     "buildpacks": [
