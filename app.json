@@ -1,9 +1,11 @@
 {
-    "name": "Save Restricted",
-    "description": "Save restricted content",
+    "name": "Save restricted content bot",
+    "description": "Telegram bot to save restricted content.",
     "logo": "",
     "keywords": [
-        "save restricted bot",
+        "telegram",
+        "Save restricted content",
+        "bot"
     ],
     "repository": "https://github.com/vasusen-code/SaveRestrictedContentBot",
     "website": "",
@@ -22,15 +24,19 @@
             "value": ""
         },
         "SESSION": {
-            "description": "pyrogram string session.",
+            "description": "Pyrogram string session.",
             "value": ""
         },
         "AUTH": {
-            "description": "USER ID of bot owner",
+            "description": "User ID of Bot owner.",
             "value": ""
         },
         "FORCESUB": {
-            "description": "Public channel username without using '@'.",
+            "description": "Username name of public channel without using '@'.",
+            "value": ""
+        },
+        "BOT_UN": {
+            "description": "Your bot username here. Do not use '@'.",
             "value": ""
         }
     },
