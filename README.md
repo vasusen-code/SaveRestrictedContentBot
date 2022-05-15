@@ -54,7 +54,7 @@ Buildpacks for manual deploy:
 - `heroku/python`
 - `https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git`
 
-Deploy your bot on `Okteto`
+Deploy your bot on `Okteto` [Useless]
   
 Tutorial for okteto - [click here](https://telegra.ph/Okteto-Deploy-04-01)
 
