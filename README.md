@@ -44,7 +44,7 @@ Deploy your bot on `heroku`
 » Method - 2:
 - Star the repo, and fork it in desktop mode
 - create app in heroku
-- go to settings of app>> config vars>> add all variables
+- go to settings of app›› config vars›› add all variables
 - add buildpacks
 - connect to github and deploy
 - turn on dynos
