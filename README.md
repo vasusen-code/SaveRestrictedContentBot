@@ -35,7 +35,7 @@ BOT TOKEN: @Botfather on telegram
 
 Deploy your bot on `Render`
 
-<p align="left"><img src="https://www.g2.com/products/render-render/reviews-white?style=for-the-badge&logo=python&logoColor=azure-blue" alt=""></p>
+[![Deploy](https://www.generalcatalyst.com/wp-content/uploads/2019/04/render-logo-wordmark-735x277.png)](dashboard.render.com)
 
 Tutorial - [Click here](https://telegra.ph/SRCB-on-Render-05-17)
 
