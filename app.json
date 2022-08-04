@@ -9,7 +9,7 @@
     ],
     "repository": "https://github.com/vasusen-code/SaveRestrictedContentBot",
     "website": "",
-    "success_url": "https://t.me/DroneBots",
+    "success_url": "https://t.me/savevideo05_bot",
     "env": {
         "API_HASH": {
             "description": "Your API HASH from my.telegram.org",
