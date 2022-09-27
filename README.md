@@ -1,10 +1,10 @@
 <h1 align="center">
-  <b>Save restricted content Bot</b>
+  <b>Stars Restricted</b>
 </h1> 
 
-Contact: [Telegram](https://t.me/MaheshChauhan)
+Contact: [Telegram](https://t.me/ConvenientPlace)
 
-A stable telegram bot to get restricted messages with custom thumbnail support , made by Mahesh Chauhan. 
+A stable telegram bot to get restricted messages with custom thumbnail support , made by Bintang Pamungkas. 
 
 - works for both public and private channels
 - Custom thumbnail support for Pvt medias
@@ -27,7 +27,7 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
  
 API: [API scrapper Bot](https://t.me/USETGSBOT) or [Telegram.org](https://my.telegram.org/auth)
 
-PYROGRAM SESSION: [SessionGen Bot](https://t.me/SessionStringGeneratorZBot) or [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
+PYROGRAM SESSION: [SessionGen Bot](https://t.me/SessionStringGeneratorZBot) or [![Run on Repl.it](https://replit.com/badge/github/BintangP28/StarsRestricted)](https://replit.com/@SpEcHiDe/GenerateStringSession)
 
 BOT TOKEN: @Botfather on telegram
 
