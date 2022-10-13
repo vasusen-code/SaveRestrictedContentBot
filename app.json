@@ -7,7 +7,7 @@
         "Save restricted content",
         "bot"
     ],
-    "repository": "https://github.com/vasusen-code/SaveRestrictedContentBot",
+    "repository": "https://github.com/devilll9/Savecontent",
     "website": "",
     "success_url": "https://t.me/DroneBots",
     "env": {
