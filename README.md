@@ -33,6 +33,10 @@ BOT TOKEN: @Botfather on telegram
 
 # Deploy
 
+Deploy on `VPS`
+
+Tutorial - [Click here](https://t.me/MaheshChauhan/36)
+
 Deploy your bot on `Render`
 
 Tutorial - [Click here](https://telegra.ph/SRCB-on-Render-05-17)
