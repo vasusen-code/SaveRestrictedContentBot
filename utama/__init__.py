@@ -15,7 +15,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 API_ID = config("16191861", default=None, cast=int)
 API_HASH = config("8afcd0285c66c4d12c6199ba78309636", default=None)
 BOT_TOKEN = config("5517378684:AAHMe8LHS1lEoFoo16JMGmIFhf5aQFFlOV8", default=None)
-SESSION = config("BQChAPUApZywJ_TPsoXKvgRriqcxBfY4p_5xO0kbrQ9vPci-H1u93ctxOy6jWP_b-0UUJbGCYhSbTkKJNvHGSco8mr3x3Z5STVE_BOeDR39Bwxl0HftWB88RUkGXF0ea_jsF-3vRUGnG0TNqdeWxemUXgtODFigxwofHLllZoq_oif_KYd2YDcPBTL3kv1fsCmnpLSRAOSEfaLrAEoju_7sBzod5NXo1NnVYcHRyXWVzv1ceoUMSUo22YmmHgsMZXv7a_XsbpfgxDwFVjvrOdp4aBEV7JmrlqQB7ZmdjKQlWLSDVYfEb9cp8UYTRElTVPobHWI9NdLQ8YJZSIVj1Sf20TZXAogAAAAB3pzF-AA", default=None)
+SESSION = config("BQDBZ_TjTRPb7Y1RG8yojntSJlFSrc7weQMYRkutjLGxWawv8YwBxMZdyEYRL7dsamfbuBSIm5HsQgoBNHtgyHMwHqaN20KpMj_aoedvuRjOxEkyuDKagQ2_ra3ICUqFKvjw1YUYSq2SmvXNe18gjJJFoAYrWWsKyl09lPZNUlvzSnVFROek9LD6N5V0NcBqTvaVKEHUdvWIS9qq94VdXav3l2lla9M-BlZi2CGDogA0iSqFaswHmAOmwwKDnm-IZpfCMv3p5qCzgLVf10Gs5WDc70NvAh8Ug_-C6IEn82yM5xBh5YsXVflrcm4JTqZx4vGBQXq7O3Yr6W0qvDJSBDfdd6cxfgA", default=None)
 FORCESUB = config("@jesnita_full_movie", default=None)
 AUTH = config("2007445886", default=None, cast=int)
 
