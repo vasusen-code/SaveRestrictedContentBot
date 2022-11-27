@@ -1,0 +1,14 @@
+version: "3.3"
+
+services:
+  app:
+    container_name: srcbot
+    build: .
+    command: bash bash.sh
+    environment:
+      API_ID: #fill here 
+      API_HASH: #fill here
+      BOT_TOKEN: #fill here 
+      SESSION: #fill here
+      AUTH: #fill here
+      FORCESUB: #fill here
