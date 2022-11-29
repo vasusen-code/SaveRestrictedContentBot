@@ -42,6 +42,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
     msg_id = int(msg_link.split("/")[-1]) + int(i)
     if 't.me/c/' in msg_link:
         chat = int('-100' + str(msg_link.split("/")[-2]))
+        file = ""
         try:
             msg = await userbot.get_messages(chat, msg_id)
             if msg.media:
@@ -121,6 +122,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
             return 
         except Exception as e:
             await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
+            os.remove(file)
             return 
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
