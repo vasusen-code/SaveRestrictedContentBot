@@ -130,6 +130,9 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
         chat =  msg_link.split("/")[-2]
         try:
             await client.copy_message(int(sender), chat, msg_id)
+        except FloodWait as fw:
+            await client.edit_message_text(sender, edit_id, f'Please try after {fw.x} seconds, due to floodwaits caused by too many requests.')
+            return print(fw)
         except Exception as e:
             print(e)
             return await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
