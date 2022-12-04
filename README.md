@@ -37,6 +37,19 @@ Deploy on `VPS`
 
 Tutorial - [Click here](https://t.me/MaheshChauhan/36)
 
+Easy Method 
+
+1. Intall docker-compose
+2. Fill in the variables in docker-compose.yml file using your favorite text editor or nano 
+3. Start the container 
+
+```
+sudo apt install docker-compose -y
+nano docker-compose.yml
+sudo docker-compose up --build
+```
+
+
 Deploy your bot on `Render`
 
 Tutorial - [Click here](https://telegra.ph/SRCB-on-Render-05-17)
