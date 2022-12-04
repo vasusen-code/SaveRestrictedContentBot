@@ -61,9 +61,9 @@ pip3 install -r requirements.txt
 python3 -m main
 ```
 
-if you want bot to be running in background then enter `screen -S srcb` before `python3 -m main` 
-after `python3 -m main`, click ctrl+A and ctrl+D
-if you want to stop bot, then enter `screen -r srcb` and click ctrl+A then press K and enter Y.
+- if you want bot to be running in background then enter `screen -S srcb` before `python3 -m main` 
+- after `python3 -m main`, click ctrl+A and ctrl+D
+- if you want to stop bot, then enter `screen -r srcb` and click ctrl+A then press K and enter Y.
 
 Deploy your bot on `Render`
 
