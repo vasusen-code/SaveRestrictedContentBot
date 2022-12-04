@@ -93,7 +93,9 @@ async def run_batch(userbot, client, sender, link, _range):
         try:
             await get_bulk_msg(userbot, client, sender, link, i) 
         except FloodWait as fw:
+            fw_alert = await client.send_message(sender, f"Sleeping for f'{fw.x} seconds due to floodwait.")
             await asyncio.sleep(fw.x + 5)
+            await fw_alert.delete()
             await get_bulk_msg(userbot, client, sender, link, i)
         protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
         time.sleep(timer)
