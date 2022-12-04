@@ -49,7 +49,7 @@ sudo docker-compose up --build
 
 The hard Way:
 
-- Fill vars in your fork in [this](https://github.com/vasusen-code/SaveRestrictedContentBot/blob/master/main/__init__.py) file as shown above in the picture
+- Fill vars in your fork in [this](https://github.com/vasusen-code/SaveRestrictedContentBot/blob/master/main/__init__.py) file as shown in this [picture](https://t.me/MaheshChauhan/36)
 - enter all the below commands
 
 ```
