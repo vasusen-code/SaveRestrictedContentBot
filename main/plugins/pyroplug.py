@@ -7,7 +7,7 @@ from main.plugins.progress import progress_for_pyrogram
 from main.plugins.helpers import screenshot
 
 from pyrogram import Client, filters
-from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid
+from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid, FloodWait
 from ethon.pyfunc import video_metadata
 from telethon import events
 
