@@ -35,13 +35,11 @@ BOT TOKEN: @Botfather on telegram
 
 Deploy on `VPS`
 
-Tutorial - [Click here](https://t.me/MaheshChauhan/36)
+Easy Method:
 
-Easy Method 
-
-1. Intall docker-compose
-2. Fill in the variables in docker-compose.yml file using your favorite text editor or nano 
-3. Start the container 
+- Intall docker-compose
+- Fill in the variables in docker-compose.yml file using your favorite text editor or nano 
+- Start the container 
 
 ```
 sudo apt install docker-compose -y
@@ -49,6 +47,23 @@ nano docker-compose.yml
 sudo docker-compose up --build
 ```
 
+The hard Way:
+
+- Fill vars in your fork in [this](https://github.com/vasusen-code/SaveRestrictedContentBot/blob/master/main/__init__.py) file as shown above in the picture
+- enter all the below commands
+
+```
+sudo apt update
+sudo apt install ffmpeg git python3-pip
+git clone your_repo_link
+cd saverestrictedcontentbot 
+pip3 install -r requirements.txt
+python3 -m main
+```
+
+if you want bot to be running in background then enter `screen -S srcb` before `python3 -m main` 
+after `python3 -m main`, click ctrl+A and ctrl+D
+if you want to stop bot, then enter `screen -r srcb` and click ctrl+A then press K and enter Y.
 
 Deploy your bot on `Render`
 
