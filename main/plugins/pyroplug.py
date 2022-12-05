@@ -7,7 +7,7 @@ from main.plugins.progress import progress_for_pyrogram
 from main.plugins.helpers import screenshot
 
 from pyrogram import Client, filters
-from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid
+from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid, FloodWait
 from ethon.pyfunc import video_metadata
 from telethon import events
 
@@ -42,6 +42,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
     msg_id = int(msg_link.split("/")[-1]) + int(i)
     if 't.me/c/' in msg_link:
         chat = int('-100' + str(msg_link.split("/")[-2]))
+        file = ""
         try:
             msg = await userbot.get_messages(chat, msg_id)
             if msg.media:
@@ -94,9 +95,11 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
                         time.time()
                     )
                 )
+                os.remove(file)
             elif str(file).split(".")[-1] in ['jpg', 'jpeg', 'png', 'webp']:
                 await edit.edit("Uploading photo.")
                 await bot.send_file(sender, file, caption=caption)
+                os.remove(file)
             else:
                 thumb_path=thumbnail(sender)
                 await client.send_document(
@@ -112,18 +115,24 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
                         time.time()
                     )
                 )
+                os.remove(file)
             await edit.delete()
         except (ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid):
             await client.edit_message_text(sender, edit_id, "Have you joined the channel?")
             return 
         except Exception as e:
+            print(e)
             await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
+            os.remove(file)
             return 
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
         chat =  msg_link.split("/")[-2]
         try:
             await client.copy_message(int(sender), chat, msg_id)
+        except FloodWait as fw:
+            await client.edit_message_text(sender, edit_id, f'Please try after {fw.x} seconds, due to floodwaits caused by too many requests.')
+            return print(fw)
         except Exception as e:
             print(e)
             return await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
