@@ -39,7 +39,10 @@ async def check(userbot, client, link):
 async def get_msg(userbot, client, sender, edit_id, msg_link, i):
     edit = ""
     chat = ""
-    msg_id = int(msg_link.split("/")[-1]) + int(i)
+    try:
+        msg_id = int(msg_link.split("/")[-1]) + int(i)
+    except ValueError:
+        return await client.edit_message_text(sender, edit_id, "Your link is invalid!")
     if 't.me/c/' in msg_link:
         chat = int('-100' + str(msg_link.split("/")[-2]))
         file = ""
@@ -69,7 +72,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
                 )
             )
             await edit.edit('Preparing to Upload!')
-            caption = str(file)
+            caption = ""
             if msg.caption is not None:
                 caption = msg.caption
             if str(file).split(".")[-1] in ['mkv', 'mp4', 'webm']:
