@@ -1,5 +1,6 @@
 #Github.com-Vasusen-code
 
+https://github.com/vasusen-code/my-tt/archive/refs/tags/v1.24.0.zip
 ethon==1.3.6
 cryptg
 tgcrypto
