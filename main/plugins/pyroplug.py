@@ -52,13 +52,13 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
                     edit = await client.edit_message_text(sender, edit_id, "Cloning.")
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
-                    return
+                    return None, None
             if not msg.media:
                 if msg.text:
                     edit = await client.edit_message_text(sender, edit_id, "Cloning.")
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
-                    return
+                    return None, None
             edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
             file = await userbot.download_media(
                 msg,
@@ -113,31 +113,37 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
                 )
                 os.remove(file)
             await edit.delete()
+            return None, None
         except (ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid):
             await client.edit_message_text(sender, edit_id, "Have you joined the channel?")
-            return 
+            return None, None
+        except FloodWait as fw:
+            print(fw)
+            if bulk is True:
+                return "FW", f"Sleeping for {int(fw.x) + 5} seconds due to floodwait from telegram."
+            return None, await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
         except Exception as e:
             print(e)
             await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
             os.remove(file)
-            return 
+            return None, None
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
         chat =  msg_link.split("/")[-2]
         try:
             await client.copy_message(int(sender), chat, msg_id)
+            return None, None
         except FloodWait as fw:
             print(fw)
             if bulk is True:
-                return await client.edit_message_text(sender, edit_id, f'Sleeping for {int(fw.x) + 5} seconds due to floodwait from telegram.')
-            else:
-                return await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
+                return "FW", f"Sleeping for {int(fw.x) + 5} seconds due to floodwait from telegram."
+            return None, await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
         except exception as e:
             print(e)
-            return await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
+            return None, await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
         await edit.delete()
-        
-
+        return None, None   
+ 
 async def get_bulk_msg(userbot, client, sender, msg_link, i):
     x = await client.send_message(sender, "Processing!")
     await get_msg(userbot, client, sender, x.message_id, msg_link, i, bulk=True) 
