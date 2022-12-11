@@ -120,7 +120,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
         except FloodWait as fw:
             print(fw)
             if bulk is True:
-                return "FW", f"Sleeping for {int(fw.x) + 5} seconds due to floodwait from telegram."
+                return "FW", int(fw.x) + 5
             return None, await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
         except Exception as e:
             print(e)
@@ -136,7 +136,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
         except FloodWait as fw:
             print(fw)
             if bulk is True:
-                return "FW", f"Sleeping for {int(fw.x) + 5} seconds due to floodwait from telegram."
+                return "FW", int(fw.x) + 5
             return None, await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
         except exception as e:
             print(e)
