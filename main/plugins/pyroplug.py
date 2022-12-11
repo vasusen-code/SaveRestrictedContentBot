@@ -38,7 +38,7 @@ async def check(userbot, client, link):
         except Exception:
             return False, "Maybe bot is banned from the chat, or your link is invalid!"
             
-async def get_msg(userbot, client, sender, edit_id, msg_link, i):
+async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
     edit = ""
     chat = ""
     msg_id = int(msg_link.split("/")[-1]) + int(i)
@@ -128,13 +128,16 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
             await client.copy_message(int(sender), chat, msg_id)
         except FloodWait as fw:
             print(fw)
-            return await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
-        except Exception as e:
+            if bulk is True:
+                return await client.edit_message_text(sender, edit_id, f'Sleeping for {int(fw.x) + 5} seconds due to floodwait from telegram.')
+            else:
+                return await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
+        except exception as e:
             print(e)
             return await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
         await edit.delete()
         
-        
+
 async def get_bulk_msg(userbot, client, sender, msg_link, i):
     x = await client.send_message(sender, "Processing!")
-    await get_msg(userbot, client, sender, x.message_id, msg_link, i) 
+    await get_msg(userbot, client, sender, x.message_id, msg_link, i, bulk=True) 
