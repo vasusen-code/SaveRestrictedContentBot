@@ -138,7 +138,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
             if bulk is True:
                 return "FW", int(fw.x) + 5
             return None, await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
-        except exception as e:
+        except Exception as e:
             print(e)
             return None, await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
         await edit.delete()
