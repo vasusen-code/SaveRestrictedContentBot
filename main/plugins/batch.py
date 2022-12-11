@@ -90,11 +90,10 @@ async def run_batch(userbot, client, sender, link, _range):
                 timer = 2
             else:
                 timer = 3
-        try:
-            await get_bulk_msg(userbot, client, sender, link, i) 
-        except FloodWait as fw:
-            fw_alert = await client.send_message(sender, f"Sleeping for f'{int(fw.x) + 5} seconds due to floodwait.")
-            await asyncio.sleep(fw.x + 5)
+       er, out = await get_bulk_msg(userbot, client, sender, link, i) 
+       if er == "FW":
+            fw_alert = await client.send_message(sender, f'Sleeping for {int(out)} second(s) due to telegram flooodwait.')
+            await asyncio.sleep(out)
             await fw_alert.delete()
             await get_bulk_msg(userbot, client, sender, link, i)
         protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
