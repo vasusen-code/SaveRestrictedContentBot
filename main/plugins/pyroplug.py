@@ -20,7 +20,13 @@ def thumbnail(sender):
          return None
       
 async def check(userbot, client, link):
-    msg_id = int(link.split("/")[-1])
+    msg_id = 0
+    try:
+        msg_id = int(link.split("/")[-1])
+    except ValueError:
+        if '?single' in link:
+            link_ = link.split("?single")[0]
+            msg_id = int(link_.split("/")[-1])
     if 't.me/c/' in link:
         try:
             chat = int('-100' + str(link.split("/")[-2]))
@@ -41,7 +47,13 @@ async def check(userbot, client, link):
 async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
     edit = ""
     chat = ""
-    msg_id = int(msg_link.split("/")[-1]) + int(i)
+    msg_id = 0
+    try:
+        msg_id = int(msg_link.split("/")[-1])
+    except ValueError:
+        if '?single' in link:
+            link_ = msg_link.split("?single")[0]
+            msg_id = int(link_.split("/")[-1])
     if 't.me/c/' in msg_link:
         chat = int('-100' + str(msg_link.split("/")[-2]))
         file = ""
@@ -132,7 +144,6 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
         chat =  msg_link.split("/")[-2]
         try:
             await client.copy_message(int(sender), chat, msg_id)
-            return None, None
         except FloodWait as fw:
             print(fw)
             if bulk is True:
