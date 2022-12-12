@@ -102,7 +102,6 @@ async def run_batch(userbot, client, sender, link, _range):
             await protection.delete()
         except Exception as e:
             print(e)
-            await client.send_message(sender, f"Error occured: {e}\n\nAction: **PASS**")
             pass
                 
 
