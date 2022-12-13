@@ -51,7 +51,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
     try:
         msg_id = int(msg_link.split("/")[-1])
     except ValueError:
-        if '?single' in link:
+        if '?single' in msg_link:
             link_ = msg_link.split("?single")[0]
             msg_id = int(link_.split("/")[-1])
     if 't.me/c/' in msg_link:
