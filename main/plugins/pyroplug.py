@@ -27,6 +27,8 @@ async def check(userbot, client, link):
         if '?single' in link:
             link_ = link.split("?single")[0]
             msg_id = int(link_.split("/")[-1])
+        else:
+            return False, "**Invalid Link!**"
     if 't.me/c/' in link:
         try:
             chat = int('-100' + str(link.split("/")[-2]))
@@ -54,6 +56,8 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
         if '?single' in msg_link:
             link_ = msg_link.split("?single")[0]
             msg_id = int(link_.split("/")[-1])
+        else:
+            return None, await client.edit_message_text(sender, edit_id, "**Invalid Link!**")
     if 't.me/c/' in msg_link:
         chat = int('-100' + str(msg_link.split("/")[-2]))
         file = ""
