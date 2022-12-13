@@ -44,10 +44,14 @@ async def clone(event):
     if f'{int(event.sender_id)}' in user:
         return await edit.edit("Please don't spam links, wait until ongoing process is done.")
     user.append(f'{int(event.sender_id)}')
-    if 't.me/+' in link:
-        q = await join(userbot, link)
-        await edit.edit(q)
-    if 't.me/' in link:
-        await get_msg(userbot, Bot, event.sender_id, edit.id, link, 0)
+    try:
+        if 't.me/+' in link:
+            q = await join(userbot, link)
+            await edit.edit(q)
+        if 't.me/' in link:
+            await get_msg(userbot, Bot, event.sender_id, edit.id, link, 0)
+    except Exception as e:
+        print(e)
+        pass
     ind = user.index(f'{int(event.sender_id)}')
     user.pop(int(ind))
