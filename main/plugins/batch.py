@@ -72,12 +72,17 @@ async def _batch(event):
                 await conv.send_message(r)
                 return
             batch.append(f'{event.sender_id}')
-            await run_batch(userbot, Bot, event.sender_id, _link, value) 
+            cd = await conv.send_message("**Batch process ongoing.**\n\nProcess completed: 0", 
+                                    buttons=[[Button.inline("CANCEL❌", data="cancel")]])
+            await run_batch(userbot, Bot, event.sender_id, cd, _link, value) 
             conv.cancel()
             batch.pop(0)
-            
-            
-async def run_batch(userbot, client, sender, link, _range):
+
+@Drone.on(events.callbackquery.CallbackQuery(data="cancel"))
+async def cancel(event):
+    ids.clear()
+    
+async def run_batch(userbot, client, sender, countdown, link, _range):
     for i in range(len(ids)):
         timer = 60
         if i < 25:
@@ -101,12 +106,17 @@ async def run_batch(userbot, client, sender, link, _range):
                     await fw_alert.delete()
                     await get_bulk_msg(userbot, client, sender, link, integer)
             protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
+            await countdown.edit(f"**Batch process ongoing.**\n\nProcess completed: {i+1}", 
+                                 buttons=[[Button.inline("CANCEL❌", data="cancel")]])
             await asyncio.sleep(timer)
             await protection.delete()
         except IndexError:
             await client.send_message(sender, "Batch successfully completed!")
+            await countdown.delete()
             break
         except Exception as e:
             print(e)
+            await countdown.edit(f"**Batch process ongoing.**\n\nProcess completed: {i+1}", 
+                                 buttons=[[Button.inline("CANCEL❌", data="cancel")]])
             pass
 
