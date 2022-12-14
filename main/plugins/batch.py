@@ -25,6 +25,7 @@ from ethon.telefunc import force_sub
 ft = f"To use this bot you've to join @{fs}."
 
 batch = []
+ids = []
 
 async def get_pvt_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
@@ -77,7 +78,7 @@ async def _batch(event):
             
             
 async def run_batch(userbot, client, sender, link, _range):
-    for i in range(_range):
+    for i in range(len(ids)):
         timer = 60
         if i < 25:
             timer = 5
@@ -91,16 +92,20 @@ async def run_batch(userbot, client, sender, link, _range):
             else:
                 timer = 3
         try: 
-            er, out = await get_bulk_msg(userbot, client, sender, link, i) 
+            integer = int(ids[i])
+            er, out = await get_bulk_msg(userbot, client, sender, link, integer) 
             if er is not True:
                 if er == "FW":
                     fw_alert = await client.send_message(sender, f'Sleeping for {int(out)} second(s) due to telegram flooodwait.')
                     await asyncio.sleep(out)
                     await fw_alert.delete()
-                    await get_bulk_msg(userbot, client, sender, link, i)
+                    await get_bulk_msg(userbot, client, sender, link, integer)
             protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
             await asyncio.sleep(timer)
             await protection.delete()
+        except IndexError:
+            await client.send_message(sender, "Batch successfully completed!")
+            break
         except Exception as e:
             print(e)
             pass
