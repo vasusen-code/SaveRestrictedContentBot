@@ -57,7 +57,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
             link_ = msg_link.split("?single")[0]
             msg_id = int(link_.split("/")[-1])
         else:
-            return None, await client.edit_message_text(sender, edit_id, "**Invalid Link!**")
+            return True, await client.edit_message_text(sender, edit_id, "**Invalid Link!**")
     if 't.me/c/' in msg_link:
         chat = int('-100' + str(msg_link.split("/")[-2]))
         file = ""
@@ -68,13 +68,13 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
                     edit = await client.edit_message_text(sender, edit_id, "Cloning.")
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
-                    return None, None
+                    return True, None
             if not msg.media:
                 if msg.text:
                     edit = await client.edit_message_text(sender, edit_id, "Cloning.")
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
-                    return None, None
+                    return True, None
             edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
             file = await userbot.download_media(
                 msg,
@@ -129,20 +129,20 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
                 )
                 os.remove(file)
             await edit.delete()
-            return None, None
+            return True, None
         except (ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid):
             await client.edit_message_text(sender, edit_id, "Have you joined the channel?")
-            return None, None
+            return True, None
         except FloodWait as fw:
             print(fw)
             if bulk is True:
                 return "FW", int(fw.x) + 5
-            return None, await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
+            return True, await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
         except Exception as e:
             print(e)
             await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
             os.remove(file)
-            return None, None
+            return True, None
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
         chat =  msg_link.split("/")[-2]
@@ -152,12 +152,12 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
             print(fw)
             if bulk is True:
                 return "FW", int(fw.x) + 5
-            return None, await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
+            return True, await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
         except Exception as e:
             print(e)
-            return None, await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
+            return True, await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
         await edit.delete()
-        return None, None   
+        return True, None   
  
 async def get_bulk_msg(userbot, client, sender, msg_link, i):
     x = await client.send_message(sender, "Processing!")
