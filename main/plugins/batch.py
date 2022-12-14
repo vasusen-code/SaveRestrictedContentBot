@@ -67,6 +67,8 @@ async def _batch(event):
                     return await conv.send_message("You can only get upto 100 files in a single batch.")
             except ValueError:
                 return await conv.send_message("Range must be an integer!")
+            for i in range(value + 1):
+                ids.append(i)
             s, r = await check(userbot, Bot, _link)
             if s != True:
                 await conv.send_message(r)
@@ -74,7 +76,7 @@ async def _batch(event):
             batch.append(f'{event.sender_id}')
             cd = await conv.send_message("**Batch process ongoing.**\n\nProcess completed: 0", 
                                     buttons=[[Button.inline("CANCEL❌", data="cancel")]])
-            await run_batch(userbot, Bot, event.sender_id, cd, _link, value) 
+            await run_batch(userbot, Bot, event.sender_id, cd, _link) 
             conv.cancel()
             batch.pop(0)
 
@@ -82,7 +84,7 @@ async def _batch(event):
 async def cancel(event):
     ids.clear()
     
-async def run_batch(userbot, client, sender, countdown, link, _range):
+async def run_batch(userbot, client, sender, countdown, link):
     for i in range(len(ids)):
         timer = 60
         if i < 25:
