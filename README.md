@@ -27,7 +27,7 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
  
 API: [API scrapper Bot](https://t.me/USETGSBOT) or [Telegram.org](https://my.telegram.org/auth)
 
-PYROGRAM SESSION: [SessionGen Bot](https://t.me/SessionStringGeneratorZBot) or [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@SpEcHiDe/GenerateStringSession)
+PYROGRAM SESSION: [SessionGen Bot](https://t.me/SessionStringGeneratorZBot) or [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@dashezup/generate-pyrogram-session-string)
 
 BOT TOKEN: @Botfather on telegram
 
@@ -62,7 +62,7 @@ python3 -m main
 ```
 
 - if you want bot to be running in background then enter `screen -S srcb` before `python3 -m main` 
-- after `python3 -m main`, click ctrl+A and ctrl+D
+- after `python3 -m main`, click ctrl+A, ctrl+D
 - if you want to stop bot, then enter `screen -r srcb` and click ctrl+A then press K and enter Y.
 
 Deploy your bot on `Render`

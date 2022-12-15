@@ -25,6 +25,7 @@ from ethon.telefunc import force_sub
 ft = f"To use this bot you've to join @{fs}."
 
 batch = []
+ids = []
 
 async def get_pvt_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
@@ -66,18 +67,25 @@ async def _batch(event):
                     return await conv.send_message("You can only get upto 100 files in a single batch.")
             except ValueError:
                 return await conv.send_message("Range must be an integer!")
+            for i in range(value + 1):
+                ids.append(i)
             s, r = await check(userbot, Bot, _link)
             if s != True:
                 await conv.send_message(r)
                 return
             batch.append(f'{event.sender_id}')
-            await run_batch(userbot, Bot, event.sender_id, _link, value) 
+            cd = await conv.send_message("**Batch process ongoing.**\n\nProcess completed: 0", 
+                                    buttons=[[Button.inline("CANCEL❌", data="cancel")]])
+            await run_batch(userbot, Bot, event.sender_id, cd, _link) 
             conv.cancel()
             batch.pop(0)
-            
-            
-async def run_batch(userbot, client, sender, link, _range):
-    for i in range(_range):
+
+@Drone.on(events.callbackquery.CallbackQuery(data="cancel"))
+async def cancel(event):
+    ids.clear()
+    
+async def run_batch(userbot, client, sender, countdown, link):
+    for i in range(len(ids)):
         timer = 60
         if i < 25:
             timer = 5
@@ -90,16 +98,26 @@ async def run_batch(userbot, client, sender, link, _range):
                 timer = 2
             else:
                 timer = 3
-        try:
-            await get_bulk_msg(userbot, client, sender, link, i) 
-        except FloodWait as fw:
-            fw_alert = await client.send_message(sender, f"Sleeping for f'{fw.x} seconds due to floodwait.")
-            await asyncio.sleep(fw.x + 5)
-            await fw_alert.delete()
-            await get_bulk_msg(userbot, client, sender, link, i)
-        protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
-        time.sleep(timer)
-        await protection.delete()
+        try: 
+            integer = int(ids[i])
+            er, out = await get_bulk_msg(userbot, client, sender, link, integer) 
+            if er is not True:
+                fw_alert = await client.send_message(sender, f'Sleeping for {int(out)} second(s) due to telegram flooodwait.')
+                await asyncio.sleep(out)
+                await fw_alert.delete()
+                await get_bulk_msg(userbot, client, sender, link, integer)
+            protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
+            await countdown.edit(f"**Batch process ongoing.**\n\nProcess completed: {i+1}", 
+                                 buttons=[[Button.inline("CANCEL❌", data="cancel")]])
+            await asyncio.sleep(timer)
+            await protection.delete()
+        except IndexError:
+            await client.send_message(sender, "Batch successfully completed!")
+            await countdown.delete()
+            break
+        except Exception as e:
+            print(e)
+            await countdown.edit(f"**Batch process ongoing.**\n\nProcess completed: {i+1}", 
+                                 buttons=[[Button.inline("CANCEL❌", data="cancel")]])
             
-                
 
