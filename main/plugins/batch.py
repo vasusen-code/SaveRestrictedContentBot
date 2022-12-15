@@ -102,11 +102,10 @@ async def run_batch(userbot, client, sender, countdown, link):
             integer = int(ids[i])
             er, out = await get_bulk_msg(userbot, client, sender, link, integer) 
             if er is not True:
-                if er == "FW":
-                    fw_alert = await client.send_message(sender, f'Sleeping for {int(out)} second(s) due to telegram flooodwait.')
-                    await asyncio.sleep(out)
-                    await fw_alert.delete()
-                    await get_bulk_msg(userbot, client, sender, link, integer)
+                fw_alert = await client.send_message(sender, f'Sleeping for {int(out)} second(s) due to telegram flooodwait.')
+                await asyncio.sleep(out)
+                await fw_alert.delete()
+                await get_bulk_msg(userbot, client, sender, link, integer)
             protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
             await countdown.edit(f"**Batch process ongoing.**\n\nProcess completed: {i+1}", 
                                  buttons=[[Button.inline("CANCEL❌", data="cancel")]])
