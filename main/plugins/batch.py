@@ -119,5 +119,5 @@ async def run_batch(userbot, client, sender, countdown, link):
             print(e)
             await countdown.edit(f"**Batch process ongoing.**\n\nProcess completed: {i+1}", 
                                  buttons=[[Button.inline("CANCEL❌", data="cancel")]])
-            pass
+            
 
