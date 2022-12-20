@@ -100,14 +100,14 @@ async def run_batch(userbot, client, sender, countdown, link):
                 timer = 3
         try: 
             integer = int(ids[i])
-            er, out = await get_bulk_msg(userbot, client, sender, link, integer) 
-            if er is not True:
+            out = await get_bulk_msg(userbot, client, sender, link, integer) 
+            if out is not None:
                 fw_alert = await client.send_message(sender, f'Sleeping for {int(out)} second(s) due to telegram flooodwait.')
                 await asyncio.sleep(out)
                 await fw_alert.delete()
                 await get_bulk_msg(userbot, client, sender, link, integer)
             protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
-            await countdown.edit(f"**Batch process ongoing.**\n\nProcess completed: {i+1}", 
+            await countdown.edit(f"**Batch process ongoing.**\n\nProcess completed: {i}", 
                                  buttons=[[Button.inline("CANCEL❌", data="cancel")]])
             await asyncio.sleep(timer)
             await protection.delete()
@@ -117,7 +117,7 @@ async def run_batch(userbot, client, sender, countdown, link):
             break
         except Exception as e:
             print(e)
-            await countdown.edit(f"**Batch process ongoing.**\n\nProcess completed: {i+1}", 
+            await countdown.edit(f"**Batch process ongoing.**\n\nProcess completed: {i}", 
                                  buttons=[[Button.inline("CANCEL❌", data="cancel")]])
             
 
