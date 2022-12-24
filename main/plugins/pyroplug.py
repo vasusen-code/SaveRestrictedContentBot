@@ -115,29 +115,9 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
                         time.time()
                     )
                 )
-            if str(file).split(".")[-1] in ['jpg', 'jpeg', 'png', 'webp']:
-                await edit.edit("Uploading photo.")
-                await bot.send_file(sender, file, caption=caption)
-            else:
-                thumb_path=thumbnail(sender)
-                await client.send_document(
-                    sender,
-                    file, 
-                    caption=caption,
-                    thumb=thumb_path,
-                    progress=progress_for_pyrogram,
-                    progress_args=(
-                        client,
-                        '**UPLOADING:**\n',
-                        edit,
-                        time.time()
-                    )
-                )
-                os.remove(file)
             elif str(file).split(".")[-1] in ['jpg', 'jpeg', 'png', 'webp']:
                 await edit.edit("Uploading photo.")
                 await bot.send_file(sender, file, caption=caption)
-                os.remove(file)
             else:
                 thumb_path=thumbnail(sender)
                 await client.send_document(
@@ -153,7 +133,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
                         time.time()
                     )
                 )
-                os.remove(file)
+            os.remove(file)
             await edit.delete()
             return None
         except (ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid):
