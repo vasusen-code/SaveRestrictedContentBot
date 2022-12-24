@@ -9,9 +9,7 @@ from main.plugins.helpers import screenshot
 from pyrogram import Client, filters
 from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid, FloodWait
 from ethon.pyfunc import video_metadata
-from ethon.telefunc import fast_upload
 from telethon import events
-from telethon.tl.types import DocumentAttributeVideo
 
 def thumbnail(sender):
     if os.path.exists(f'{sender}.jpg'):
@@ -98,23 +96,42 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
                     file = str(file).split(".")[0] + ".mp4"
                 data = video_metadata(file)
                 duration = data["duration"]
-                width = data["width"]
-                height = data["height"]
                 try:
                     thumb_path = await screenshot(file, duration, sender)
-                except Exception as e:
-                    print(e)
+                except Exception:
                     thumb_path = None
-                UT = time.time()
-                uploader = await fast_upload(f'{file}', f'{file}', UT, bot, edit, '**UPLOADING:**')
-                attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
-                await bot.send_file(
-                    sender, 
-                    uploader, 
-                    caption=caption, 
-                    thumb=thumb_path, 
-                    attributes=attributes, 
-                    force_document=False
+                await client.send_video(
+                    chat_id=sender,
+                    video=file,
+                    caption=caption,
+                    supports_streaming=True,
+                    duration=duration,
+                    thumb=thumb_path,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        client,
+                        '**UPLOADING:**\n',
+                        edit,
+                        time.time()
+                    )
+                )
+            elif str(file).split(".")[-1] in ['jpg', 'jpeg', 'png', 'webp']:
+                await edit.edit("Uploading photo.")
+                await bot.send_file(sender, file, caption=caption)
+            else:
+                thumb_path=thumbnail(sender)
+                await client.send_document(
+                    sender,
+                    file, 
+                    caption=caption,
+                    thumb=thumb_path,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        client,
+                        '**UPLOADING:**\n',
+                        edit,
+                        time.time()
+                    )
                 )
                 os.remove(file)
             elif str(file).split(".")[-1] in ['jpg', 'jpeg', 'png', 'webp']:
@@ -123,14 +140,18 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
                 os.remove(file)
             else:
                 thumb_path=thumbnail(sender)
-                UT = time.time()
-                uploader = await fast_upload(f'{file}', f'{file}', UT, bot, edit, '**UPLOADING:**')
-                await bot.send_file(
-                    sender, 
-                    uploader, 
-                    caption=caption, 
-                    thumb=thumb_path, 
-                    force_document=True
+                await client.send_document(
+                    sender,
+                    file, 
+                    caption=caption,
+                    thumb=thumb_path,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        client,
+                        '**UPLOADING:**\n',
+                        edit,
+                        time.time()
+                    )
                 )
                 os.remove(file)
             await edit.delete()
