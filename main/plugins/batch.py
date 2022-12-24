@@ -99,6 +99,7 @@ async def run_batch(userbot, client, sender, countdown, link):
             else:
                 timer = 3
         try: 
+            count_down = f"**Batch process ongoing.**\n\nProcess completed: {i+1}"
             integer = int(ids[i])
             out = await get_bulk_msg(userbot, client, sender, link, integer) 
             if out is not None:
