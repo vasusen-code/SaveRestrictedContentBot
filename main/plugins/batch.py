@@ -74,7 +74,7 @@ async def _batch(event):
                 await conv.send_message(r)
                 return
             batch.append(f'{event.sender_id}')
-            cd = await conv.send_message("**Batch process ongoing.**\n\nProcess completed: 0", 
+            cd = await conv.send_message("**Batch process ongoing.**\n\nProcess completed: ", 
                                     buttons=[[Button.inline("CANCEL❌", data="cancel")]])
             await run_batch(userbot, Bot, event.sender_id, cd, _link) 
             conv.cancel()
@@ -107,7 +107,7 @@ async def run_batch(userbot, client, sender, countdown, link):
                 await fw_alert.delete()
                 await get_bulk_msg(userbot, client, sender, link, integer)
             protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
-            await countdown.edit(f"**Batch process ongoing.**\n\nProcess completed: {i}", 
+            await countdown.edit(count_down, 
                                  buttons=[[Button.inline("CANCEL❌", data="cancel")]])
             await asyncio.sleep(timer)
             await protection.delete()
@@ -117,7 +117,6 @@ async def run_batch(userbot, client, sender, countdown, link):
             break
         except Exception as e:
             print(e)
-            await countdown.edit(f"**Batch process ongoing.**\n\nProcess completed: {i}", 
-                                 buttons=[[Button.inline("CANCEL❌", data="cancel")]])
+            if not countdown.text == count_down:
+                await countdown.edit(count_down, buttons=[[Button.inline("CANCEL❌", data="cancel")]])
             
-
