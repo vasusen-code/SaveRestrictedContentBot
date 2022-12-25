@@ -102,7 +102,7 @@ async def run_batch(userbot, client, sender, countdown, link):
             count_down = f"**Batch process ongoing.**\n\nProcess completed: {i+1}"
             integer = int(ids[i])
             out = await get_bulk_msg(userbot, client, sender, link, integer) 
-            if out is not None:
+            if not out == None:
                 fw_alert = await client.send_message(sender, f'Sleeping for {int(out)} second(s) due to telegram flooodwait.')
                 await asyncio.sleep(out)
                 await fw_alert.delete()
@@ -120,4 +120,4 @@ async def run_batch(userbot, client, sender, countdown, link):
             print(e)
             if not countdown.text == count_down:
                 await countdown.edit(count_down, buttons=[[Button.inline("CANCEL❌", data="cancel")]])
-            
+        return
