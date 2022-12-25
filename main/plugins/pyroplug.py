@@ -44,7 +44,7 @@ async def check(userbot, client, link):
         except Exception:
             return False, "Maybe bot is banned from the chat, or your link is invalid!"
             
-async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
+async def get_msg(userbot, client, sender, edit_id, msg_link, i):
     edit = ""
     chat = ""
     msg_id = 0
@@ -139,35 +139,13 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
         except (ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid):
             await client.edit_message_text(sender, edit_id, "Have you joined the channel?")
             return None
-        except FloodWait as fw:
-            print(fw)
-            if bulk is True:
-                return int(fw.x) + 5
-            await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
-            return None
-        except Exception as e:
-            print(e)
-            await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
-            os.remove(file)
-            return None
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
         chat =  msg_link.split("/")[-2]
-        try:
-            await client.copy_message(int(sender), chat, msg_id)
-        except FloodWait as fw:
-            print(fw)
-            if bulk is True:
-                return int(fw.x) + 5
-            await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
-            return None
-        except Exception as e:
-            print(e)
-            await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
-            return None
+        await client.copy_message(int(sender), chat, msg_id)
         await edit.delete()
         return None   
  
 async def get_bulk_msg(userbot, client, sender, msg_link, i):
     x = await client.send_message(sender, "Processing!")
-    await get_msg(userbot, client, sender, x.message_id, msg_link, i, bulk=True) 
+    await get_msg(userbot, client, sender, x.message_id, msg_link, i) 
