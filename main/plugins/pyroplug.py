@@ -9,9 +9,7 @@ from main.plugins.helpers import screenshot
 from pyrogram import Client, filters
 from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid, FloodWait
 from ethon.pyfunc import video_metadata
-from ethon.telefunc import fast_upload
 from telethon import events
-from telethon.tl.types import DocumentAttributeVideo
 
 def thumbnail(sender):
     if os.path.exists(f'{sender}.jpg'):
@@ -57,7 +55,8 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
             link_ = msg_link.split("?single")[0]
             msg_id = int(link_.split("/")[-1])
         else:
-            return True, await client.edit_message_text(sender, edit_id, "**Invalid Link!**")
+            await client.edit_message_text(sender, edit_id, "**Invalid Link!**")
+            return None
     if 't.me/c/' in msg_link:
         chat = int('-100' + str(msg_link.split("/")[-2]))
         file = ""
@@ -68,13 +67,13 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
                     edit = await client.edit_message_text(sender, edit_id, "Cloning.")
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
-                    return True, None
+                    return None
             if not msg.media:
                 if msg.text:
                     edit = await client.edit_message_text(sender, edit_id, "Cloning.")
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
-                    return True, None
+                    return None
             edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
             file = await userbot.download_media(
                 msg,
@@ -97,56 +96,60 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
                     file = str(file).split(".")[0] + ".mp4"
                 data = video_metadata(file)
                 duration = data["duration"]
-                width = data["width"]
-                height = data["height"]
                 try:
                     thumb_path = await screenshot(file, duration, sender)
-                except Exception as e:
-                    print(e)
+                except Exception:
                     thumb_path = None
-                UT = time.time()
-                uploader = await fast_upload(f'{file}', f'{file}', UT, bot, edit, '**UPLOADING:**')
-                attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
-                await bot.send_file(
-                    sender, 
-                    uploader, 
-                    caption=caption, 
-                    thumb=thumb_path, 
-                    attributes=attributes, 
-                    force_document=False
+                await client.send_video(
+                    chat_id=sender,
+                    video=file,
+                    caption=caption,
+                    supports_streaming=True,
+                    duration=duration,
+                    thumb=thumb_path,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        client,
+                        '**UPLOADING:**\n',
+                        edit,
+                        time.time()
+                    )
                 )
-                os.remove(file)
             elif str(file).split(".")[-1] in ['jpg', 'jpeg', 'png', 'webp']:
                 await edit.edit("Uploading photo.")
                 await bot.send_file(sender, file, caption=caption)
-                os.remove(file)
             else:
                 thumb_path=thumbnail(sender)
-                UT = time.time()
-                uploader = await fast_upload(f'{file}', f'{file}', UT, bot, edit, '**UPLOADING:**')
-                await bot.send_file(
-                    sender, 
-                    uploader, 
-                    caption=caption, 
-                    thumb=thumb_path, 
-                    force_document=True
+                await client.send_document(
+                    sender,
+                    file, 
+                    caption=caption,
+                    thumb=thumb_path,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        client,
+                        '**UPLOADING:**\n',
+                        edit,
+                        time.time()
+                    )
                 )
-                os.remove(file)
+            os.remove(file)
             await edit.delete()
-            return True, None
+            return None
         except (ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid):
             await client.edit_message_text(sender, edit_id, "Have you joined the channel?")
-            return True, None
+            return None
         except FloodWait as fw:
             print(fw)
             if bulk is True:
-                return "FW", int(fw.x) + 5
-            return True, await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
+                return int(fw.x) + 5
+            await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
+            return None
         except Exception as e:
             print(e)
             await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
             os.remove(file)
-            return True, None
+            return None
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
         chat =  msg_link.split("/")[-2]
@@ -155,13 +158,15 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
         except FloodWait as fw:
             print(fw)
             if bulk is True:
-                return "FW", int(fw.x) + 5
-            return True, await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
+                return int(fw.x) + 5
+            await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
+            return None
         except Exception as e:
             print(e)
-            return True, await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
+            await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
+            return None
         await edit.delete()
-        return True, None   
+        return None   
  
 async def get_bulk_msg(userbot, client, sender, msg_link, i):
     x = await client.send_message(sender, "Processing!")
