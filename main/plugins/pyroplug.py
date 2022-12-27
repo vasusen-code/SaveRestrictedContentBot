@@ -47,16 +47,16 @@ async def check(userbot, client, link):
 async def get_msg(userbot, client, sender, edit_id, msg_link, i):
     edit = ""
     chat = ""
-    msg_id = 0
-    try:
-        msg_id = int(msg_link.split("/")[-1])
-    except ValueError:
-        if '?single' in msg_link:
-            link_ = msg_link.split("?single")[0]
-            msg_id = int(link_.split("/")[-1])
-        else:
-            await client.edit_message_text(sender, edit_id, "**Invalid Link!**")
-            return None
+    msg_id = i
+    #try:
+    #    msg_id = int(msg_link.split("/")[-1])
+    #except ValueError:
+    #    if '?single' in msg_link:
+    #        link_ = msg_link.split("?single")[0]
+     #       msg_id = int(link_.split("/")[-1])
+    #    else:
+     #       await client.edit_message_text(sender, edit_id, "**Invalid Link!**")
+     #       return None
     if 't.me/c/' in msg_link:
         chat = int('-100' + str(msg_link.split("/")[-2]))
         file = ""
