@@ -54,10 +54,10 @@ async def clone(event):
                 msg_id = int(msg_link.split("/")[-1])
             except ValueError:
                 if '?single' in msg_link:
-                link_ = msg_link.split("?single")[0]
-                msg_id = int(link_.split("/")[-1])
-            else:
-                msg_id = -1
+                    link_ = msg_link.split("?single")[0]
+                    msg_id = int(link_.split("/")[-1])
+                else:
+                    msg_id = -1
             m = msg_id
             await get_msg(userbot, Bot, event.sender_id, edit.id, link, m)
     except FloodWait as fw:
