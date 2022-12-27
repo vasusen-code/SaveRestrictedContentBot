@@ -48,6 +48,8 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
     edit = ""
     chat = ""
     msg_id = i
+    if msg_id == -1:
+        return None
     #try:
     #    msg_id = int(msg_link.split("/")[-1])
     #except ValueError:
