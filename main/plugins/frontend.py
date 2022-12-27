@@ -50,6 +50,7 @@ async def clone(event):
             q = await join(userbot, link)
             await edit.edit(q)
         if 't.me/' in link:
+            msg_id = 0
             try:
                 msg_id = int(msg_link.split("/")[-1])
             except ValueError:
