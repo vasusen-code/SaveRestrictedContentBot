@@ -52,10 +52,10 @@ async def clone(event):
         if 't.me/' in link:
             msg_id = 0
             try:
-                msg_id = int(msg_link.split("/")[-1])
+                msg_id = int(link.split("/")[-1])
             except ValueError:
-                if '?single' in msg_link:
-                    link_ = msg_link.split("?single")[0]
+                if '?single' in link:
+                    link_ = link.split("?single")[0]
                     msg_id = int(link_.split("/")[-1])
                 else:
                     msg_id = -1
