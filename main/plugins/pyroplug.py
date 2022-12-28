@@ -47,7 +47,7 @@ async def check(userbot, client, link):
 async def get_msg(userbot, client, sender, edit_id, msg_link, i):
     edit = ""
     chat = ""
-    msg_id = i
+    msg_id = int(i)
     if msg_id == -1:
         await client.edit_message_text(sender, edit_id, "**Invalid Link!**")
         return None
