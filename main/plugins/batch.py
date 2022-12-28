@@ -78,11 +78,11 @@ async def _batch(event):
                                     buttons=[[Button.inline("CANCEL❌", data="cancel")]])
             co = await run_batch(userbot, Bot, event.sender_id, cd, _link) 
             try: 
-                if int(co) == -2:
-                    await client.send_message(event.sender_id, "Batch successfully completed!")
+                if co == -2:
+                    await Bot.send_message(event.sender_id, "Batch successfully completed!")
                     await cd.edit(f"**Batch process ongoing.**\n\nProcess completed: {value} \n\n Batch successfully completed! ")
             except:
-                await client.send_message(event.sender_id, "ERROR!")
+                await Bot.send_message(event.sender_id, "ERROR!")
             conv.cancel()
             ids.clear()
             batch.clear()
@@ -146,4 +146,6 @@ async def run_batch(userbot, client, sender, countdown, link):
             await client.send_message(sender, f"An error occurred during cloning, batch will continue.\n\n**Error:** {str(e)}")
             if not countdown.text == count_down:
                 await countdown.edit(count_down, buttons=[[Button.inline("CANCEL❌", data="cancel")]])
-        
+        if i == len(ids):
+            yr = -2
+            return yr
