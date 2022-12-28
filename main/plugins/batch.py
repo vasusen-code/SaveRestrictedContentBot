@@ -23,6 +23,8 @@ from pyrogram.errors import FloodWait
 from ethon.pyfunc import video_metadata
 from ethon.telefunc import force_sub
 
+from main.plugins.deco import udo_commands
+
 ft = f"To use this bot you've to join @{fs}."
 
 batch = []
@@ -32,7 +34,8 @@ async def get_pvt_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
     await event.client.send_message(event.chat_id, msg) 
     
-@Drone.on(events.NewMessage(incoming=True, from_users=AUTH, pattern='/batch'))
+@Drone.on(events.NewMessage(incoming=True, pattern='/batch'))
+@sudo_commands
 async def _batch(event):
     if not event.is_private:
         return
