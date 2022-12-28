@@ -101,7 +101,15 @@ async def run_batch(userbot, client, sender, countdown, link):
                 timer = 3
         try: 
             count_down = f"**Batch process ongoing.**\n\nProcess completed: {i+1}"
-            integer = int(ids[i])
+            try:
+                msg_id = int(link.split("/")[-1])
+            except ValueError:
+                if '?single' in link:
+                    link_ = link.split("?single")[0]
+                    msg_id = int(link_.split("/")[-1])
+                else:
+                    return await client.send_message(sender, "**Invalid Link!**")
+            integer = msg_id + int(ids[i])
             await get_bulk_msg(userbot, client, sender, link, integer) 
             protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
             await countdown.edit(count_down, 
