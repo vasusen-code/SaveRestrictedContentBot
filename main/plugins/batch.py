@@ -147,6 +147,7 @@ async def run_batch(userbot, client, sender, countdown, link):
             await client.send_message(sender, f"An error occurred during cloning, batch will continue.\n\n**Error:** {str(e)}")
             if not countdown.text == count_down:
                 await countdown.edit(count_down, buttons=[[Button.inline("CANCEL❌", data="cancel")]])
-        if i == len(ids):
+        n = i + 1
+        if n == len(ids):
             yr = -2
             return yr
