@@ -81,6 +81,8 @@ async def _batch(event):
                 if int(co) == -2:
                     await client.send_message(event.sender_id, "Batch successfully completed!")
                     await cd.edit(f"**Batch process ongoing.**\n\nProcess completed: {value} \n\n Batch successfully completed! ")
+                except:
+                    await client.send_message(event.sender_id, "ERROR!")
             conv.cancel()
             ids.clear()
             batch.clear()
