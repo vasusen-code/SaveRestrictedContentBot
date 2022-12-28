@@ -76,7 +76,11 @@ async def _batch(event):
             batch.append(f'{event.sender_id}')
             cd = await conv.send_message("**Batch process ongoing.**\n\nProcess completed: ", 
                                     buttons=[[Button.inline("CANCEL❌", data="cancel")]])
-            await run_batch(userbot, Bot, event.sender_id, cd, _link) 
+            co = await run_batch(userbot, Bot, event.sender_id, cd, _link) 
+            try: 
+                if int(co) == -2:
+                    await client.send_message(event.sender_id, "Batch successfully completed!")
+                    await cd.edit(f"**Batch process ongoing.**\n\nProcess completed: {value} \n\n Batch successfully completed! ")
             conv.cancel()
             ids.clear()
             batch.clear()
