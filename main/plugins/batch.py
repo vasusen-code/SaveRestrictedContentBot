@@ -3,6 +3,7 @@
 
 """
 Plugin for both public & private channels!
+.....................
 """
 
 import time, os, asyncio
