@@ -126,7 +126,7 @@ async def run_batch(userbot, client, sender, countdown, link):
             await client.send_message(sender, "Batch successfully completed!")
             await countdown.delete()
             break
-        except Floodwait as fw:
+        except FloodWait as fw:
             if int(fw.value) > 300:
                 await client.send_message(sender, f'You have floodwaits of {fw.value} seconds, cancelling batch') 
                 ids.clear()
