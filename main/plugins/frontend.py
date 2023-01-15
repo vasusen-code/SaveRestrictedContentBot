@@ -9,6 +9,7 @@ from main.plugins.pyroplug import get_msg
 from main.plugins.helpers import get_link, join, screenshot
 
 from telethon import events
+from pyrogram.errors import FloodWait
 
 from ethon.telefunc import force_sub
 
@@ -50,8 +51,10 @@ async def clone(event):
             await edit.edit(q)
         if 't.me/' in link:
             await get_msg(userbot, Bot, event.sender_id, edit.id, link, 0)
+    except FloodWait as fw:
+        await Drone.send_message(event.sender_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
     except Exception as e:
         print(e)
-        pass
+        await Drone.send_message(event.sender_id, f"An error occurred during cloning of `{link}`\n\n**Error:** {str(e)}")
     ind = user.index(f'{int(event.sender_id)}')
     user.pop(int(ind))

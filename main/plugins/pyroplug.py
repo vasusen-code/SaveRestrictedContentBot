@@ -143,12 +143,14 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
             print(fw)
             if bulk is True:
                 return int(fw.x) + 5
-            await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
-            return None
+            else:
+                await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
+                return None
         except Exception as e:
             print(e)
             await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
-            os.remove(file)
+            if os.path.isfile(file) == True:
+                os.remove(file)
             return None
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
@@ -159,14 +161,15 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, bulk=False):
             print(fw)
             if bulk is True:
                 return int(fw.x) + 5
-            await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
-            return None
+            else:
+                await client.edit_message_text(sender, edit_id, f'Try again after {fw.x} seconds due to floodwait from telegram.')
+                return None
         except Exception as e:
             print(e)
             await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
             return None
         await edit.delete()
-        return None   
+        return None
  
 async def get_bulk_msg(userbot, client, sender, msg_link, i):
     x = await client.send_message(sender, "Processing!")
