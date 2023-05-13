@@ -25,7 +25,6 @@ from ethon.telefunc import force_sub
 ft = f"To use this bot you've to join @{fs}."
 
 batch = []
-batch_ = []
 
 async def get_pvt_content(event, chat, id):
     msg = await userbot.get_messages(chat, ids=id)
@@ -71,17 +70,15 @@ async def _batch(event):
                 await conv.send_message(r)
                 return
             batch.append(f'{event.sender_id}')
-            batch_.append(f'{event.sender_id}')
             cd = await conv.send_message("**Batch process ongoing.**\n\nProcess completed: ", 
                                     buttons=[[Button.inline("CANCEL❌", data="cancel")]])
             await run_batch(userbot, Bot, event.sender_id, value, cd, _link) 
             conv.cancel()
             batch.clear()
-            batch_.clear()
             
 @Drone.on(events.callbackquery.CallbackQuery(data="cancel"))
 async def cancel(event):
-    batch_.clear()
+    batch.clear()
     
 async def run_batch(userbot, client, sender, range_, countdown, link):
     for i in range(range_ + 1):
