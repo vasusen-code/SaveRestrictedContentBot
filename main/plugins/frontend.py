@@ -42,7 +42,7 @@ async def clone(event):
         await event.reply(r)
         return
     edit = await event.reply("Processing!")
-    if f'{int(event.sender_id)}' in user:
+    if f'{int(event.sender_id)}' in user and False: # remove "and False" to enable spam protection
         return await edit.edit("Please don't spam links, wait until ongoing process is done.")
     user.append(f'{int(event.sender_id)}')
     try:
