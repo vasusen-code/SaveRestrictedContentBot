@@ -26,6 +26,13 @@ ft = f"To use this bot you've to join @{fs}."
 
 batch = []
 
+@Drone.on(events.NewMessage(incoming=True, pattern='/cancel'))
+async def cancel(event):
+    if not event.sender_id in batch:
+        return await event.reply("No batch active.")
+    batch.clear()
+    await event.reply("Done.")
+    
 @Drone.on(events.NewMessage(incoming=True, from_users=AUTH, pattern='/batch'))
 async def _batch(event):
     if not event.is_private:
