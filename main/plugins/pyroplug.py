@@ -1,5 +1,6 @@
 import asyncio, time, os
 
+from .. import bot as Drone
 from main.plugins.progress import progress_for_pyrogram
 
 from pyrogram import Client, filters
@@ -217,6 +218,6 @@ async def get_msg(PyrogramUserBot, PyrogramBotClient, TelethonBotClient, sender,
                 return await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`\n\nError: {str(e)}')
         await edit.delete()
         
-async def get_bulk_msg(userbot, client, sender, chat, msg_link, i):
+async def get_bulk_msg(userbot, client, sender, msg_link, i):
     x = await client.send_message(sender, "Processing!")
-    await get_msg(userbot, client, Drone, sender, chat, x.id, msg_link, i)
+    await get_msg(userbot, client, Drone, sender, x.id, msg_link, i)
