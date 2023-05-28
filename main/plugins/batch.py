@@ -71,11 +71,7 @@ async def _batch(event):
             await run_batch(userbot, Bot, event.sender_id, _link, value) 
             conv.cancel()
             batch.clear()
-            
-@Drone.on(events.callbackquery.CallbackQuery(data="cancel"))
-async def cancel(event):
-    batch.clear()
- 
+
 async def run_batch(userbot, client, sender, link, _range):
     for i in range(_range):
         timer = 60
