@@ -19,7 +19,12 @@ def thumbnail(sender):
     else:
          return None
       
-async def get_msg(PyrogramUserBot, PyrogramBotClient, TelethonBotClient, sender, edit_id, msg_link, i):
+async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
+    
+    """ userbot: PyrogramUserBot
+    client: PyrogramBotClient
+    bot: TelethonBotClient """
+    
     edit = ""
     chat = ""
     round_message = False
