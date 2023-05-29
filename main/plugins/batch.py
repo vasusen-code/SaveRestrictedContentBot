@@ -41,7 +41,7 @@ async def _batch(event):
     if s == True:
         await event.reply(r)
         return       
-   if event.sender_id in batch:
+    if event.sender_id in batch:
         return await event.reply("You've already started one batch, wait for it to complete you dumbfuck owner!")
     async with Drone.conversation(event.chat_id) as conv: 
         if s != True:
