@@ -38,6 +38,7 @@ async def clone(event):
         if 't.me/+' in link:
             q = await join(userbot, link)
             await edit.edit(q)
+            return
         if 't.me/' in link:
             await get_msg(userbot, Bot, Drone, event.sender_id, edit.id, link, 0)
     except FloodWait as fw:
