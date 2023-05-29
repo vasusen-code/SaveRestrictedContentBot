@@ -52,26 +52,26 @@ async def _batch(event):
                     _link = get_link(link.text)
                 except Exception:
                     await conv.send_message("No link found.")
-                    retrun conv.cancel()
+                    return conv.cancel()
             except Exception as e:
                 print(e)
                 await conv.send_message("Cannot wait more longer for your response!")
-                retrun conv.cancel()
+                return conv.cancel()
             await conv.send_message("Send me the number of files/range you want to save from the given message, as a reply to this message.", buttons=Button.force_reply())
             try:
                 _range = await conv.get_reply()
             except Exception as e:
                 print(e)
                 await conv.send_message("Cannot wait more longer for your response!")
-                retrun conv.cancel()
+                return conv.cancel()
             try:
                 value = int(_range.text)
                 if value > 100:
                     await conv.send_message("You can only get upto 100 files in a single batch.")
-                    retrun conv.cancel()
+                    return conv.cancel()
             except ValueError:
                 await conv.send_message("Range must be an integer!")
-                retrun conv.cancel()
+                return conv.cancel()
             batch.append(event.sender_id)
             await run_batch(userbot, Bot, event.sender_id, _link, value) 
             conv.cancel()
