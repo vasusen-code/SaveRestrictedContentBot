@@ -218,6 +218,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
             await client.copy_message(sender, chat, msg_id)
         except Exception as e:
             if "Empty messages cannot be copied" in str(e):
+                await edit.delete()
                 group = await userbot.get_users(chat)
                 group_link = f't.me/c/{int(group.id)}/{int(msg_id)}'
                 return await get_msg(userbot, client, bot, sender, edit_id, msg_link, i)
