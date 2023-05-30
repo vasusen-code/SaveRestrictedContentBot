@@ -218,8 +218,9 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
             await client.copy_message(sender, chat, msg_id)
         except Exception as e:
             if "Empty messages cannot be copied" in str(e):
-                group_link = f't.me/c/{int(msg.sender_chat.id)}/{int(msg.id)}'
-                return await get_msg(PyrogramUserBot, PyrogramBotClient, TelethonBotClient, sender, edit_id, msg_link, i)
+                group = await userbot.get_users(chat)
+                group_link = f't.me/c/{int(group.id)}/{int(msg_id)}'
+                return await get_msg(userbot, client, bot, sender, edit_id, msg_link, i)
             else:
                 print(e)
                 return await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`\n\nError: {str(e)}')
