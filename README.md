@@ -12,6 +12,7 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
 - Faster speed
 - Forcesubscribe available 
 - `/batch` - (For owner only) Use this command to save upto 100 files from a pvt or public restricted channel at once.
+- `/cancel` -  Use this to stop batch
 - Time delay is added to avoid FloodWait and keep user account safe. 
 
 # Variables
@@ -27,7 +28,7 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
  
 API: [API scrapper Bot](https://t.me/USETGSBOT) or [Telegram.org](https://my.telegram.org/auth)
 
-PYROGRAM SESSION: [SessionGen Bot](https://t.me/SessionStringGeneratorZBot) or [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@dashezup/generate-pyrogram-session-string)
+PYROGRAM SESSION: [SessionGen Bot](https://t.me/SessionStringGeneratorZBot) or [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@levinalab/Session-Generator#main.py)
 
 BOT TOKEN: @Botfather on telegram
 
