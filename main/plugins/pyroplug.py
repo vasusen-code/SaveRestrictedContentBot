@@ -171,7 +171,8 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                     except Exception:
                         return
                     return 
-            elif "SaveBigFilePartRequest" in str(e):
+            elif "SaveBigFilePartRequest" in str(e) or "SendMediaRequest" in str(e) \
+            or str(e) == "File size equals to 0 B":
                 try: 
                     if msg.media==MessageMediaType.VIDEO and msg.video.mime_type in ["video/mp4", "video/x-matroska"]:
                         UT = time.time()
@@ -215,15 +216,15 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
         chat =  msg_link.split("/")[-2]
         try:
-            await client.copy_message(sender, chat, msg_id)
-        except Exception as e:
-            if "Empty messages cannot be copied" in str(e):
+            if msg.empty:
                 group = await userbot.get_users(chat)
                 group_link = f't.me/c/{int(group.id)}/{int(msg_id)}'
+                #recurrsion 
                 return await get_msg(userbot, client, bot, sender, edit_id, msg_link, i)
-            else:
-                print(e)
-                return await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`\n\nError: {str(e)}')
+            await client.copy_message(sender, chat, msg_id)
+        except Exception as e:
+            print(e)
+            return await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`\n\nError: {str(e)}')
         await edit.delete()
         
 async def get_bulk_msg(userbot, client, sender, msg_link, i):
