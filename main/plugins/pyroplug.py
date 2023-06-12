@@ -146,32 +146,9 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
             return
         except Exception as e:
             print(e)
-            if "messages.SendMedia" in str(e): 
-                try: 
-                    if msg.media==MessageMediaType.VIDEO and msg.video.mime_type in ["video/mp4", "video/x-matroska"]:
-                        UT = time.time()
-                        uploader = await fast_upload(f'{file}', f'{file}', UT, bot, edit, '**UPLOADING:**')
-                        attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, round_message=round_message, supports_streaming=True)] 
-                        await bot.send_file(sender, uploader, caption=caption, thumb=thumb_path, attributes=attributes, force_document=False)
-                    elif msg.media==MessageMediaType.VIDEO_NOTE:
-                        uploader = await fast_upload(f'{file}', f'{file}', UT, bot, edit, '**UPLOADING:**')
-                        attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, round_message=round_message, supports_streaming=True)] 
-                        await bot.send_file(sender, uploader, caption=caption, thumb=thumb_path, attributes=attributes, force_document=False)
-                    else:
-                        UT = time.time()
-                        uploader = await fast_upload(f'{file}', f'{file}', UT, bot, edit, '**UPLOADING:**')
-                        await bot.send_file(sender, uploader, caption=caption, thumb=thumb_path, force_document=True)
-                    if os.path.isfile(file) == True:
-                        os.remove(file)
-                except Exception as e:
-                    print(e)
-                    await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`\n\nError: {str(e)}')
-                    try:
-                        os.remove(file)
-                    except Exception:
-                        return
-                    return 
-            elif "SaveBigFilePartRequest" in str(e) or "SendMediaRequest" in str(e) \
+            if "messages.SendMedia" in str(e) \
+            or "SaveBigFilePartRequest" in str(e) \
+            or "SendMediaRequest" in str(e) \
             or str(e) == "File size equals to 0 B":
                 try: 
                     if msg.media==MessageMediaType.VIDEO and msg.video.mime_type in ["video/mp4", "video/x-matroska"]:
@@ -190,7 +167,6 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                     if os.path.isfile(file) == True:
                         os.remove(file)
                 except Exception as e:
-                    print("Telethon tried but failed!")
                     print(e)
                     await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`\n\nError: {str(e)}')
                     try:
