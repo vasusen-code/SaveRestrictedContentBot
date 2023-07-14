@@ -64,7 +64,7 @@ python3 -m main
 
 - if you want bot to be running in background then enter `screen -S srcb` before `python3 -m main` 
 - after `python3 -m main`, click ctrl+A, ctrl+D
-- if you want to stop bot, then enter `screen -r srcb` and click ctrl+A then press K and enter Y.
+- if you want to stop bot, then enter `screen -r srcb` and to kill screen enter `screen -S srcb -X quit`.
 
 Deploy your bot on `Render`
 
