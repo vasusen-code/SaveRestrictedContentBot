@@ -7,9 +7,9 @@
         "Save restricted content",
         "bot"
     ],
-    "repository": "https://github.com/vasusen-code/SaveRestrictedContentBot",
+    "repository": "https://github.com/nileshya/SaveRestrictedContentBot",
     "website": "",
-    "success_url": "https://t.me/DroneBots",
+    "success_url": "https://t.me/tdbuf3",
     "env": {
         "API_HASH": {
             "description": "Your API HASH from my.telegram.org",
