@@ -7,7 +7,7 @@ from main.plugins.progress import progress_for_pyrogram
 from main.plugins.helpers import screenshot
 
 from pyrogram import Client, filters
-from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid
+from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid, PeerIdInvalid
 from pyrogram.enums import MessageMediaType
 from ethon.pyfunc import video_metadata
 from ethon.telefunc import fast_upload
@@ -146,10 +146,10 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
             await client.edit_message_text(sender, edit_id, "Have you joined the channel?")
             return
         except PeerIdInvalid:
-            chat = int(msg_link.split("/")[-3])
-            new_link = f"t.me/c/{chat}/{msg_id}"
+            chat = msg_link.split("/")[-3]
             try:
                 int(chat)
+                new_link = f"t.me/c/{chat}/{msg_id}"
             except ValueError:
                 new_link = f"t.me/b/{chat}/{msg_id}"
             return await get_msg(userbot, client, bot, sender, to, edit_id, new_link, i)
@@ -199,7 +199,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
         await edit.delete()
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
-        chat =  msg_link.split("/")[-2]
+        chat =  msg_link.split("t.me")[1].split("/")[1]
         try:
             msg = await client.copy_message(sender, chat, msg_id)
             if msg.empty:
