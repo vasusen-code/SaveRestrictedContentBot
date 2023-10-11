@@ -150,9 +150,9 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
             try:
                 int(chat)
                 new_link = f"t.me/c/{chat}/{msg_id}"
-            except ValueError:
+            except:
                 new_link = f"t.me/b/{chat}/{msg_id}"
-            return await get_msg(userbot, client, bot, sender, to, edit_id, new_link, i)
+            return await get_msg(userbot, client, bot, sender, edit_id, msg_link, i)
         except Exception as e:
             print(e)
             if "messages.SendMedia" in str(e) \
