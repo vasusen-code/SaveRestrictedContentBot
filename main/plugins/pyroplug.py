@@ -201,11 +201,12 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
         chat =  msg_link.split("t.me")[1].split("/")[1]
         try:
-            msg = await client.copy_message(sender, chat, msg_id)
+            msg = await client.get_messages(chat, msg_id)
             if msg.empty:
                 new_link = f't.me/b/{chat}/{int(msg_id)}'
                 #recurrsion 
                 return await get_msg(userbot, client, bot, sender, edit_id, new_link, i)
+        await client.copy_message(sender, chat, msg_id)
         except Exception as e:
             print(e)
             return await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`\n\nError: {str(e)}')
