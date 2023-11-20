@@ -6,7 +6,7 @@ from .. import bot as Drone
 from .. import userbot, Bot
 from .. import FORCESUB as fs
 from main.plugins.pyroplug import get_msg
-from main.plugins.helpers import get_link, join, screenshot
+from main.plugins.helpers import get_link, join
 
 from telethon import events
 from pyrogram.errors import FloodWait

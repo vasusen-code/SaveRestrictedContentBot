@@ -6,15 +6,16 @@ Contact: [Telegram](https://t.me/MaheshChauhan)
 
 A stable telegram bot to get restricted messages with custom thumbnail support , made by Mahesh Chauhan. 
 
-- works for both public and private channels
+- works for both public and private chats
 - Custom thumbnail support for Pvt medias
 - supports text and webpage media messages
 - Faster speed
-- Forcesubscribe available 
+- Forcesubscribe available
+- To save from bots send link in this format : `t.me/b/bot_username/message_id` (use plus messenger for message_id)
 - `/batch` - (For owner only) Use this command to save upto 100 files from a pvt or public restricted channel at once.
 - `/cancel` -  Use this to stop batch
 - Time delay is added to avoid FloodWait and keep user account safe. 
-
+  
 # Variables
 
 - `API_ID`
@@ -28,7 +29,7 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
  
 API: [API scrapper Bot](https://t.me/USETGSBOT) or [Telegram.org](https://my.telegram.org/auth)
 
-PYROGRAM SESSION: [SessionGen Bot](https://t.me/SessionStringGeneratorZBot) or [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@levinalab/Session-Generator#main.py)
+PYROGRAM SESSION: [SessionGen Bot](https://t.me/SessionStringGeneratorRobot) or [![Run on Repl.it](https://replit.com/badge/github/vasusen-code/saverestrictedcontentbot)](https://replit.com/@levinalab/Session-Generator#main.py)
 
 BOT TOKEN: @Botfather on telegram
 
@@ -64,7 +65,7 @@ python3 -m main
 
 - if you want bot to be running in background then enter `screen -S srcb` before `python3 -m main` 
 - after `python3 -m main`, click ctrl+A, ctrl+D
-- if you want to stop bot, then enter `screen -r srcb` and click ctrl+A then press K and enter Y.
+- if you want to stop bot, then enter `screen -r srcb` and to kill screen enter `screen -S srcb -X quit`.
 
 Deploy your bot on `Render`
 

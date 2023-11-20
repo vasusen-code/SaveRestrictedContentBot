@@ -4,9 +4,10 @@ import asyncio, time, os
 
 from .. import bot as Drone
 from main.plugins.progress import progress_for_pyrogram
+from main.plugins.helpers import screenshot
 
 from pyrogram import Client, filters
-from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid
+from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid, PeerIdInvalid
 from pyrogram.enums import MessageMediaType
 from ethon.pyfunc import video_metadata
 from ethon.telefunc import fast_upload
@@ -32,7 +33,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
         msg_link = msg_link.split("?single")[0]
     msg_id = int(msg_link.split("/")[-1]) + int(i)
     height, width, duration, thumb_path = 90, 90, 0, None
-    if 't.me/c/' in msg_link:
+    if 't.me/c/' or 't.me/b/' in msg_link:
         if 't.me/b/' in msg_link:
             chat = str(msg_link.split("/")[-2])
         else:
@@ -144,9 +145,20 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
         except (ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid):
             await client.edit_message_text(sender, edit_id, "Have you joined the channel?")
             return
+        except PeerIdInvalid:
+            chat = msg_link.split("/")[-3]
+            try:
+                int(chat)
+                new_link = f"t.me/c/{chat}/{msg_id}"
+            except:
+                new_link = f"t.me/b/{chat}/{msg_id}"
+            return await get_msg(userbot, client, bot, sender, edit_id, msg_link, i)
         except Exception as e:
             print(e)
-            if "messages.SendMedia" in str(e): 
+            if "messages.SendMedia" in str(e) \
+            or "SaveBigFilePartRequest" in str(e) \
+            or "SendMediaRequest" in str(e) \
+            or str(e) == "File size equals to 0 B":
                 try: 
                     if msg.media==MessageMediaType.VIDEO and msg.video.mime_type in ["video/mp4", "video/x-matroska"]:
                         UT = time.time()
@@ -164,32 +176,6 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                     if os.path.isfile(file) == True:
                         os.remove(file)
                 except Exception as e:
-                    print(e)
-                    await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`\n\nError: {str(e)}')
-                    try:
-                        os.remove(file)
-                    except Exception:
-                        return
-                    return 
-            elif "SaveBigFilePartRequest" in str(e):
-                try: 
-                    if msg.media==MessageMediaType.VIDEO and msg.video.mime_type in ["video/mp4", "video/x-matroska"]:
-                        UT = time.time()
-                        uploader = await fast_upload(f'{file}', f'{file}', UT, bot, edit, '**UPLOADING:**')
-                        attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, round_message=round_message, supports_streaming=True)] 
-                        await bot.send_file(sender, uploader, caption=caption, thumb=thumb_path, attributes=attributes, force_document=False)
-                    elif msg.media==MessageMediaType.VIDEO_NOTE:
-                        uploader = await fast_upload(f'{file}', f'{file}', UT, bot, edit, '**UPLOADING:**')
-                        attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, round_message=round_message, supports_streaming=True)] 
-                        await bot.send_file(sender, uploader, caption=caption, thumb=thumb_path, attributes=attributes, force_document=False)
-                    else:
-                        UT = time.time()
-                        uploader = await fast_upload(f'{file}', f'{file}', UT, bot, edit, '**UPLOADING:**')
-                        await bot.send_file(sender, uploader, caption=caption, thumb=thumb_path, force_document=True)
-                    if os.path.isfile(file) == True:
-                        os.remove(file)
-                except Exception as e:
-                    print("Telethon tried but failed!")
                     print(e)
                     await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`\n\nError: {str(e)}')
                     try:
@@ -213,17 +199,17 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
         await edit.delete()
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
-        chat =  msg_link.split("/")[-2]
+        chat =  msg_link.split("t.me")[1].split("/")[1]
         try:
-            await client.copy_message(sender, chat, msg_id)
+            msg = await client.get_messages(chat, msg_id)
+            if msg.empty:
+                new_link = f't.me/b/{chat}/{int(msg_id)}'
+                #recurrsion 
+                return await get_msg(userbot, client, bot, sender, edit_id, new_link, i)
+        await client.copy_message(sender, chat, msg_id)
         except Exception as e:
-            if "Empty messages cannot be copied" in str(e):
-                group = await userbot.get_users(chat)
-                group_link = f't.me/c/{int(group.id)}/{int(msg_id)}'
-                return await get_msg(userbot, client, bot, sender, edit_id, msg_link, i)
-            else:
-                print(e)
-                return await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`\n\nError: {str(e)}')
+            print(e)
+            return await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`\n\nError: {str(e)}')
         await edit.delete()
         
 async def get_bulk_msg(userbot, client, sender, msg_link, i):
