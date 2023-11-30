@@ -12,12 +12,11 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 
 # variables
-API_ID = config("API_ID", default=None, cast=int)
-API_HASH = config("API_HASH", default=None)
-BOT_TOKEN = config("BOT_TOKEN", default=None)
-SESSION = config("SESSION", default=None)
-FORCESUB = config("FORCESUB", default=None)
-AUTH = config("AUTH", default=None, cast=int)
+API_ID = 13999676
+API_HASH = d707bccfa731029b8ca5bef0e5afd813
+BOT_TOKEN = 6389857059:AAHJuopfnnNLRj8mZt9Bwjl_F1_bzRtUFwQ
+SESSION = BQDVnjwATAKNMsPvTdCuocJUisfSoefTPHSV5-a0zVHyizBLOoRRGzJBhRrM2VhOkV_cTRv67mLo5ShiEEm4216beN8UQx5cPbHMafSt78syGy_p373KmCw8ASLuv1oaDc-cYc3UmwIeg8TKb4L9k4aKIeQmuZcumU1P6IYU8JG7tyS-KSCqtfYaQTYBRPHA_Qe0fbo1kXDhSMavGg3VgkPdIHvyNGTd0q4vWIcU_sOT6D4Iwkr9klfFVHJJ-gek6PrQkzGCkMxdkaauWQ5wsH3WgSc6gf1R5V5HzQSu8RWxgZpTas7zXMs-qAcrM6s0QrbJChAivldkNW6Ra6jVlWEdpMc25wAAAABLCzuiAA
+FORCESUB = indomilkonlyfans
 
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
 
