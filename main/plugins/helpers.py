@@ -1,9 +1,11 @@
 #Github.com/Vasusen-code
 
-from pyrogram import Client
-from pyrogram.errors import FloodWait, BadRequest
+from pyrogram.errors import FloodWait, InviteHashInvalid, InviteHashExpired, UserAlreadyParticipant
+from telethon import errors, events
 
 import asyncio, subprocess, re, os, time
+from pathlib import Path
+from datetime import datetime as dt
 
 #Join private chat-------------------------------------------------------------------------------------------------------------
 
@@ -11,13 +13,16 @@ async def join(client, invite_link):
     try:
         await client.join_chat(invite_link)
         return "Successfully joined the Channel"
-    except BadRequest:
+    except UserAlreadyParticipant:
+        return "User is already a participant."
+    except (InviteHashInvalid, InviteHashExpired):
         return "Could not join. Maybe your link is expired or Invalid."
     except FloodWait:
         return "Too many requests, try again later."
     except Exception as e:
-        return f"{str(e)}"
-           
+        print(e)
+        return "Could not join, try joining manually."
+    
 #Regex---------------------------------------------------------------------------------------------------------------
 #to get the url from event
 
@@ -35,23 +40,34 @@ def get_link(string):
     
 #Screenshot---------------------------------------------------------------------------------------------------------------
 
-async def screenshot(video, time_stamp, sender):
-    if os.path.isfile(f'{sender}.jpg'):
+def hhmmss(seconds):
+    x = time.strftime('%H:%M:%S',time.gmtime(seconds))
+    return x
+
+async def screenshot(video, duration, sender):
+    if os.path.exists(f'{sender}.jpg'):
         return f'{sender}.jpg'
-    out = str(video).split(".")[0] + ".jpg"
-    cmd = (f"ffmpeg -ss {time_stamp} -i {video} -vframes 1 {out}").split(" ")
+    time_stamp = hhmmss(int(duration)/2)
+    out = dt.now().isoformat("_", "seconds") + ".jpg"
+    cmd = ["ffmpeg",
+           "-ss",
+           f"{time_stamp}", 
+           "-i",
+           f"{video}",
+           "-frames:v",
+           "1", 
+           f"{out}",
+           "-y"
+          ]
     process = await asyncio.create_subprocess_exec(
-         *cmd,
-         stdout=asyncio.subprocess.PIPE,
-         stderr=asyncio.subprocess.PIPE)
-        
+        *cmd,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE
+    )
     stdout, stderr = await process.communicate()
     x = stderr.decode().strip()
     y = stdout.decode().strip()
-    print(x)
-    print(y)
     if os.path.isfile(out):
         return out
     else:
-        None
-        
+        None       
