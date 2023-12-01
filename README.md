@@ -25,7 +25,7 @@ A stable telegram bot to get restricted messages with custom thumbnail support ,
 - `AUTH` - Owner user id
 - `FORCESUB` - Public channel username without '@'. Don't forget to add bot in channel as administrator. 
 
-# Get API & PYROGRAM string session from:
+# Get API & PYROGRAMstring session from:
  
 API: [API scrapper Bot](https://t.me/USETGSBOT) or [Telegram.org](https://my.telegram.org/auth)
 
