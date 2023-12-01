@@ -3,6 +3,8 @@
 from pyrogram import Client
 
 from telethon.sessions import StringSession
+
+
 from telethon.sync import TelegramClient
 
 from decouple import config
@@ -12,12 +14,12 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 
 # variables
-API_ID = config("API_ID", default=None, cast=int)
-API_HASH = config("API_HASH", default=None)
-BOT_TOKEN = config("BOT_TOKEN", default=None)
-SESSION = config("SESSION", default=None)
-FORCESUB = config("FORCESUB", default=None)
-AUTH = config("AUTH", default=None, cast=int)
+API_ID = 29287695
+API_HASH = fd378e3dd671ed4c83368f894090ba94
+BOT_TOKEN = 6308831657:AAFfhx4BzcwOsw8nwlc6IPSP79vZqcPk_1Q
+SESSION = BQG-5Q8AZzBR1faRMzt-gTaDi3v9qgVz42UCxzfMTBfj62CLkbfileXthWINCWXZl42UykNtdrVHyFqboPEJe3YCyRXMbWuGeKUoChryqrZ8m5SoM4eiQmuuLkcX0cm83NVZsTBPZuvISMfAfor5w6LyEBykHt8WpdSAKAe78YRcC0Wr0pYoc0rV6RGy2uKXRClK-fGeJk7o4p7aTdo0_t2nU0yBdwZF3_gdYa8UFFm-77gPTwKOAyST9Yt9Bagi9TyxlnHwsz6k77EGchkChW6L8hUu0UQxctYVS1-YQ1F4izk_ty5oU-kML8VPgx4nvYZdGYUsA1x2GUe_zw2AwEwf-r2oUAAAAABQFrewAA
+FORCESUB = @Medico_helper_2 
+AUTH = 1058482162
 
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
 
