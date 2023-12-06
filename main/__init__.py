@@ -12,12 +12,12 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 
 # variables
-API_ID = config("API_ID", default=None, cast=int)
-API_HASH = config("API_HASH", default=None)
-BOT_TOKEN = config("BOT_TOKEN", default=None)
-SESSION = config("SESSION", default=None)
-FORCESUB = config("FORCESUB", default=None)
-AUTH = config("AUTH", default=None, cast=int)
+API_ID = 29098616
+API_HASH = "635f6ec82aa166be7682113b562e0898"
+BOT_TOKEN = "6885013483:AAGtgv-j1-fUz-ri-_kTdJtr9_0LnTm17U8"
+SESSION = "BQBYYfd2YSYMtiUyWz0QyOMuQbgEXNijyNRAh0hW1_snYqzA3XgLO1UgT8f9CKad3dP4Myi2D5fCEe98He9uOd6v9VTjXYV-vZU0ghVyWRJKLPu0sQaeZGpcAh2WcTGZ_UzGIyCeH6FnnSI6u5PjXbJPEuZQZvXdErmvnDuqktjlkvTcQ6orJoy7pCFcxUqTJ0YHYXJLTCXPruYIE1V3cSOj9O-FFbex4jsl9X79Ic69PUlkierdOW5lZ-k6wH7wD-i48XVj1mAK6zai6oWWNe4CTHT0fAjFfLkmDmFYF-mdq9VuQcA5SAt3ROWz8VLs4DppFO5TnQMCEv_WyHwa4iaiAAAAAVs7moUA"
+FORCESUB = "mychannel124588"
+AUTH = 5825600133
 
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
 
@@ -41,3 +41,9 @@ try:
 except Exception as e:
     print(e)
     sys.exit(1)
+sudo apt update
+sudo apt install ffmpeg git python3-pip
+git clone your_repo_link
+cd saverestrictedcontentbot 
+pip3 install -r requirements.txt
+python3 -m main
