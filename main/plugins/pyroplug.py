@@ -33,7 +33,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
         msg_link = msg_link.split("?single")[0]
     msg_id = int(msg_link.split("/")[-1]) + int(i)
     height, width, duration, thumb_path = 90, 90, 0, None
-    if 't.me/c/' or 't.me/b/' in msg_link:
+    if 't.me/c/' in msg_link or 't.me/b/' in msg_link:
         if 't.me/b/' in msg_link:
             chat = str(msg_link.split("/")[-2])
         else:
