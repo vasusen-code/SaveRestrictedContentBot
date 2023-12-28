@@ -1,5 +1,3 @@
-#Github.com/Vasusen-code
-
 import os
 from .. import bot as Drone
 from telethon import events, Button
@@ -41,9 +39,13 @@ async def remt(event):
         await event.edit('Removed!')
     except Exception:
         await event.edit("No thumbnail saved.")                        
-  
+
 @Drone.on(events.NewMessage(incoming=True, pattern=f"{S}"))
 async def start(event):
-    text = "Send me Link of any message to clone it here, For private channel message, send invite link first.\n\n**SUPPORT:** @susanta_support"
+    text = (
+        "Send me the link of any message to clone it here. "
+        "For private channel messages, send the invite link first.\n\n"
+        "**SUPPORT:** @susanta_support\n\n"
+        "Join our channel @susanta_bhndarii for updates and announcements!"
+    )
     await start_srb(event, text)
-    
