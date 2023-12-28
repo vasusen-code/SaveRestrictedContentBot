@@ -1,39 +1,49 @@
+#Github.com/Vasusen-code
+
 import os
-from flask import Flask, request, jsonify
 from .. import bot as Drone
 from telethon import events, Button
 
 from ethon.mystarts import start_srb
-
+    
 S = '/' + 's' + 't' + 'a' + 'r' + 't'
 
-app = Flask(__name__)
-
 @Drone.on(events.callbackquery.CallbackQuery(data="set"))
-async def sett(event):
-    # Your existing code for the callback
-
+async def sett(event):    
+    Drone = event.client                    
+    button = await event.get_message()
+    msg = await button.get_reply_message() 
+    await event.delete()
+    async with Drone.conversation(event.chat_id) as conv: 
+        xx = await conv.send_message("Send me any image for thumbnail as a `reply` to this message.")
+        x = await conv.get_reply()
+        if not x.media:
+            xx.edit("No media found.")
+        mime = x.file.mime_type
+        if not 'png' in mime:
+            if not 'jpg' in mime:
+                if not 'jpeg' in mime:
+                    return await xx.edit("No image found.")
+        await xx.delete()
+        t = await event.client.send_message(event.chat_id, 'Trying.')
+        path = await event.client.download_media(x.media)
+        if os.path.exists(f'{event.sender_id}.jpg'):
+            os.remove(f'{event.sender_id}.jpg')
+        os.rename(path, f'./{event.sender_id}.jpg')
+        await t.edit("Temporary thumbnail saved!")
+        
 @Drone.on(events.callbackquery.CallbackQuery(data="rem"))
-async def remt(event):
-    # Your existing code for the callback
-
+async def remt(event):  
+    Drone = event.client            
+    await event.edit('Trying.')
+    try:
+        os.remove(f'{event.sender_id}.jpg')
+        await event.edit('Removed!')
+    except Exception:
+        await event.edit("No thumbnail saved.")                        
+  
 @Drone.on(events.NewMessage(incoming=True, pattern=f"{S}"))
 async def start(event):
-    text = (
-        "Send me the link of any message to clone it here. "
-        "For private channel messages, send the invite link first.\n\n"
-        "**SUPPORT:** @susanta_support\n\n"
-        "Join our channel @susanta_bhndarii for updates and announcements!"
-    )
+    text = "Send me Link of any message to clone it here, For private channel message, send invite link first.\n\n**SUPPORT:** @susanta_support"
     await start_srb(event, text)
-
-# Add a simple route for Heroku to hit to check if the app is running
-@app.route('/')
-def index():
-    return "Hello, this is your Telegram bot!"
-
-# Run the Flask app if this script is the main script
-if __name__ == '__main__':
-    # Start the Flask app on a different port than the default one
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    
