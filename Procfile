@@ -1,1 +1,0 @@
-Drone: python -m main
