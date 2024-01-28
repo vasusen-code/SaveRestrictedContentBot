@@ -1,5 +1,4 @@
 FROM encodev/srcbot:latest
 WORKDIR /usr/src/app
-COPY . .
-RUN rm -rf .git Dockerfile
+COPY .env .
 CMD ["bash", "srcbot.sh"]
