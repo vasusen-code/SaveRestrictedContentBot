@@ -4,9 +4,10 @@ import asyncio, time, os
 
 from .. import bot as Drone
 from main.plugins.progress import progress_for_pyrogram
+from main.plugins.helpers import screenshot
 
 from pyrogram import Client, filters
-from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid
+from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid, PeerIdInvalid
 from pyrogram.enums import MessageMediaType
 from ethon.pyfunc import video_metadata
 from ethon.telefunc import fast_upload
@@ -32,7 +33,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
         msg_link = msg_link.split("?single")[0]
     msg_id = int(msg_link.split("/")[-1]) + int(i)
     height, width, duration, thumb_path = 90, 90, 0, None
-    if 't.me/c/' in msg_link:
+    if 't.me/c/' or 't.me/b/' in msg_link:
         if 't.me/b/' in msg_link:
             chat = str(msg_link.split("/")[-2])
         else:
@@ -144,6 +145,14 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
         except (ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid):
             await client.edit_message_text(sender, edit_id, "Have you joined the channel?")
             return
+        except PeerIdInvalid:
+            chat = msg_link.split("/")[-3]
+            try:
+                int(chat)
+                new_link = f"t.me/c/{chat}/{msg_id}"
+            except:
+                new_link = f"t.me/b/{chat}/{msg_id}"
+            return await get_msg(userbot, client, bot, sender, edit_id, msg_link, i)
         except Exception as e:
             print(e)
             if "messages.SendMedia" in str(e) \
@@ -190,13 +199,13 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
         await edit.delete()
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
-        chat =  msg_link.split("/")[-2]
+        chat =  msg_link.split("t.me")[1].split("/")[1]
         try:
+            msg = await client.get_messages(chat, msg_id)
             if msg.empty:
-                group = await userbot.get_users(chat)
-                group_link = f't.me/c/{int(group.id)}/{int(msg_id)}'
+                new_link = f't.me/b/{chat}/{int(msg_id)}'
                 #recurrsion 
-                return await get_msg(userbot, client, bot, sender, edit_id, msg_link, i)
+                return await get_msg(userbot, client, bot, sender, edit_id, new_link, i)
             await client.copy_message(sender, chat, msg_id)
         except Exception as e:
             print(e)
